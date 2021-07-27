@@ -1,0 +1,39 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+
+<Meta title="SpeechKit JS/AMP" />
+
+# SpeechKit on AMP ⚡
+
+[AMP](https://amp.dev) is a web component framework to easily create user-first websites.
+
+To enable the SpeechKit player on AMP, you must add our AMP-specific embed code into your your article template. Copy the snippet below into your AMP template, replacing `project_id` with your own Project ID, and pass one of the following parameters: `podcast_id | external_id | article_url`, i.e. `https://spkt.io/amp/{project_id}?{podcast_id | external_id | article_url}={value_for_param}`.
+
+```html
+<amp-iframe
+    width="295" height="43"
+    sandbox="allow-scripts allow-same-origin allow-popups"
+    layout="responsive" scrolling="no" frameborder="0"
+    src="https://spkt.io/amp/6673?podcast_id=534513">
+  <amp-img
+    width="643" height="150"
+    layout="responsive" placeholder
+    src="https://s3-eu-west-1.amazonaws.com/speechkit-js/logo.svg"></amp-img>
+</amp-iframe>
+```
+
+### Demo
+
+<iframe frameBorder="0" src="/amp-example.html" style={{ marginTop: '30px', width: '100%', height: '150px' }}></iframe>
+
+You can open this example in [AMP Playground](https://playground.amp.dev/#share=PCFkb2N0eXBlIGh0bWw+CjxodG1sIOKaoT4KPGhlYWQ+CiAgPG1ldGEgY2hhcnNldD0idXRmLTgiPgogIDx0aXRsZT5NeSBBTVAgUGFnZTwvdGl0bGU+CiAgPGxpbmsgcmVsPSJjYW5vbmljYWwiIGhyZWY9InNlbGYuaHRtbCIgLz4KICA8bWV0YSBuYW1lPSJ2aWV3cG9ydCIgY29udGVudD0id2lkdGg9ZGV2aWNlLXdpZHRoLG1pbmltdW0tc2NhbGU9MSxpbml0aWFsLXNjYWxlPTEiPgogIDxzdHlsZSBhbXAtYm9pbGVycGxhdGU+Ym9keXstd2Via2l0LWFuaW1hdGlvbjotYW1wLXN0YXJ0IDhzIHN0ZXBzKDEsZW5kKSAwcyAxIG5vcm1hbCBib3RoOy1tb3otYW5pbWF0aW9uOi1hbXAtc3RhcnQgOHMgc3RlcHMoMSxlbmQpIDBzIDEgbm9ybWFsIGJvdGg7LW1zLWFuaW1hdGlvbjotYW1wLXN0YXJ0IDhzIHN0ZXBzKDEsZW5kKSAwcyAxIG5vcm1hbCBib3RoO2FuaW1hdGlvbjotYW1wLXN0YXJ0IDhzIHN0ZXBzKDEsZW5kKSAwcyAxIG5vcm1hbCBib3RofUAtd2Via2l0LWtleWZyYW1lcyAtYW1wLXN0YXJ0e2Zyb217dmlzaWJpbGl0eTpoaWRkZW59dG97dmlzaWJpbGl0eTp2aXNpYmxlfX1ALW1vei1rZXlmcmFtZXMgLWFtcC1zdGFydHtmcm9te3Zpc2liaWxpdHk6aGlkZGVufXRve3Zpc2liaWxpdHk6dmlzaWJsZX19QC1tcy1rZXlmcmFtZXMgLWFtcC1zdGFydHtmcm9te3Zpc2liaWxpdHk6aGlkZGVufXRve3Zpc2liaWxpdHk6dmlzaWJsZX19QC1vLWtleWZyYW1lcyAtYW1wLXN0YXJ0e2Zyb217dmlzaWJpbGl0eTpoaWRkZW59dG97dmlzaWJpbGl0eTp2aXNpYmxlfX1Aa2V5ZnJhbWVzIC1hbXAtc3RhcnR7ZnJvbXt2aXNpYmlsaXR5OmhpZGRlbn10b3t2aXNpYmlsaXR5OnZpc2libGV9fTwvc3R5bGU+PG5vc2NyaXB0PjxzdHlsZSBhbXAtYm9pbGVycGxhdGU+Ym9keXstd2Via2l0LWFuaW1hdGlvbjpub25lOy1tb3otYW5pbWF0aW9uOm5vbmU7LW1zLWFuaW1hdGlvbjpub25lO2FuaW1hdGlvbjpub25lfTwvc3R5bGU+PC9ub3NjcmlwdD4KICA8c2NyaXB0IGFzeW5jIHNyYz0iaHR0cHM6Ly9jZG4uYW1wcHJvamVjdC5vcmcvdjAuanMiPjwvc2NyaXB0PgogIDxzY3JpcHQgYXN5bmMgY3VzdG9tLWVsZW1lbnQ9ImFtcC1pZnJhbWUiIHNyYz0iaHR0cHM6Ly9jZG4uYW1wcHJvamVjdC5vcmcvdjAvYW1wLWlmcmFtZS0wLjEuanMiPjwvc2NyaXB0PgogIDxzdHlsZSBhbXAtY3VzdG9tPgogICAgaDEgewogICAgICBtYXJnaW46IDFyZW07CiAgICB9CiAgPC9zdHlsZT4KPC9oZWFkPgo8Ym9keT4KICA8aDE+CiAgICB0ZXN0IGlmcmFtZQogIDwvaDE+CiAgPGFtcC1pZnJhbWUKICAgIHdpZHRoPSIyOTUiIGhlaWdodD0iNDMiCiAgICBzYW5kYm94PSJhbGxvdy1zY3JpcHRzIGFsbG93LXNhbWUtb3JpZ2luIGFsbG93LXBvcHVwcyIgbGF5b3V0PSJyZXNwb25zaXZlIgogICAgc2Nyb2xsaW5nPSJubyIgZnJhbWVib3JkZXI9IjAiIAogICAgc3JjPSJodHRwczovL3Nwa3QuaW8vYW1wLzY2NzM/cG9kY2FzdF9pZD01MzQ1MTMmdD0xOTkiCiAgPgogICAgPGFtcC1pbWcgbGF5b3V0PSJyZXNwb25zaXZlIiBzcmM9Imh0dHBzOi8vczMtZXUtd2VzdC0xLmFtYXpvbmF3cy5jb20vc3BlZWNoa2l0LWpzL2xvZ28uc3ZnIiB3aWR0aD0iNjQzIiBoZWlnaHQ9IjE1MCIgcGxhY2Vob2xkZXI+PC9hbXAtaW1nPgogIDwvYW1wLWlmcmFtZT4KPC9ib2R5Pgo8L2h0bWw+)
+
+It is worth noting that the player will not render when audio is unavailable, though due to AMP restrictions we cannot hide an amp-iframe (as we do normally). To solve this you will need to add a function checker to show/hide the amp-frame and this must be added on your side due to the restrictions.
+
+The function needs to make a request to our API and perform a check for the audio. You can then show/hide the iframe depending on the response. The following snippet will give you the request URL: `https://app.speechkit.io/api/v2/projects/{project_id}/podcasts/search?url={article_url}`
+
+```
+curl -X GET "https://app.speechkit.io/api/v2/projects/6673/podcasts/search?url=https://www.midtjyllandsavis.dk/artikel/e93e39cd-d69b-4273-9201-78574c511791" \
+ -H "Accept: application/json"
+```
+
+When you make a request using sRequestUrl, it will return a 200 JSON response for an existing audio article, or a 404 Not Found response for an article that can't be found. You can then show/hide the iframe according to this response.

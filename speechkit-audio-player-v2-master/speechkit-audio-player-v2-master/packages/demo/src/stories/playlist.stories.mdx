@@ -1,0 +1,412 @@
+import { Meta, Story, Preview } from '@storybook/addon-docs/blocks'
+import * as stories from '../playlist'
+
+<Meta title='SpeechKit JS/Playlist' />
+
+# Playlist Player
+
+## **Example**
+
+<Story name='Player' height='400px'>{() => stories.player()}</Story>
+
+## **Use**
+
+Import components you want into your **Project**
+`import SpeechKit from ‘@speechkit/speechkit-audio-player-v2‘;`
+
+and use them like so
+
+```js
+import SpeechKit from '@speechkit/speechkit-audio-player-v2';
+
+SpeechKit.player({
+  projectId: "6673",
+  // player type
+  player: 'PlaylistPlayer',
+}).then(appInst => {});
+```
+
+## **Use with SDK**
+
+Import components you want into your **Project**
+`import { SpeechKitSdk } from ‘@speechkit/speechkit-audio-player-v2‘;`
+
+The playlist player SDK will then be available and allow interaction with the player.
+
+To initialise a new instance of the player, add
+
+```js
+import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
+
+SpeechKitSdk.player({
+  projectId: "6673",
+  // player type
+  player: 'PlaylistPlayer',
+  playlist: [{ podcastId: '...' }, { externelId: '...' }],
+}).then(appInst => {
+  // Binding to methods and events can be implemented here (see below)
+});
+```
+
+### **Mandatory parameters**
+
+___
+`projectId` _number_
+
+This is the Project ID.
+___
+`player` _string_
+
+To use the Playlist Player you should pass `"PlaylistPlayer"`.
+___
+`playlist` _array_
+
+Array of objects like `{ key: value }` where `key` can be one of (`podcastId` | `externalId`). The array should be sorted in the order that you wish the audios to appear in the playlist player.
+
+Example for array of playlist:
+```js
+[
+  { podcastId: '...' },
+  { podcastId: '...' },
+  ...
+  { podcastId: '...' },
+]
+```
+___
+
+### **Advanced parameters**
+
+___
+`renderNode` *string (optional)*
+
+This is the ID of the container element. The default is set to `speechkit-player`.
+
+___
+
+`UIEnabled` *boolean (optional)*
+
+Set to false to use the playlist player without the UI.
+
+___
+
+`publisherColor` *string (optional)*
+
+Set the color of the playlist player icons and progress bar, e.g, `#000000`.
+
+___
+
+`publisherBgColor` *string (optional)*
+
+Set the color of the playlist player background, e.g, `#F5F5F5`.
+
+___
+
+Once the player has been initialised, you will have access to all the methods and can bind to various events that will be emitted by the player.
+
+## **Player Methods**
+
+Now that you have a basic player setup, various methods are available to control the audio, set the language, or obtain information about the player state.
+
+Player methods can be called directly eg. `appInst.play()` or you can create an new object within the window object and add the methods you want available, as shown here:
+
+```js
+SpeechKitSdk.player(parameters).then(appInst => {
+  appInst.play();
+
+  window.YourApp = {
+    paused() {
+      const result = appInst.paused();
+      console.log(`fn_paused() -> ${result}`);
+    },
+  };
+)};
+```
+
+The method can then simply be called using `YourApp.paused()`
+
+Details of the other methods available in the player are provided below.
+
+### **Methods:**
+___
+`play()` -
+
+This method plays the audio.
+___
+`pause()` -
+
+This method pauses the audio.
+
+___
+`paused()` -
+
+This method determines whether or not the player is paused.
+___
+`changeLang(lang)` _string_
+
+This method changes the text language within the player.
+
+___
+`currentTime()` -
+
+This method gets the current time in seconds, rounded to two decimal places, eg `28.05`.
+
+___
+`duration()` -
+
+This method gets the total duration of the audio in seconds, rounded to two decimal places, eg `28.05`.
+
+___
+`remainingTime()` -
+
+This method gets the time remaining of the audio in seconds, rounded to two decimal places, eg `28.05`.
+
+___
+`changeCurrentTime(seconds)` _number_
+
+This method sets play position between 0 and total duration in seconds, rounded to two decimal places, eg `18.05`.
+
+___
+`rewind(seconds)` _number_
+
+This method rewinds the playback by the specified seek time in seconds eg `5.0`.
+
+___
+`forward(seconds)` _number_
+
+This method fast forwards the playback by the specified seek time in seconds eg `5.0`.
+
+___
+`getCurrent()` -
+
+This method returns the current audio index in the playlist.
+
+___
+`setCurrent(index)` _number_
+
+This method sets the audio index in the playlist.
+
+___
+`previous()` -
+
+This method skips to the previous audio in the playlist.
+
+___
+`next()` -
+
+This method skips to the next audio in the playlist.
+
+___
+`getPlaylist()` -
+
+This method returns a list of audios in the playlist.
+
+```js
+[
+  {
+    id: '...', // podcastId
+    externalId: '...', // external ID for audio
+    title: 'Audio title',
+    author: 'Audio author',
+    duration: 30.58, // in seconds
+    publishedAt: '2020-11-04T09:23:29.000Z', // Standard ISO 8601 format is used by your input string.
+  }
+]
+```
+
+___
+`getPlaylistItem(index)` _number_
+
+This method returns the audio by index.
+
+```js
+{
+  id: '...', // podcastId
+  externalId: '...', // external ID for audio
+  title: 'Audio title',
+  author: 'Audio author',
+  duration: 30.58, // in seconds
+  publishedAt: '2020-11-04T09:23:29.000Z', // Standard ISO 8601 format is used by your input string.
+}
+```
+
+___
+`loadPlaylist(arrayIds)` -
+
+The method return a promise in which you can get data from the parameter list.
+
+Example for parameter - `arrayIDs`:
+```js
+[
+  { podcastId: '...' },
+  { podcastId: '...' },
+  ...
+  { podcastId: '...' },
+]
+```
+Returns a [promise](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Promise) list of audios:
+```js
+[
+  {
+    id: '...', // podcastId
+    externalId: '...', // external ID for podcast
+    title: 'Podcast title',
+    author: 'Podcast author',
+    duration: 30.58, // in seconds
+    publishedAt: '2020-11-04T09:23:29.000Z', // Standard ISO 8601 format is used by your input string.
+  }
+]
+```
+___
+
+All time values are returned in seconds, rounded to two decimal places, eg `28.05`
+
+`SpeechKitSdk.language` - list of available languages
+
+`SpeechKitSdk.playerTypes` - list of available types
+
+### Playlist Player Events
+
+You can run custom functions based on specific playlist player events using the `on` and `off` listener to bind your functions to the events:
+
+```js
+SpeechKitSdk.player(parameters).then(appInst => {
+  // Bind to the play event:
+  appInst.events.on(SpeechKitSdk.Events.play, dataEvent => {
+    console.log(`on -> ${SpeechKitSdk.Events.play} -> `, dataEvent);
+  });
+  // on -> play -> { duration: 10.23, progress: 3.12, index: 0 }
+});
+```
+
+`appInst.events` supported the next methods:
+
+- `on(type, handler)` - Register an event handler for the given type.
+- `off(type, handler)` - Remove an event handler for the given type.
+
+**play**
+
+___
+
+This event fires when playback is initiated.
+
+**Event data:**
+
+`duration` *number*
+
+The total duration of the audio in seconds, rounded to two decimal places, eg `28.05`.
+
+`progress` *number*
+
+The duration of the audio already played in seconds, rounded to two decimal places, eg `28.05`.
+
+`index` *number*
+
+The index of the audio already played.
+
+**Sample event data:**
+
+```json
+{
+  "duration": 30.04,
+  "progress": 10.6,
+  "index": 0,
+}
+```
+
+**pause**
+
+___
+
+This event fires when audio is paused.
+
+**Event data:**
+
+`duration` *number*
+
+The total duration of the audio in seconds, rounded to two decimal places, eg `28.05`.
+
+`progress` *number*
+
+The duration of the audio played, when the pause was triggered, in seconds, rounded to two decimal places, eg `28.05`.
+
+`index` *number*
+
+The index of the audio already played.
+
+**Sample event data:**
+
+```json
+{
+  "duration": 30.04,
+  "progress": 10.6,
+  "index": 0,
+}
+```
+
+**timeUpdate**
+
+___
+
+This event fires every 25ms during playback and indicates, in seconds, the duration of the audio that has been played, eg `28.05`.
+
+**Event data:**
+
+`duration` *number*
+
+The total duration of the audio in seconds, rounded to two decimal places, eg `28.05`.
+
+`progress` *number*
+
+The duration of the audio played in seconds, rounded to two decimal places, eg `28.05`.
+
+`index` *number*
+
+The index of the audio already played.
+
+**Sample event data:**
+
+```json
+{
+  "duration": 30.04,
+  "progress": 10.6,
+  "index": 0,
+}
+```
+
+**playbackRate**
+
+___
+
+This event fires when the playback rate of the audio in the player changes.
+
+**Event data:**
+
+`playbackRate` *number*
+
+The new playback rate, eg `1.5`.
+
+```json
+{
+  "playbackRate": 1.5
+}
+```
+
+**ended**
+
+___
+
+This event fires when the audio completes playback.
+
+**Event data:**
+
+`index` *number*
+
+The index of the audio was ended.
+
+```json
+{
+  "index": 0
+}
+```
+
+If you have any further questions related to the SDK, please contact us at [support@speechkit.io](mailto:support@speechkit.io).

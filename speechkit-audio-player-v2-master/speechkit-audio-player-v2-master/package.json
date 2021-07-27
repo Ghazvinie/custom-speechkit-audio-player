@@ -1,0 +1,72 @@
+{
+  "name": "speechkit-audio-player-v2",
+  "description": "A web player component that can play audio from https://speechkit.io",
+  "engines": {
+    "node": ">=12.x.x <13",
+    "yarn": ">=1.22.x"
+  },
+  "module": "build/module/index.js",
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "clear": "./scripts/clear.sh",
+    "lint:js": "eslint --ext .js .",
+    "ci:lint:js": "eslint --ignore-path .gitignore --ext .js --format junit -o reports/junit/js-lint-results.xml .",
+    "lint": "yarn lint:js && echo \"Lint free!\"",
+    "ci:lint": "yarn lint:js && echo \"Lint free!\"",
+    "lerna": "lerna",
+    "test": "node ./scripts/test.js --env=jsdom --config=./jest.config.js",
+    "preversion": "yarn lint && yarn test --ci",
+    "publish:stable": "yarn lerna publish",
+    "publish:rc": "yarn lerna publish --canary --dist-tag release-candidate --preid rc.$(git rev-parse --short HEAD)",
+    "start": "cd packages/player && yarn start",
+    "develop": "yarn run clear && cd packages/player && yarn run develop",
+    "develop:lib": "yarn run clear && cd packages/player && yarn run develop:lib",
+    "develop:ie11": "yarn run clear && cd packages/player && yarn run develop:ie11",
+    "build": "yarn run clear && cd packages/player && yarn run build",
+    "build:module": "yarn run clear && cd packages/player && yarn run build:module",
+    "build:player": "cd packages/player && yarn run build",
+    "build:lib": "yarn run clear && cd packages/player && yarn run build:lib",
+    "dist:copy": "NODE_ENV=production npx babel-node ./scripts/copy-files.js",
+    "dist:build": "sh scripts/build-dist.sh && yarn run dist:copy",
+    "storybook": "cd packages/demo && yarn run storybook",
+    "storybook:build": "yarn run build:lib && cd packages/demo && yarn run build-storybook"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/SpeechKit/speechkit-audio-player-v2.git"
+  },
+  "homepage": "https://speechkit.io",
+  "author": "Zapozdaev Anton <azapozdaev@meyvndigital.co.uk>",
+  "license": "MIT",
+  "private": true,
+  "devDependencies": {
+    "@babel/cli": "^7.8.4",
+    "@babel/core": "^7.9.0",
+    "@babel/node": "^7.12.10",
+    "@babel/preset-env": "^7.9.5",
+    "@commitlint/cli": "^8.3.5",
+    "@commitlint/config-conventional": "^8.3.4",
+    "babel-eslint": "^10.1.0",
+    "babel-jest": "^26.5.2",
+    "eslint": "^7.2.0",
+    "eslint-config-airbnb-base": "^14.1.0",
+    "eslint-import-resolver-babel-module": "^5.1.2",
+    "eslint-plugin-import": "^2.20.2",
+    "eslint-plugin-svelte3": "^2.7.3",
+    "husky": "^4.2.5",
+    "jest": "^26.5.2",
+    "jest-junit": "^12.0.0",
+    "lerna": "^3.20.2",
+    "regenerator-runtime": "^0.13.7",
+    "sentry-testkit": "^3.2.1",
+    "whatwg-fetch": "^3.0.0"
+  },
+  "husky": {
+    "hooks": {
+      "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
+    }
+  },
+  "dependencies": {}
+}

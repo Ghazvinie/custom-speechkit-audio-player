@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta http-equiv="X-UA-Compatible" content="IE=9; IE=8; IE=7; IE=EDGE">
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <title>SpeechKit player</title>
+  <script type="text/javascript" src="https://polyfill.io/v3/polyfill.min.js?features=fetch%2CPromise%2CObject.assign%2CString.prototype.includes%2CNumber.isNaN%2CNumber.parseInt%2CNumber.parseFloat%2CArray.from%2CCustomEvent"></script>
+  <script type="systemjs-importmap">
+    {
+      "imports": {
+        "@speechkit/speechkit-audio-player-v2": "https://proxy.speechkit.io/npm/@speechkit/speechkit-audio-player-v2@latest/dist/systemjs/index.js",
+        "css-vars-ponyfill": "https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2/dist/css-vars-ponyfill.min.js"
+      }
+    }
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/systemjs/dist/system.js"></script>
+</head>
+<body>
+<div id="speechkit-player"></div>
+<script defer type="text/javascript">
+  Promise.all([
+    System.import('@speechkit/speechkit-audio-player-v2'),
+    System.import('css-vars-ponyfill')
+  ]).then(function () {
+    SpeechKit.player({
+      projectId: 6673,
+      podcastId: 534513,
+    }).then(function () {
+      cssVars({
+        rootElement: document,
+      });
+    });
+  });
+</script>
+</body>
+</html>

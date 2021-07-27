@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+  </script>
+
+  <base target='_blank'>
+</head>
+<body>
+<div id='speechkit-player'></div>
+<script defer='' type='module'>
+  import SpeechKit from 'https://cdn.jsdelivr.net/npm/@speechkit/speechkit-audio-player-v2@latest/dist/module/index.js';
+
+  window.addEventListener('message', event => {
+    console.log('event -> data -> ', event.data)
+  }, false)
+
+  (function() {
+    var podcast = null;
+    var articleUrl = 'https://www.nettavisen.no/nyheter/innenriks/navs-saksbehandlingstid-er-tilbake-til-normalen/3424014339.html';
+    var player = 'MinimalPlayer';
+    var isAmp = false;
+    var withDownloadButton = false;
+    var campaignJson = null;
+    var campaignId = null;
+    var publisherMeta = null;
+    var vastAdTag = "null";
+    if (vastAdTag == 'null') { vastAdTag = null; }
+
+    // if there is a fragment identifier #hash appended to URL, remove from string
+    if(articleUrl) {
+      var sAMPPrefixRegex = /[a-z-]+\.cdn\.ampproject\.org\/v\/s\//g;
+      if (articleUrl.match(sAMPPrefixRegex)) {
+        articleUrl = articleUrl.replace(sAMPPrefixRegex, '');
+      }
+      // strip out params for forbes
+      if (articleUrl.indexOf('forbes.com') !== -1) {
+        articleUrl = articleUrl.split('?')[0];
+        var regex = /\/amp\//g;
+        if (articleUrl.match(regex)) {
+          articleUrl = articleUrl.replace(regex, '/');
+        }
+        articleUrl = articleUrl.split('#')[0];
+      }
+    }
+
+    var config = {
+      isIframe: true,
+      player: player,
+      skBackend: "https://spkt.io",
+      renderNode: 'speechkit-player',
+      apiKey: "read_f57abc99e9023bc497be0ab938193c12",
+      projectId: "4033",
+      customAdMedia: campaignJson,
+      projectCampaignId: campaignId,
+      podcastUrl: "",
+      publisherId: "4148",
+      publisher: "Nettavisen",
+      publisherLogo: "https://d22tbkdovk5ea2.cloudfront.net/profile_images/projects/4033/W4zSKsj5_400x400.jpg",
+      publisherColor: "#000",
+      publisherBgColor: "#F5F5F5",
+      language: "nb_NO",
+      podcast: podcast,
+      articleUrl: articleUrl,
+      feedbackUrl: "https://spkt.io/rate/basic",
+      message: "",
+      isAmp: isAmp,
+      publisherMeta: publisherMeta,
+      vastAdTag: vastAdTag,
+      withDownloadButton: withDownloadButton,
+      featureFlags: "",
+    };
+
+    SpeechKit.player(config).then(function(currentPlayer) {});
+  })()
+
+</script>
+</body>
+</html>

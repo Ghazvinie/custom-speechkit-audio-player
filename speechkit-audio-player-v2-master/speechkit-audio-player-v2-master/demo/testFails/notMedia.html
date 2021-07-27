@@ -1,0 +1,416 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  <meta content='width=device-width, initial-scale=1' name='viewport'>
+  <script async='async' src='https://www.googletagmanager.com/gtag/js?id=UA-97997734-2'></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() {
+      dataLayer.push(arguments);
+    }
+    gtag('js', new Date());
+    gtag('config', "UA-97997734-2", {
+      'client_storage': 'none'
+    });
+  </script>
+  <script nomodule='nomodule' src='https://polyfill.io/v3/polyfill.min.js?features=String.prototype.startsWith%2Cfetch%2CPromise%2CObject.assign%2CString.prototype.includes%2CNumber.isNaN%2CNumber.parseInt%2CNumber.parseFloat%2CArray.from%2CCustomEvent' type='text/javascript'></script>
+  <base target='_blank'>
+  <script nomodule='nomodule' type='systemjs-importmap'>
+
+{
+  "imports": {
+    "@speechkit/speechkit-audio-player-v2": "https://cdn.jsdelivr.net/npm/@speechkit/speechkit-audio-player-v2@latest/dist/systemjs/index.js",
+    "css-vars-ponyfill": "https://cdn.jsdelivr.net/npm/css-vars-ponyfill@2/dist/css-vars-ponyfill.min.js"
+  }
+}
+
+        </script>
+  <script nomodule='nomodule' src='https://cdn.jsdelivr.net/npm/systemjs/dist/system.js' type='text/javascript'></script>
+  <style></style>
+</head>
+<body>
+<div id='speechkit-player'></div>
+<script defer='' type='module'>
+  import SpeechKit from '/build/module/index.js';
+  const podcasts = [{"id":"6345da94-ba0d-435d-a382-9c8e6f96c53f","podcast_id":965786,"url":"https://amtsavisen.dk/artikel/ifk-goteborg-hyrer-roland-nilsson-f%C3%B8r-fck-m%C3%B8de?rss=speechkit","title":"IFK Göteborg hyrer Roland Nilsson før FCK-møde ","author":"/ritzau/","summary":"Roland Nilsson er ansat som ny cheftræner for IFK Göteborg seks dage før mødet med eksklubben FC København. ","image":"https://images.jfmedier.dk/images/d/dd/dde/dde8b996-6b4a-4fbf-ae37-6e163c4f6231_0_90_0_0_1000_563_600_338_3d7a660a.jpg","published_at":"2020-09-11T09:10:05.000Z","body":"Det bliver en tidligere FC København-træner, som skal forsøge at ødelægge københavnernes europæiske drømme i denne sæson. \n\nFredag formiddag er Roland Nilsson således præsenteret som ny cheftræner for IFK Göteborg på et pressemøde. Hans kontrakt løber til udgangen af 2022. \n\nDermed kommer han til at stå på svenskernes sidelinje torsdag, når den kriseramte klub tager imod FC København i kvalifikationen til Europa League. \n\nRoland Nilsson var cheftræner i FCK i efteråret 2011. Han overtog jobbet fra Ståle Solbakken, som var taget til FC Köln. Nilsson nåede dog kun et halvt år i spidsen for FCK, inden han blev fyret af daværende FCK-sportsdirektør Carsten V. Jensen, som selv overtog cheftrænerjobbet i resten af sæsonen. \n\nRoland Nilsson efterlod FCK på førstepladsen, men efter hans fyring blev FCK indhentet af FC Nordsjælland og måtte nøjes med sølv. \n\nI modsætning til tidligere sæsoner spilles der kun én kamp i hver kvalifikationsrunde i Europa League, og Roland Nilsson kan derfor sende FCK ud i et europæiske mørke med en hjemmesejr i Göteborg. \n\nKøbenhavnerne rejser dog til Sveriges næststørste by som favoritter. Det danske hold har stor europæisk erfaring og spillede Europa League-kvartfinale mod Manchester United for en måned siden. \n\nDe svenske pokalmestre er til gengæld ramt af en resultatmæssig krise. Klubben har ikke vundet i 14 ligakampe i træk og flirter alvorligt med nedrykningsstregen. \n\nSom aktiv var Roland Nilsson anfører for det svenske landshold, som han repræsenterede 116 gange. \n\nI tiden før ansættelsen i FCK nåede han at være træner for Coventry, GAIS og Malmö FF. Efter fyringen i Danmark har han været træner for forskellige svenske ungdomslandshold, senest U21-landsholdet. \n\n/ritzau/ ","state":"processed","share_url":"https://spkt.io/a/965786","share_version":"v2","media":[{"id":5193426,"role":"body","content_type":"application/x-mpegURL","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7260/podcasts/965701/media/471a3ca52bfb294b247f56d6865f2cdb.m3u8","download_url":null,"created_at":"2020-09-11T09:16:17.289Z","updated_at":"2020-09-11T09:16:18.801Z","state":"processed","duration":109.556624,"voice":{"id":143,"language":"da_DK","name":"A"}},{"id":5193421,"role":"body","content_type":"audio/mpeg","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7260/podcasts/965701/media/0391f703f7700dce25b783d256b78875_compiled.mp3","download_url":null,"created_at":"2020-09-11T09:16:15.608Z","updated_at":"2020-09-11T09:16:16.341Z","state":"processed","duration":109.584,"voice":{"id":143,"language":"da_DK","name":"A"}}],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"a8b4e5ae-bff5-47c8-9cd4-a97659d805a8","podcast_id":965785,"url":"https://amtsavisen.dk/artikel/indsats-mod-motorg%C3%A6ld-sender-130-millioner-i-statskassen?rss=speechkit","title":"Indsats mod motorgæld sender 130 millioner i statskassen ","author":"/ritzau/","summary":"Tusindvis af bilejere med gæld for vægtafgift og grøn ejerafgift har betalt i alt 130 millioner kroner tilbage. ","image":"https://images.jfmedier.dk/images/3/3b/3b2/3b2ea6ec-c7ee-45db-8fd1-6c6546273477_0_90_0_52_1000_563_600_338_3e1e69e0.jpg","published_at":"2020-09-11T09:10:05.000Z","body":"Siden starten af 2019 har 50.000 bilejere modtaget en varsling fra Skattestyrelsen om ubetalt motorafgift, og det har indbragt statskassen 130 millioner kroner. \n\nDet oplyser Skattestyrelsen i en pressemeddelelse. \n\nFølger man ikke varslingen, risikerer man at få inddraget sine nummerplader. Den advarsel virker, lyder det fra Peter Thorgaard, underdirektør hos Skattestyrelsen. \n\nVi har lige så stille fået det optimeret og er begyndt at bruge en robotløsning, så vi kan sende flere varslingsbreve afsted. \n\nDet har så gjort, at vi nu har sendt 50.000 breve, hvor vi gør opmærksom på, at hvis man ikke betaler, bliver nummerpladen sendt til inddrivelse hos politiet, siger han. \n\nGælden kan blandt andet dreje sig om ubetalt vægtafgift eller grøn ejerafgift. Betaler man ikke efter gentagne henvendelser, kan man som bilist risikere at få inddraget sin nummerplade, så bilen ikke er lovlig at køre i længere. \n\nDet er særligt bilejere i hovedstadsområdet, der har betalt mest. 12.400 varslingsbreve har resulteret i 37,6 millioner kroner i betalte afgifter. Det er også dem, der har fået flest varslingsbreve. \n\nI Region Nordjylland står det bedre til. Her finder man færrest skyldnere. 5800 varslingsbreve har indbragt 14,2 millioner kroner. \n\nDet er vigtigt at forstå, at langt de fleste borgere og virksomheder betaler de motorafgifter, de skal, siger Peter Thorgaard. \n\nHvert år kommer der motorafgifter i statskassen for omkring 34 milliarder kroner. Men der er en gruppe, der ikke betaler det, de skal. Der har vi nu fået et værktøj, der gør, at flere betaler, fortsætter han. \n\nPlanen er ifølge Peter Thorgaard at fortsætte indsatsen, så man på længere sigt kan få fat i alle, der ikke betaler den rette motorafgift. \n\n/ritzau/ ","state":"processed","share_url":"https://spkt.io/a/965785","share_version":"v2","media":[{"id":5193425,"role":"body","content_type":"application/x-mpegURL","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965703/media/009cc4aebbf6cc02b4056844d3e6d309.m3u8","download_url":null,"created_at":"2020-09-11T09:16:16.617Z","updated_at":"2020-09-11T09:16:18.375Z","state":"processed","duration":105.524624,"voice":{"id":143,"language":"da_DK","name":"A"}},{"id":5193419,"role":"body","content_type":"audio/mpeg","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965703/media/55b6adc0216797aea06abec1df3c1fae_compiled.mp3","download_url":null,"created_at":"2020-09-11T09:16:15.050Z","updated_at":"2020-09-11T09:16:15.692Z","state":"processed","duration":105.552,"voice":{"id":143,"language":"da_DK","name":"A"}}],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"cb3954e6-87d6-4641-bb7b-5b2757f0065f","podcast_id":965782,"url":"https://amtsavisen.dk/artikel/telia-starter-5g-udrulning-i-slutningen-af-september?rss=speechkit","title":"Telia starter 5G-udrulning i slutningen af september ","author":"/ritzau/","summary":"Mobilnetværket 5G har en større hastighed end det nuværende 4G. I uge 40 begynder Telia udrulningen. ","image":"","published_at":"2020-09-11T09:15:02.000Z","body":"I slutningen af september vil Telia begynde at udrulle 5G for sine kunder. Det oplyser selskabet i en pressemeddelelse. \n\n5G er den næste generation af mobilnetværk og har en større hastighed end det nuværende 4G. \n\nUdrulningen begynder i uge 40 og starter i København og Aalborg, inden den fortsætter i Aarhus og Odense. \n\nOver de kommende år vil 5G-netværket blive rullet ud i resten af landet. \n\nOmkring 500.000 Telia-kunder kan se frem til at få 5G inkluderet i deres mobilabonnement, oplyser selskabet. \n\nTDC åbnede for netværket 7. september. Ved udgangen af måneden vil 80 procent af landet i princippet været dækket. \n\nDen vil dog være klart bedst i centrum af København, Aarhus, Odense og Helsingør, lød det fra TDC i slutningen af august. \n\n/ritzau/ ","state":"processed","share_url":"https://spkt.io/a/965782","share_version":"v2","media":[{"id":5193417,"role":"body","content_type":"application/x-mpegURL","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965702/media/2dc8d6a729997c5cb1bd0bb98dc23869.m3u8","download_url":null,"created_at":"2020-09-11T09:16:14.489Z","updated_at":"2020-09-11T09:16:15.447Z","state":"processed","duration":45.380623,"voice":{"id":143,"language":"da_DK","name":"A"}},{"id":5193412,"role":"body","content_type":"audio/mpeg","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965702/media/76856f13c55db02296bcdc68ccfd92fd_compiled.mp3","download_url":null,"created_at":"2020-09-11T09:16:13.464Z","updated_at":"2020-09-11T09:16:13.835Z","state":"processed","duration":45.408,"voice":{"id":143,"language":"da_DK","name":"A"}}],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"1a1358b7-24ea-4160-bfa0-a8e42aa96edb","podcast_id":965777,"url":"https://amtsavisen.dk/artikel/notat-eu-g%C3%A5r-efter-co2-reduktion-p%C3%A5-mindst-55-procent?rss=speechkit","title":"Notat: EU går efter CO2-reduktion på mindst 55 procent ","author":"/ritzau/","summary":"Nyhedsbureauet Reuters har set dokument, der foreslår 55 procents reduktion i drivhusgasser i 2030. ","image":"","published_at":"2020-09-11T09:15:02.000Z","body":"EU-Kommissionen vil foreslå, at EU sætter som mål, at der i 2030 skal være en reduktion i drivhusgasser i forhold til 1990 på \"mindst 55 procent\". \n\nDet fremgår af et dokument, som nyhedsbureauet Reuters har set. \n\nEU's nuværende mål for CO2-reduktion er 40 procent i 2030. \n\n/ritzau/ ","state":"processed","share_url":"https://spkt.io/a/965777","share_version":"v2","media":[{"id":5193404,"role":"body","content_type":"application/x-mpegURL","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7258/podcasts/965697/media/580ebcb16afe797834acf88016d93caa.m3u8","download_url":null,"created_at":"2020-09-11T09:16:08.679Z","updated_at":"2020-09-11T09:16:09.379Z","state":"processed","duration":25.556623,"voice":{"id":143,"language":"da_DK","name":"A"}},{"id":5193401,"role":"body","content_type":"audio/mpeg","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7258/podcasts/965697/media/da9e56d7b63934e973627afd4e13a344_compiled.mp3","download_url":null,"created_at":"2020-09-11T09:16:07.866Z","updated_at":"2020-09-11T09:16:08.149Z","state":"processed","duration":25.584,"voice":{"id":143,"language":"da_DK","name":"A"}}],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"05b51b5d-5dc5-418d-b6dc-438d3bb23160","podcast_id":965605,"url":"https://amtsavisen.dk/artikel/ti-eu-lande-tager-imod-400-b%C3%B8rn-fra-nedbr%C3%A6ndt-migrantlejr?rss=speechkit","title":"Ti EU-lande tager imod 400 børn fra nedbrændt migrantlejr ","author":"/ritzau/","summary":"EU-Kommissionen siger efter aftale om migrantbørn, at forslag til ny migrationspolitik fremsættes om to uger. ","image":"https://images.jfmedier.dk/images/8/8b/8b9/8b957ef8-78cb-48da-82c8-28ad6a231b23_0_90_0_52_1000_563_600_338_53c60ffa.jpg","published_at":"2020-09-11T09:05:02.000Z","body":"Ti EU-lande har indgået en aftale om at tage imod 400 uledsagede mindreårige fra den overfyldte græske migrantlejr Moria, der er brændt ned. \n\nDet bekræfter den tyske indenrigsminister, Horst Seehofer, på et pressemøde sammen med EU-kommissær for migration Margaritis Schinas. \n\nNatten til onsdag blev Moria-lejren, der ligger på den græske ø Lesbos, ramt af en voldsom brand. \n\nMellem 12.000 og 13.000 befandt sig i lejren, selv om den kun er beregnet til omkring 3000 migranter. Migranterne blev evakueret under branden. \n\nTyskland og Frankrig vil tage imod hovedparten af 400 børn, fortæller Seehofer. \n\nDe to store EU-lande vil hver tage imod 100-150 af de uledsagede. \n\nMoria er en klar påmindelse til os alle om, hvad vi bliver nødt til at ændre i Europa, siger Schinas. \n\nDen græske kommissær siger, at EU-Kommissionen vil fremsætte et forslag til en ny migrations- og asylpolitik 30. september. \n\nDen såkaldte migrationspagt har været undervejs meget længe. Tidligere på ugen talte EU-Kommissionens formand, Ursula von der Leyen, med den danske statsminister, Mette Frederiksen (S), om netop denne pagt. \n\n/ritzau/ ","state":"processed","share_url":"https://spkt.io/a/965605","share_version":"v2","media":[{"id":5193155,"role":"body","content_type":"application/x-mpegURL","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965565/media/acf88100076e7e7902ea74f4f5fd12bd.m3u8","download_url":null,"created_at":"2020-09-11T09:06:50.390Z","updated_at":"2020-09-11T09:06:53.080Z","state":"processed","duration":72.596623,"voice":{"id":143,"language":"da_DK","name":"A"}},{"id":5193146,"role":"body","content_type":"audio/mpeg","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965565/media/33e9966031f3247ad12c47b23efcfe2c_compiled.mp3","download_url":null,"created_at":"2020-09-11T09:06:48.634Z","updated_at":"2020-09-11T09:06:49.269Z","state":"processed","duration":72.624,"voice":{"id":143,"language":"da_DK","name":"A"}}],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"76de5768-ad4a-4481-82b6-10a69b588240","podcast_id":965500,"url":"https://amtsavisen.dk/artikel/eksiliraner-f%C3%A5r-gr%C3%B8nt-lys-til-at-tale-med-pressen-i-spionsag?rss=speechkit","title":"Eksiliraner får grønt lys til at tale med pressen i spionsag ","author":"/ritzau/","summary":"En dommer har besluttet, at udvalgte journalister må besøge fængslet mand i sag om spionage og terrorstøtte. ","image":"","published_at":"2020-09-11T08:55:03.000Z","body":"Han skal have lov til at tale med pressen. \n\nDet er i korte træk konklusionen i en kendelse om, hvorvidt en fængslet mand i en sag om spionage og økonomisk støtte til terror skal have mulighed for at udtale sig direkte til udvalgte journalister. \n\nDet oplyser Retten i Roskilde, som har taget stilling til spørgsmålet. \n\nManden er 39 år og er sammen med yderligere to personer sigtet i den opsigtsvækkende sag. De tre mænd har iransk baggrund, har i en årrække været i eksil i Danmark og tilhører oprørsgruppen ASMLA. \n\nGruppen anses af det iranske styre for at være en terrorbevægelse. \n\nDe tre mænd har været varetægtsfængslet siden juni. To måneder senere indledte den 39-årige mand en sultestrejke. \n\nHan var utilfreds - dels på grund af sin fængsling, dels fordi anklagemyndigheden afslog hans ønske om at udtale sig til pressen. \n\nAdvokat Karoline Normann - mandens forsvarer - bad herefter om at få spørgsmålet om pressekontakt indbragt for Retten i Roskilde. \n\nHer har dommer John Larsen givet grønt lys til, at journalister fra tre udvalgte medier samt en repræsentant for Amnesty International i Danmark må aflægge eksiliraneren et besøg i arresten. \n\nDer er tale om journalister fra henholdsvis den amerikanske avis Wall Street Journal samt de to danske medier Danmarks Radio og Ritzau. \n\n/ritzau/ ","state":"processed","share_url":"https://spkt.io/a/965500","share_version":"v2","media":[{"id":5192965,"role":"body","content_type":"application/x-mpegURL","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965447/media/c638b4f8f6593cfe70da6ec7c3cf8570.m3u8","download_url":null,"created_at":"2020-09-11T08:55:40.819Z","updated_at":"2020-09-11T08:55:43.376Z","state":"processed","duration":76.916623,"voice":{"id":143,"language":"da_DK","name":"A"}},{"id":5192957,"role":"body","content_type":"audio/mpeg","url":"https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965447/media/a0d5a274a35d67966f3e6d6091d30355_compiled.mp3","download_url":null,"created_at":"2020-09-11T08:55:38.943Z","updated_at":"2020-09-11T08:55:39.710Z","state":"processed","duration":76.944,"voice":{"id":143,"language":"da_DK","name":"A"}}],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"2477b074-217f-4f60-aeb5-33c6cc25f446","podcast_id":965400,"url":"https://amtsavisen.dk/artikel/ungt-pakkebud-fik-stj%C3%A5let-sine-pakker-i-aarhus-v-aggressiv-mand-med-rottweiler-efterlyses?rss=speechkit","title":null,"author":"Tobias Heede Niebuhr tobn@stiften.dk","summary":null,"image":"https://images.jfmedier.dk/images/e/e8/e85/e85c958f-84b0-40e4-8ae4-877b78e024ea_1_90_0_0_1628_917_600_338_174d1135.jpg","published_at":"2020-09-11T08:43:06.000Z","body":null,"state":"processed","share_url":"https://spkt.io/a/965400","share_version":"v2","media":[],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false},{"id":"9c222bc3-dc05-49a6-8e5a-fa198890fbcf","podcast_id":965397,"url":"https://amtsavisen.dk/artikel/de-samme-fem-melodier-gjorde-kvinde-tosset-bad-politiet-om-at-fjerne-harmonikaspiller?rss=speechkit","title":null,"author":"Kasper Kudsk kaje@stiften.dk","summary":null,"image":"https://images.jfmedier.dk/images/f/f1/f1b/f1bf8e2b-3601-4076-86c8-af0229b5d225_1_90_0_205_3976_2240_600_338_978deb6d.jpg","published_at":"2020-09-11T08:44:21.000Z","body":null,"state":"processed","share_url":"https://spkt.io/a/965397","share_version":"v2","media":[],"player_type":"EmbeddedPlayer","next_podcast_external_id":null,"ad_disabled":false}];
+  const config = {
+    isIframe: true,
+    player: 'PlaylistPlayer',
+    skBackend: "https://spkt.io",
+    renderNode: 'speechkit-player',
+    apiKey: "read_e73300aafab92097d010e10410952899",
+    projectId: "6997",
+    projectCampaignId: "",
+    podcastUrl: "",
+    publisherId: "363",
+    publisher: "Randers Amtsavis - General",
+    publisherLogo: "https://speechkit-prod.s3-eu-west-1.amazonaws.com/distribution_images/distribution/6997/Nyhedsoverblik.jpg",
+    publisherColor: "#000",
+    publisherBgColor: "#F5F5F5",
+    language: "da_DK",
+    podcasts: podcasts,
+    feedbackUrl: "https://spkt.io/rate/basic",
+    message: "",
+    visibleItems: "4",
+    featureFlags: "playlist_ui_v2",
+  };
+  SpeechKit.player(config).then(function(currentPlayer) {}).catch(function(e) {
+    console.log(e);
+  });
+
+
+</script>
+<script defer='' nomodule='nomodule' type='text/javascript'>
+  (function() {
+      var podcasts = [{
+        "id": "6345da94-ba0d-435d-a382-9c8e6f96c53f",
+        "podcast_id": 965786,
+        "url": "https://amtsavisen.dk/artikel/ifk-goteborg-hyrer-roland-nilsson-f%C3%B8r-fck-m%C3%B8de?rss=speechkit",
+        "title": "IFK Göteborg hyrer Roland Nilsson før FCK-møde ",
+        "author": "/ritzau/",
+        "summary": "Roland Nilsson er ansat som ny cheftræner for IFK Göteborg seks dage før mødet med eksklubben FC København. ",
+        "image": "https://images.jfmedier.dk/images/d/dd/dde/dde8b996-6b4a-4fbf-ae37-6e163c4f6231_0_90_0_0_1000_563_600_338_3d7a660a.jpg",
+        "published_at": "2020-09-11T09:10:05.000Z",
+        "body": "Det bliver en tidligere FC København-træner, som skal forsøge at ødelægge københavnernes europæiske drømme i denne sæson. \n\nFredag formiddag er Roland Nilsson således præsenteret som ny cheftræner for IFK Göteborg på et pressemøde. Hans kontrakt løber til udgangen af 2022. \n\nDermed kommer han til at stå på svenskernes sidelinje torsdag, når den kriseramte klub tager imod FC København i kvalifikationen til Europa League. \n\nRoland Nilsson var cheftræner i FCK i efteråret 2011. Han overtog jobbet fra Ståle Solbakken, som var taget til FC Köln. Nilsson nåede dog kun et halvt år i spidsen for FCK, inden han blev fyret af daværende FCK-sportsdirektør Carsten V. Jensen, som selv overtog cheftrænerjobbet i resten af sæsonen. \n\nRoland Nilsson efterlod FCK på førstepladsen, men efter hans fyring blev FCK indhentet af FC Nordsjælland og måtte nøjes med sølv. \n\nI modsætning til tidligere sæsoner spilles der kun én kamp i hver kvalifikationsrunde i Europa League, og Roland Nilsson kan derfor sende FCK ud i et europæiske mørke med en hjemmesejr i Göteborg. \n\nKøbenhavnerne rejser dog til Sveriges næststørste by som favoritter. Det danske hold har stor europæisk erfaring og spillede Europa League-kvartfinale mod Manchester United for en måned siden. \n\nDe svenske pokalmestre er til gengæld ramt af en resultatmæssig krise. Klubben har ikke vundet i 14 ligakampe i træk og flirter alvorligt med nedrykningsstregen. \n\nSom aktiv var Roland Nilsson anfører for det svenske landshold, som han repræsenterede 116 gange. \n\nI tiden før ansættelsen i FCK nåede han at være træner for Coventry, GAIS og Malmö FF. Efter fyringen i Danmark har han været træner for forskellige svenske ungdomslandshold, senest U21-landsholdet. \n\n/ritzau/ ",
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965786",
+        "share_version": "v2",
+        "media": [{
+          "id": 5193426,
+          "role": "body",
+          "content_type": "application/x-mpegURL",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7260/podcasts/965701/media/471a3ca52bfb294b247f56d6865f2cdb.m3u8",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:17.289Z",
+          "updated_at": "2020-09-11T09:16:18.801Z",
+          "state": "processed",
+          "duration": 109.556624,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }, {
+          "id": 5193421,
+          "role": "body",
+          "content_type": "audio/mpeg",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7260/podcasts/965701/media/0391f703f7700dce25b783d256b78875_compiled.mp3",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:15.608Z",
+          "updated_at": "2020-09-11T09:16:16.341Z",
+          "state": "processed",
+          "duration": 109.584,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "a8b4e5ae-bff5-47c8-9cd4-a97659d805a8",
+        "podcast_id": 965785,
+        "url": "https://amtsavisen.dk/artikel/indsats-mod-motorg%C3%A6ld-sender-130-millioner-i-statskassen?rss=speechkit",
+        "title": "Indsats mod motorgæld sender 130 millioner i statskassen ",
+        "author": "/ritzau/",
+        "summary": "Tusindvis af bilejere med gæld for vægtafgift og grøn ejerafgift har betalt i alt 130 millioner kroner tilbage. ",
+        "image": "https://images.jfmedier.dk/images/3/3b/3b2/3b2ea6ec-c7ee-45db-8fd1-6c6546273477_0_90_0_52_1000_563_600_338_3e1e69e0.jpg",
+        "published_at": "2020-09-11T09:10:05.000Z",
+        "body": "Siden starten af 2019 har 50.000 bilejere modtaget en varsling fra Skattestyrelsen om ubetalt motorafgift, og det har indbragt statskassen 130 millioner kroner. \n\nDet oplyser Skattestyrelsen i en pressemeddelelse. \n\nFølger man ikke varslingen, risikerer man at få inddraget sine nummerplader. Den advarsel virker, lyder det fra Peter Thorgaard, underdirektør hos Skattestyrelsen. \n\nVi har lige så stille fået det optimeret og er begyndt at bruge en robotløsning, så vi kan sende flere varslingsbreve afsted. \n\nDet har så gjort, at vi nu har sendt 50.000 breve, hvor vi gør opmærksom på, at hvis man ikke betaler, bliver nummerpladen sendt til inddrivelse hos politiet, siger han. \n\nGælden kan blandt andet dreje sig om ubetalt vægtafgift eller grøn ejerafgift. Betaler man ikke efter gentagne henvendelser, kan man som bilist risikere at få inddraget sin nummerplade, så bilen ikke er lovlig at køre i længere. \n\nDet er særligt bilejere i hovedstadsområdet, der har betalt mest. 12.400 varslingsbreve har resulteret i 37,6 millioner kroner i betalte afgifter. Det er også dem, der har fået flest varslingsbreve. \n\nI Region Nordjylland står det bedre til. Her finder man færrest skyldnere. 5800 varslingsbreve har indbragt 14,2 millioner kroner. \n\nDet er vigtigt at forstå, at langt de fleste borgere og virksomheder betaler de motorafgifter, de skal, siger Peter Thorgaard. \n\nHvert år kommer der motorafgifter i statskassen for omkring 34 milliarder kroner. Men der er en gruppe, der ikke betaler det, de skal. Der har vi nu fået et værktøj, der gør, at flere betaler, fortsætter han. \n\nPlanen er ifølge Peter Thorgaard at fortsætte indsatsen, så man på længere sigt kan få fat i alle, der ikke betaler den rette motorafgift. \n\n/ritzau/ ",
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965785",
+        "share_version": "v2",
+        "media": [{
+          "id": 5193425,
+          "role": "body",
+          "content_type": "application/x-mpegURL",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965703/media/009cc4aebbf6cc02b4056844d3e6d309.m3u8",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:16.617Z",
+          "updated_at": "2020-09-11T09:16:18.375Z",
+          "state": "processed",
+          "duration": 105.524624,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }, {
+          "id": 5193419,
+          "role": "body",
+          "content_type": "audio/mpeg",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965703/media/55b6adc0216797aea06abec1df3c1fae_compiled.mp3",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:15.050Z",
+          "updated_at": "2020-09-11T09:16:15.692Z",
+          "state": "processed",
+          "duration": 105.552,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "cb3954e6-87d6-4641-bb7b-5b2757f0065f",
+        "podcast_id": 965782,
+        "url": "https://amtsavisen.dk/artikel/telia-starter-5g-udrulning-i-slutningen-af-september?rss=speechkit",
+        "title": "Telia starter 5G-udrulning i slutningen af september ",
+        "author": "/ritzau/",
+        "summary": "Mobilnetværket 5G har en større hastighed end det nuværende 4G. I uge 40 begynder Telia udrulningen. ",
+        "image": "",
+        "published_at": "2020-09-11T09:15:02.000Z",
+        "body": "I slutningen af september vil Telia begynde at udrulle 5G for sine kunder. Det oplyser selskabet i en pressemeddelelse. \n\n5G er den næste generation af mobilnetværk og har en større hastighed end det nuværende 4G. \n\nUdrulningen begynder i uge 40 og starter i København og Aalborg, inden den fortsætter i Aarhus og Odense. \n\nOver de kommende år vil 5G-netværket blive rullet ud i resten af landet. \n\nOmkring 500.000 Telia-kunder kan se frem til at få 5G inkluderet i deres mobilabonnement, oplyser selskabet. \n\nTDC åbnede for netværket 7. september. Ved udgangen af måneden vil 80 procent af landet i princippet været dækket. \n\nDen vil dog være klart bedst i centrum af København, Aarhus, Odense og Helsingør, lød det fra TDC i slutningen af august. \n\n/ritzau/ ",
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965782",
+        "share_version": "v2",
+        "media": [{
+          "id": 5193417,
+          "role": "body",
+          "content_type": "application/x-mpegURL",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965702/media/2dc8d6a729997c5cb1bd0bb98dc23869.m3u8",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:14.489Z",
+          "updated_at": "2020-09-11T09:16:15.447Z",
+          "state": "processed",
+          "duration": 45.380623,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }, {
+          "id": 5193412,
+          "role": "body",
+          "content_type": "audio/mpeg",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7259/podcasts/965702/media/76856f13c55db02296bcdc68ccfd92fd_compiled.mp3",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:13.464Z",
+          "updated_at": "2020-09-11T09:16:13.835Z",
+          "state": "processed",
+          "duration": 45.408,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "1a1358b7-24ea-4160-bfa0-a8e42aa96edb",
+        "podcast_id": 965777,
+        "url": "https://amtsavisen.dk/artikel/notat-eu-g%C3%A5r-efter-co2-reduktion-p%C3%A5-mindst-55-procent?rss=speechkit",
+        "title": "Notat: EU går efter CO2-reduktion på mindst 55 procent ",
+        "author": "/ritzau/",
+        "summary": "Nyhedsbureauet Reuters har set dokument, der foreslår 55 procents reduktion i drivhusgasser i 2030. ",
+        "image": "",
+        "published_at": "2020-09-11T09:15:02.000Z",
+        "body": "EU-Kommissionen vil foreslå, at EU sætter som mål, at der i 2030 skal være en reduktion i drivhusgasser i forhold til 1990 på \"mindst 55 procent\". \n\nDet fremgår af et dokument, som nyhedsbureauet Reuters har set. \n\nEU's nuværende mål for CO2-reduktion er 40 procent i 2030. \n\n/ritzau/ ",
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965777",
+        "share_version": "v2",
+        "media": [{
+          "id": 5193404,
+          "role": "body",
+          "content_type": "application/x-mpegURL",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7258/podcasts/965697/media/580ebcb16afe797834acf88016d93caa.m3u8",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:08.679Z",
+          "updated_at": "2020-09-11T09:16:09.379Z",
+          "state": "processed",
+          "duration": 25.556623,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }, {
+          "id": 5193401,
+          "role": "body",
+          "content_type": "audio/mpeg",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/7258/podcasts/965697/media/da9e56d7b63934e973627afd4e13a344_compiled.mp3",
+          "download_url": null,
+          "created_at": "2020-09-11T09:16:07.866Z",
+          "updated_at": "2020-09-11T09:16:08.149Z",
+          "state": "processed",
+          "duration": 25.584,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "05b51b5d-5dc5-418d-b6dc-438d3bb23160",
+        "podcast_id": 965605,
+        "url": "https://amtsavisen.dk/artikel/ti-eu-lande-tager-imod-400-b%C3%B8rn-fra-nedbr%C3%A6ndt-migrantlejr?rss=speechkit",
+        "title": "Ti EU-lande tager imod 400 børn fra nedbrændt migrantlejr ",
+        "author": "/ritzau/",
+        "summary": "EU-Kommissionen siger efter aftale om migrantbørn, at forslag til ny migrationspolitik fremsættes om to uger. ",
+        "image": "https://images.jfmedier.dk/images/8/8b/8b9/8b957ef8-78cb-48da-82c8-28ad6a231b23_0_90_0_52_1000_563_600_338_53c60ffa.jpg",
+        "published_at": "2020-09-11T09:05:02.000Z",
+        "body": "Ti EU-lande har indgået en aftale om at tage imod 400 uledsagede mindreårige fra den overfyldte græske migrantlejr Moria, der er brændt ned. \n\nDet bekræfter den tyske indenrigsminister, Horst Seehofer, på et pressemøde sammen med EU-kommissær for migration Margaritis Schinas. \n\nNatten til onsdag blev Moria-lejren, der ligger på den græske ø Lesbos, ramt af en voldsom brand. \n\nMellem 12.000 og 13.000 befandt sig i lejren, selv om den kun er beregnet til omkring 3000 migranter. Migranterne blev evakueret under branden. \n\nTyskland og Frankrig vil tage imod hovedparten af 400 børn, fortæller Seehofer. \n\nDe to store EU-lande vil hver tage imod 100-150 af de uledsagede. \n\nMoria er en klar påmindelse til os alle om, hvad vi bliver nødt til at ændre i Europa, siger Schinas. \n\nDen græske kommissær siger, at EU-Kommissionen vil fremsætte et forslag til en ny migrations- og asylpolitik 30. september. \n\nDen såkaldte migrationspagt har været undervejs meget længe. Tidligere på ugen talte EU-Kommissionens formand, Ursula von der Leyen, med den danske statsminister, Mette Frederiksen (S), om netop denne pagt. \n\n/ritzau/ ",
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965605",
+        "share_version": "v2",
+        "media": [{
+          "id": 5193155,
+          "role": "body",
+          "content_type": "application/x-mpegURL",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965565/media/acf88100076e7e7902ea74f4f5fd12bd.m3u8",
+          "download_url": null,
+          "created_at": "2020-09-11T09:06:50.390Z",
+          "updated_at": "2020-09-11T09:06:53.080Z",
+          "state": "processed",
+          "duration": 72.596623,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }, {
+          "id": 5193146,
+          "role": "body",
+          "content_type": "audio/mpeg",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965565/media/33e9966031f3247ad12c47b23efcfe2c_compiled.mp3",
+          "download_url": null,
+          "created_at": "2020-09-11T09:06:48.634Z",
+          "updated_at": "2020-09-11T09:06:49.269Z",
+          "state": "processed",
+          "duration": 72.624,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "76de5768-ad4a-4481-82b6-10a69b588240",
+        "podcast_id": 965500,
+        "url": "https://amtsavisen.dk/artikel/eksiliraner-f%C3%A5r-gr%C3%B8nt-lys-til-at-tale-med-pressen-i-spionsag?rss=speechkit",
+        "title": "Eksiliraner får grønt lys til at tale med pressen i spionsag ",
+        "author": "/ritzau/",
+        "summary": "En dommer har besluttet, at udvalgte journalister må besøge fængslet mand i sag om spionage og terrorstøtte. ",
+        "image": "",
+        "published_at": "2020-09-11T08:55:03.000Z",
+        "body": "Han skal have lov til at tale med pressen. \n\nDet er i korte træk konklusionen i en kendelse om, hvorvidt en fængslet mand i en sag om spionage og økonomisk støtte til terror skal have mulighed for at udtale sig direkte til udvalgte journalister. \n\nDet oplyser Retten i Roskilde, som har taget stilling til spørgsmålet. \n\nManden er 39 år og er sammen med yderligere to personer sigtet i den opsigtsvækkende sag. De tre mænd har iransk baggrund, har i en årrække været i eksil i Danmark og tilhører oprørsgruppen ASMLA. \n\nGruppen anses af det iranske styre for at være en terrorbevægelse. \n\nDe tre mænd har været varetægtsfængslet siden juni. To måneder senere indledte den 39-årige mand en sultestrejke. \n\nHan var utilfreds - dels på grund af sin fængsling, dels fordi anklagemyndigheden afslog hans ønske om at udtale sig til pressen. \n\nAdvokat Karoline Normann - mandens forsvarer - bad herefter om at få spørgsmålet om pressekontakt indbragt for Retten i Roskilde. \n\nHer har dommer John Larsen givet grønt lys til, at journalister fra tre udvalgte medier samt en repræsentant for Amnesty International i Danmark må aflægge eksiliraneren et besøg i arresten. \n\nDer er tale om journalister fra henholdsvis den amerikanske avis Wall Street Journal samt de to danske medier Danmarks Radio og Ritzau. \n\n/ritzau/ ",
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965500",
+        "share_version": "v2",
+        "media": [{
+          "id": 5192965,
+          "role": "body",
+          "content_type": "application/x-mpegURL",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965447/media/c638b4f8f6593cfe70da6ec7c3cf8570.m3u8",
+          "download_url": null,
+          "created_at": "2020-09-11T08:55:40.819Z",
+          "updated_at": "2020-09-11T08:55:43.376Z",
+          "state": "processed",
+          "duration": 76.916623,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }, {
+          "id": 5192957,
+          "role": "body",
+          "content_type": "audio/mpeg",
+          "url": "https://d22tbkdovk5ea2.cloudfront.net/audio/projects/6692/podcasts/965447/media/a0d5a274a35d67966f3e6d6091d30355_compiled.mp3",
+          "download_url": null,
+          "created_at": "2020-09-11T08:55:38.943Z",
+          "updated_at": "2020-09-11T08:55:39.710Z",
+          "state": "processed",
+          "duration": 76.944,
+          "voice": {
+            "id": 143,
+            "language": "da_DK",
+            "name": "A"
+          }
+        }],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "2477b074-217f-4f60-aeb5-33c6cc25f446",
+        "podcast_id": 965400,
+        "url": "https://amtsavisen.dk/artikel/ungt-pakkebud-fik-stj%C3%A5let-sine-pakker-i-aarhus-v-aggressiv-mand-med-rottweiler-efterlyses?rss=speechkit",
+        "title": null,
+        "author": "Tobias Heede Niebuhr tobn@stiften.dk",
+        "summary": null,
+        "image": "https://images.jfmedier.dk/images/e/e8/e85/e85c958f-84b0-40e4-8ae4-877b78e024ea_1_90_0_0_1628_917_600_338_174d1135.jpg",
+        "published_at": "2020-09-11T08:43:06.000Z",
+        "body": null,
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965400",
+        "share_version": "v2",
+        "media": [],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }, {
+        "id": "9c222bc3-dc05-49a6-8e5a-fa198890fbcf",
+        "podcast_id": 965397,
+        "url": "https://amtsavisen.dk/artikel/de-samme-fem-melodier-gjorde-kvinde-tosset-bad-politiet-om-at-fjerne-harmonikaspiller?rss=speechkit",
+        "title": null,
+        "author": "Kasper Kudsk kaje@stiften.dk",
+        "summary": null,
+        "image": "https://images.jfmedier.dk/images/f/f1/f1b/f1bf8e2b-3601-4076-86c8-af0229b5d225_1_90_0_205_3976_2240_600_338_978deb6d.jpg",
+        "published_at": "2020-09-11T08:44:21.000Z",
+        "body": null,
+        "state": "processed",
+        "share_url": "https://spkt.io/a/965397",
+        "share_version": "v2",
+        "media": [],
+        "player_type": "EmbeddedPlayer",
+        "next_podcast_external_id": null,
+        "ad_disabled": false
+      }];
+      var config = {
+        isIframe: true,
+        player: 'PlaylistPlayer',
+        skBackend: "https://spkt.io",
+        renderNode: 'speechkit-player',
+        apiKey: "read_e73300aafab92097d010e10410952899",
+        projectId: "6997",
+        projectCampaignId: "",
+        podcastUrl: "",
+        publisherId: "363",
+        publisher: "Randers Amtsavis - General",
+        publisherLogo: "https://speechkit-prod.s3-eu-west-1.amazonaws.com/distribution_images/distribution/6997/Nyhedsoverblik.jpg",
+        publisherColor: "#000",
+        publisherBgColor: "#F5F5F5",
+        language: "da_DK",
+        podcasts: podcasts,
+        feedbackUrl: "https://spkt.io/rate/basic",
+        message: "",
+        visibleItems: "4",
+        featureFlags: "playlist_ui_v2",
+      };
+
+      Promise.all([System.import('@speechkit/speechkit-audio-player-v2'), System.import('css-vars-ponyfill')]).then(function() {
+        SpeechKit.player(config).then(function() {
+          cssVars({
+            rootElement: document,
+          });
+        });
+      });
+    }
+  )()
+</script>
+</body>
+</html>

@@ -1,0 +1,231 @@
+import { Meta } from '@storybook/addon-docs/blocks'
+import logo from '../../assets/logo.svg'
+
+<Meta title="SpeechKit JS/Intro" id="1" />
+
+<img src={logo} height="100px" />
+
+# **SpeechKit JS Player and the SDK**
+SpeechKit JS Player and Software Development Kit
+##
+
+The SpeechKit JS Player and the SDK are designed to provide a simple integration point for publishers, through a well documented JavaScript Library.
+Developers can use this library to interact with the SpeechKit Player through the various methods and events detailed in this document.
+
+# Get started
+
+## **Install**
+Firstly you must install the SpeechKit Player which can be done by adding the following NPM package:
+
+`npm install --save @speechkit/speechkit-audio-player-v2`
+
+## **Use**
+
+Import components you want into your **Project**
+`import SpeechKit from ‘@speechkit/speechkit-audio-player-v2‘;`
+
+and use them like so
+
+```js
+SpeechKit.player({
+  projectId: "6673",
+  // one of the following parameters has to be provided
+  podcastId: "534513",
+  articleUrl: "...",
+  externalId: "...",
+}).then(appInst => {});
+```
+
+## **Use with SDK**
+
+Import components you want into your **Project**
+`import { SpeechKitSdk } from ‘@speechkit/speechkit-audio-player-v2‘;`
+
+The player SDK will then be available and allow interaction with the player.
+
+To initialise a new instance of the player, add
+
+```js
+SpeechKitSdk.player({
+  projectId: "6673",
+  // One of the following parameters has to be provided
+  podcastId: "534513",
+  articleUrl: "...",
+  externalId: "...",
+}).then(appInst => {
+  // Binding to methods and events can be implemented here (see below)
+});
+```
+
+## **Details of the parameters**
+
+### **Mandatory parameters**
+
+| Method | Mandatory | Default value | Description |
+| :-- | :-- | :-- | :-- |
+| ``projectId`` | True | | The project you wish to play audio from |
+| ``podcastId`` | True (conditionally) | | The podcast ID from SpeechKit API response. Either this or one of two other parameters below has to be provided |
+| ``externalId`` | True (conditionally) | | The article ID in your CMS |
+| ``articleUrl`` | True (conditionally) | | The related article URL for the audio |
+
+### **Advanced parameters**
+
+| Method | Mandatory | Default value | Description |
+| :-- | :-- | :-- | :-- |
+| ``renderNode`` | False | ``'speechkit-player'`` | The ID of the container element |
+| ``language`` | False | ``'Project language'`` | Set the language of buttons and text within the player |
+| ``publisherColor`` | False | Project distribution colour or #000 | Customise the player appearance by setting the colour |
+| ``feedbackUrl`` | False | Project feedback URL or default SpeechKit feedback URL | Set a URL for the feedback link within the player |
+| ``UIEnabled`` | False | true | You can set this to false if you wish to use the player without the UI |
+
+Once the player has been initialised, you will have access to all the methods and can bind to various events that will be emitted by the player.
+
+## **Player Methods**
+
+Now that you have a basic player setup, various methods are available to control the audio, set the language, or obtain information about the player state.
+
+Player methods can be called directly eg. `appInst.play()` or you can create an new object within the window object and add the methods you want available, as shown here:
+
+```js
+SpeechKitSdk.player(parameters).then(appInst => {
+  appInst.play();
+
+  window.YourApp = {
+    paused() {
+      const result = appInst.paused();
+      console.log(`fn_paused() -> ${result}`);
+    },
+  };
+)};
+```
+
+The method can then simply be called using `YourApp.paused()`
+
+Details of the other methods available in the player are provided below.
+
+| Method | Parameters | Description |
+| :-- | :-- | :-- |
+| play() | - | Begin playback of the audio |
+| pause() | - | Pause audio playback |
+| changeLang(lang) | String | Change the text language within the player |
+| paused() | - | Determine if the player is currently paused. Should return boolean value (true/false) |
+| currentTime() | - | Get the current time (in seconds). Will return value in seconds |
+| duration() | - | Get the total duration of the audio article. Will return value in seconds |
+| remainingTime() | - | Get the time remaining on the audio article. Will return value in seconds |
+| changeCurrentTime(seconds) | Number | This method sets play position between 0 and total duration in seconds, rounded to two decimal places, eg 18.05. |
+| rewind(seconds) | Number | This method rewind playback by the specified seek time (in seconds) |
+| forward(seconds) | Number | This method fast forward by the specified seek time (in seconds) |
+
+All time values are returned in seconds, rounded to two decimal places, eg `28.05`
+
+`SpeechKitSdk.language` - list of available languages
+
+## **Player Events**
+
+You can run custom functionality when certain player events are emitted by binding your function to the event, as shown in the snippet below:
+
+```js
+SpeechKitSdk.player(parameters).then(appInst => {
+  // Bind to the play event:
+  appInst.events.on(SpeechKitSdk.Events.play, dataEvent => {
+    console.log(`on -> ${SpeechKitSdk.Events.play} -> `, dataEvent);
+  });
+
+  // on -> play -> { duration: 10.23, progress: 3.12 }
+});
+```
+
+`appInst.events` supported a next methods
+ - `on(type, handler)` - Register an event handler for the given type.
+ - `off(type, handler)` - Remove an event handler for the given type.
+
+Below is a list of the various events emitted from the player, together with any event data returned when the event is fired.
+
+**play**
+
+This event fires when playback is initiated.
+
+**Event data**
+
+| Property | Description | Unit | Type |
+| :-- | :-- | :-- | :-- |
+| duration | The total length of the audio article | Seconds | Number |
+| progress | The length of the audio already played | Seconds | Number |
+
+**Sample event data**
+
+```json
+{
+  "duration": 30.04,
+  "progress": 10.6
+}
+```
+
+**pause**
+
+This event fires when the audio is paused.
+
+**Event data**
+
+| Property | Description | Unit | Type |
+| :-- | :-- | :-- | :-- |
+| duration | The length of the audio | Seconds | Number |
+| progress | The amount of the audio played when the pause was triggered | Seconds | Number |
+
+**Sample event data**
+
+```json
+{
+  "duration": 30.04,
+  "progress": 10.6
+}
+```
+
+**timeUpdate**
+
+The event data indicates the amount of the audio that has been played and will be emitted roughly every `25ms` during playback.
+
+**Event data**
+
+| Property | Description | Unit | Type |
+| :-- | :-- | :-- | :-- |
+| duration | The length of the audio | Seconds | Number |
+| progress | The amount of the audio played when the pause was triggered | Seconds | Number |
+
+**Sample event data**
+
+```json
+{
+  "duration": 30.04,
+  "progress": 10.6
+}
+```
+
+**playbackRate**
+
+This event fires when the playback rate of the audio in the player changes.
+
+**Event data**
+
+| Property | Description | Unit | Type |
+| :-- | :-- | :-- | :-- |
+| playbackRate | The new playback rate | Speed (multiplier) | Number |
+
+**Sample event data**
+
+```json
+{
+  "playbackRate": 1.5
+}
+```
+
+**ended**
+
+This event fires when the audio is ended.
+
+**Event data**
+
+has no event data
+
+
+If you have any further questions related to the SDK, please contact us at [support@speechkit.io](mailto:support@speechkit.io).

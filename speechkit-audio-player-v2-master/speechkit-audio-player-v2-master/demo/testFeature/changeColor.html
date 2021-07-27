@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link rel='stylesheet' href='/global.css'>
+  <title>SpeechKit player</title>
+</head>
+<body>
+<script>
+  const handleChangeColor = ({ target: { value } }) => {
+    AppInst.changeColor({ color: value });
+  }
+
+  const handleChangeBgColor = ({ target: { value } }) => {
+    AppInst.changeColor({ bgColor: value });
+  }
+
+  window.handleChangeColor = handleChangeColor
+  window.handleChangeBgColor = handleChangeBgColor
+</script>
+<main>
+  <div id='speechkit-player'></div>
+  <div class="wrap-form">
+    <label for="publisherColor">Publisher Color</label>
+    <input id="publisherColor" type="color" value="#000000" onchange="handleChangeColor(event)" />
+    <label for="publisherBgColor">Publisher Bg Color</label>
+    <input id="publisherBgColor" type="color" value="#F5F5F5" onchange="handleChangeBgColor(event)" />
+  </div>
+</main>
+<script defer type='module'>
+  import { SpeechKitSdk } from '/build/module/index.js'
+  SpeechKitSdk.player({
+    projectId: 2090,
+    podcastId: 271865,
+  }).then(appInst => {
+    window.AppInst = appInst
+  })
+</script>
+</body>
+</html>

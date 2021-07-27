@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+    <meta content='width=device-width, initial-scale=1' name='viewport'>
+    <title>sdk-in-top</title>
+  </head>
+  <body>
+    <div id='speechkit-player'></div>
+    <script defer type='module'>
+      import SpeechKit from '/build/module/index.js'
+
+      SpeechKit.player({
+        projectId: 2090,
+        podcastId: 271865,
+        // podcastId: 337336,
+        // skBackend: 'http://spkt.local:3000',
+      }).then(appInst => {
+        window.AppInst = appInst
+      })
+    </script>
+  </body>
+</html>

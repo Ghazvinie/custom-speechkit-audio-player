@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang='en'>
+    <head>
+        <meta charset='utf-8'>
+        <meta name='viewport' content='width=device-width,initial-scale=1'>
+        <link rel='stylesheet' href='/global.css'>
+        <title>SpeechKit player</title>
+    </head>
+    <body>
+        <main>
+            <div id='speechkit-player'></div>
+            <div class='test-pages'>
+              <button id="btnErr">make error</button>
+            </div>
+        </main>
+        <script defer type='module'>
+            import SpeechKit from '/build/module/index.js'
+
+            const testFail = () => {
+              window.parrrr()
+            }
+
+            document.getElementById('btnErr').onclick = () => {
+              testFail()
+            }
+
+            window.addEventListener('message', event => {
+              console.log('event -> data -> ', event.data)
+              if (event.data && event.data.type === 'sk-play') {
+                Sentry.captureMessage('test sk-play')
+              }
+            }, false)
+
+            // SpeechKit.sdk.player({
+            SpeechKit.sdk.player({
+              projectId: 2090,
+              podcastId: 271865,
+            }).then(appInst => {
+              window.AppInst = appInst
+            })
+        </script>
+    </body>
+</html>

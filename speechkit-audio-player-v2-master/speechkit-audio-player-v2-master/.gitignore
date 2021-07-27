@@ -1,0 +1,18 @@
+# dependencies
+node_modules
+
+# misc
+*.log
+.DS_Store
+*.iml
+
+# Ignore coverage reports
+coverage
+reports
+
+# Editor config files
+/.idea
+
+dist
+build
+tmp

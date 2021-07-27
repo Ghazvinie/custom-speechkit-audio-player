@@ -1,0 +1,24 @@
+{
+  "name": "@speechkit/speechkit-audio-player-v2",
+  "description": "A library that can be used for playing podcasts from https://speechkit.io",
+  "version": "x.x.x",
+  "main": "dist/module/index.js",
+  "browser": "dist/module/index.js",
+  "jsdelivr":  "dist/module/index.js",
+  "esmodules": "dist/esm/index.js",
+  "module": "dist/cjs/index.js",
+  "repository": "https://github.com/SpeechKit/speechkit-audio-player-v2",
+  "author": "speechkit.io",
+  "homepage": "https://player.speechkit.io/",
+  "license": "MIT",
+  "private": false,
+  "files": [
+    "dist/module",
+    "dist/cjs",
+    "dist/esm",
+    "dist/systemjs"
+  ],
+  "directories": {
+    "lib": "dist/cjs"
+  }
+}

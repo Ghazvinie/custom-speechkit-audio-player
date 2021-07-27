@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link rel='stylesheet' href='../global.css'>
+  <title>SpeechKit playlist player</title>
+  <style>
+    .control-ui {
+      margin: 15px;
+      padding: 8px;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div id='speechkit-player'></div>
+  <div class='control-ui'>
+    <label for='image'>Choose an image</label>
+    <input id='image' type='file' name='image'>
+  </div>
+  <div class='control-ui'>
+    <label for='numberItems'>Number of items</label>
+    <input id='numberItems' type='text' name='numberItems' value='4'>
+  </div>
+</main>
+<script defer type='module'>
+  import { SpeechKitSdk } from '../build/module/index.js'
+
+  const handleFiles = (app, inputImage) => () => {
+    app.setImagePicture(URL.createObjectURL(inputImage.files[0]))
+  }
+
+  const handleNumber = app => evt => {
+    const { target: { value } } = evt
+    app.setNumberOfItem(value * 1)
+  }
+
+  SpeechKitSdk.player({
+    player: 'PlaylistPlayer',
+    // skBackend: 'http://spkt.local:3000',
+    skBackend: 'https://staging.spkt.io',
+    // projectId: 6561,
+    projectId: 3311,
+    projectCampaignId: null,
+    // publisherId: 5332,
+    publisherId: 3212,
+    publisher: 'kicker Live RSS',
+    publisherLogo: 'https://speechkit-development.s3.amazonaws.com/profile_images/projects/6561/black_bg.png',
+    publisherColor: '#ca0000',
+    feedbackUrl: 'http://spkt.local:3000/rate/basic',
+    message: '',
+    // preview: 'https://speechkit-development.s3.amazonaws.com/audio/previews/de/gc/de-DE-Wavenet-B.mp3',
+    isDemo: true,
+  }).then(appInst => {
+    const inputImage = document.querySelector('input[name=image]')
+    const inputNumber = document.querySelector('input[name=numberItems]')
+
+    inputImage.addEventListener('change', handleFiles(appInst, inputImage), false)
+    inputNumber.addEventListener('change', handleNumber(appInst), false)
+  })
+</script>
+</body>
+</html>

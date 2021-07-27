@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang='en'>
+<head>
+  <meta charset='utf-8'>
+  <meta name='viewport' content='width=device-width,initial-scale=1'>
+  <link rel='stylesheet' href='/global.css'>
+  <title>SpeechKit player</title>
+  <style>
+    main {
+      margin: 0 auto;
+      height: auto;
+    }
+  </style>
+</head>
+<body>
+<main>
+  <div id="speechkit-player"></div>
+</main>
+<script type="module">
+  import SpeechKit from '/build/module/index.js'
+
+  SpeechKit.player({
+    projectId: 7748,
+    podcastId: 1268692,
+    skBackend: 'https://spkt.io',
+  }).catch(err => {
+    console.error(err)
+  })
+</script>
+</body>
+</html>

@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang='en'>
+  <head>
+    <meta charset='utf-8'>
+    <meta name='viewport' content='width=device-width,initial-scale=1'>
+    <link rel='stylesheet' href='/global.css'>
+    <title>SpeechKit player</title>
+    <style>
+      main {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding-top: 60px;
+      }
+
+      .drop-here {
+        margin: 20px;
+        padding-top: 30px;
+        box-sizing: content-box;
+      }
+
+      .drop-here > div {
+        position: relative;
+        margin-bottom: 40px;
+      }
+
+      .drop-here > div:last-child {
+        margin-bottom: 0;
+      }
+
+      .drop-here > div:before {
+        content: attr(data-text);
+        position: absolute;
+        top: -20px;
+        left: 0;
+        right: 0;
+        font-size: 16px;
+        padding-left: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <main>
+      <div class="drop-here"></div>
+      <div style="text-align: center">
+        <button class="toggle-button">Toggle skin</button>
+      </div>
+    </main>
+
+    <script defer type='module'>
+      import SpeechKit from '/build/module/sdk.js'
+      const isAmp = false
+      const podcast = {
+        'id': '4f048c8dc39405dfb7a3db3af94669b24555c101',
+        'podcast_id': 10558,
+        'url': 'http://saparjohnick@000webhostapp.com',
+        'title': 'Sweden votes, RIP Burt Reynolds, Starbucks in Milan',
+        'author': 'Sapar Kurmanov',
+        'summary': 'Sweden heads to the polls. The far-right Sweden Democrats could make big gains, as the country grapples with high rates of immigration, and could have significant influence in shaping the next governme...',
+        'image': null,
+        'published_at': '2018-10-23T11:06:52.016Z',
+        'body': 'Sweden heads to the polls. The far-right Sweden Democrats could make big gains, as the country grapples with high rates of immigration, and could have significant influence in shaping the next government. Neither of the two main political blocs are expected to win a majority. Kosovo and Serbia discuss a land swap in Brussels. Leaders of the Balkan countries will be hosted by the EU’s foreign-policy chief as they consider exchanging land that would give some Albanian-majority municipalities over to Kosovo, and Serb parts of northern Kosovo to Serbia. Some European officials worry the deal could rekindle old wounds in the region, which endured years of war in the 1990s. Starbucks lands in Italy. The US coffee chain will open its first outlet in Milan, a beautifully designed “reserve roastery” in a converted post office on a central square near the Duomo cathedral. Starbucks founder Howard Schultz was inspired to create the company after a visit to the city 35 years ago. North Korea holds a party to mark its founding. Air Koryo added extra flights from Beijing to Pyongyang as tourists and foreign journalists flock to the North Korean capital to attend celebrations for the country’s 70th anniversary on Sunday. North Korea is expected to hold the Mass Games for the first time in five years, in addition to a military parade. The US could implement another round of tariffs against China. The latest batch, if given the green light, could come into effect today and would see the US place 25% duties onto goods worth $200 billion. The Chinese commerce ministry has said it is poised to retaliate in kind. A Turkish-Iranian-Russian summit in Tehran. Turkish president Recep Tayyip Erdoğan arrives in the Iranian capital to talk about Syria with Russian president Vladimir Putin and Iranian president Hassan Rouhani. On Tuesday, Russia led an air strike on the rebel-held Idlib province, while Erdoğan backs the opposition to Syrian president Bashar al-Assad. Twitter banned alt-right conspiracy theorist Alex Jones. The platform banned the provocateur and his website Infowars after Jones posted videos and tweets heckling reporters and members of Congress. Twitter had previously been reluctant to ban Jones, saying that reports of inappropriate behavior had not come through the right channels at the time he was tweeting. Naomi Osaka smashed into the US Open finals. The Japanese-Haitian player defeated Madison Keys of the US and will play 23-time Grand Slam winner Serena Williams in tomorrow’s women’s singles final. Osaka is the first Japanese woman to reach a Grand Slam final. Burt Reynolds died. The Boogie Nights and Deliverance actor, who until recently was filming Quentin Tarantino’s Once Upon a Time in Hollywood, was 82. Arnold Schwarzenegger was among those who paid tribute to Reynolds, who was an American football player in his youth, calling him an inspiration to others who had transitioned from sports to acting. A mass grave was found in Veracruz, Mexico. The remains of at least 166 people were discovered in the eastern state, more than a year after another mass grave was found there containing 250 skulls. Drug traffickers have long dumped the bodies of their victims in Veracruz. The UN examined the Skripal poisoning. UK prime minister Theresa May, backed by many international allies, attended a UN security council meeting in New York to discuss new evidence that indicated Russia was behind the poisoning of former spy Sergei Skripal on British soil. Russia’s envoy called it all “more repeated lies.” Kabir Chibber on what it will be like to play sports in a hotter world. “Sports will have to completely rethink how they are played in a world that’s getting warmer every year. For those with annual tournaments, as in tennis, this is a slow burn. Each one is a reminder that the venues and rules are not designed for hotter weather. For example, there remains only one ‘heat rule’ in the game of tennis… only in the women’s singles game and only when requested by one of the two players. The men aren’t officially allowed a break.” Read more here. There’s no honor in anonymity. Republicans who disapprove of Trump’s job performance (paywall) need to tell his voters, not the media. The US Open shows that 30s are the new 20s in tennis. The game is a power sport with more emphasis on overall athleticism, which older players have figured out how to game. Wastefulness is out. Burberry will stop burning unsold goods, but the rest of the fashion industry needs to follow suit. A trillion-metric-ton iceberg is on the move. Antarctica’s A-68 iceberg detached itself more than a year ago, but just recently starting heading north. A Pacific island nation of 11,000 people is picking a fight with China. Nauru, a Taiwan ally, made clear it won’t be bullied by a larger country. Hedgehogs have disappeared from most of the English and Welsh countryside. Scientists think their numbers have fallen by at least 80% since the 1950s, thanks to intensive farming and rising badger populations. An algorithm can identify tumors. Diagnostic help from AI could give doctors more time to focus on patients. A Bay Area university asked instructors to house students. Silicon Valley’s soaring rent prices are bleeding into college campuses. Sweden heads to the pollaaaas. The far-right Sweden Democrats could make big gains, as the country grapples with high rates of immigration, and could have significant influence in shaping the next government. Neither of the two main political blocs are expected to win a majority. aaaaKosovo and Serbia discuss a land swap in Brussels. Leaders of the Balkan countries will be hosted by the EU’s foreign-policy chief as they consider exchanging land that would give some Albanian-majority municipalities over to Kosovo, and Serb parts of northern Kosovo to Serbia. Some European officials worry the deal could rekindle old wounds in the region, which endured years of war in the 1990s.',
+        'state': 'processed',
+        'share_url': 'https://staging.spkt.io/a/10458',
+        'share_version': 'v2',
+        'media': [{
+          'id': 30599,
+          'role': 'body',
+          'content_type': 'application/x-mpegURL',
+          'url': 'https://speechkit-staging.s3.amazonaws.com/audio/projects/380/podcasts/10458/media/f15b528563481d852d8e43a3f8298529.m3u8',
+          'created_at': '2018-10-23T11:07:17.646Z',
+          'updated_at': '2018-10-23T11:07:27.663Z',
+          'state': 'processed',
+          'duration': 408.904834,
+          'voice': { 'id': 39, 'language': 'en_GB', 'name': 'Brian' },
+        }, {
+          'id': 30598,
+          'role': 'body',
+          'content_type': 'audio/mpeg',
+          'url': 'https://speechkit-staging.s3.amazonaws.com/audio/projects/380/podcasts/10458/media/e00ae2284334dea783c9a2900a6d1ec5_compiled.mp3',
+          'created_at': '2018-10-23T11:07:06.865Z',
+          'updated_at': '2018-10-23T11:07:17.329Z',
+          'state': 'processed',
+          'duration': 408.894694,
+          'voice': { 'id': 39, 'language': 'en_GB', 'name': 'Brian' },
+        }],
+        'player_type': 'MinimalPlayer',
+        'next_podcast_external_id': null,
+        // 'ad_disabled': true,
+      }
+      window.dataLayer = []
+
+      const params = {
+        // renderNode: 'speechkit-player',
+        language: 'en_GB',
+        publisherColor: '#1041d6',
+        apiKey: "read_33dbe2628d957eefe4a73b57c95c3e27",
+        projectId: 2911,
+        podcastUrl: "http://saparjohnick@000webhostapp.com",
+        publisherId: 1085,
+        publisher: "PLAYER AD PROJECT",
+        publisherLogo: "",
+        podcast,
+        articleUrl: '//',
+        feedbackUrl: "https://staging.spkt.io/rate/basic",
+        message: "",
+        // vastAdTag: '//demo.deliveryengine.adswizz.com/vast/4.0/request/alias/speechkitaudio?companion_zone_alias=speechkitdisplay&duration=33000',
+        isAmp,
+        withDownloadButton: true,
+        isIframe: true,
+      }
+      const featureFlags = 'customControls'
+      const testPublisherIds = [
+        { publisherId: '403', text: 'without customControls'},
+        { publisherId: '5332', text: 'with customControls for kicker'},
+        { publisherId: '6574', text: 'with customControls for Maison Moderne'},
+      ]
+      const boxWithPlayers = document.querySelector('.drop-here')
+      const toggleView = document.querySelector('.toggle-button')
+      let useUiV2 = true
+      let players = []
+
+      const initPlayer = ({ publisherId, text }, index) => {
+        const playerBox = document.createElement('div')
+        playerBox.id = `speechkit-player-${publisherId}-${index}`
+        playerBox.setAttribute('data-text', text)
+        boxWithPlayers.appendChild(playerBox)
+
+        return SpeechKit.player({
+          ...params,
+          renderNode: playerBox.id,
+          featureFlags: `${featureFlags}${useUiV2 ? ', ui_v2' : ''}`,
+          publisherId,
+        })
+      }
+
+      const startTest = async () => {
+        toggleView.disabled = true
+        players = await Promise.all(testPublisherIds.map(initPlayer))
+        window.players = players
+        toggleView.disabled = false
+      }
+
+      toggleView.onclick = evt => {
+        evt.stopPropagation()
+        useUiV2 = !useUiV2
+        if (players.length) {
+          players.forEach(appInst => {
+            appInst.destroy()
+          })
+          const svelteStyles = Array.from(document.querySelectorAll('style[id*=svelte]'))
+          svelteStyles.forEach(styleEl => {
+            styleEl.parentNode.removeChild(styleEl)
+          })
+          boxWithPlayers.innerHTML = ''
+        }
+        startTest()
+      }
+
+      startTest()
+    </script>
+  </body>
+</html>
