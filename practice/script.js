@@ -1,4 +1,6 @@
 import keys from './key.js';
+import SpeechKit from 'https://proxy.speechkit.io/npm/@speechkit/speechkit-audio-player-v2@latest/dist/module/index.js';
+
 
 const article = {
     api_key: keys.api_key,
@@ -138,4 +140,57 @@ async function listAudio() {
     }
 }
 
-listAudio()
+async function listProjects() {
+
+    const fetchParams = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json'
+        }
+    };
+    try {
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects?api_key=${keys.api_key}`, fetchParams)
+        console.log(response)
+        const data = await response.json();
+        console.log(data);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+// -------------------------------------------------------------------------------------------------------------------------
+
+window.addEventListener('message', event => {
+    console.log('event -> data -> ', event.data)
+}, false)
+
+const playerSdk = document.querySelector('.speechkit-audio-sdk-player')
+
+const initParams = {
+    projectId: keys.project_id,
+    externalId: keys.external_key,
+    articleUrl: 'http://http://localhost:3000/',
+    renderNode: playerSdk,
+};
+
+let myApp;
+
+SpeechKit.sdk.player(initParams).then(appInst => {
+    myApp = appInst;
+});
+
+const play = document.getElementById('play').addEventListener('click', handleClick)
+const pause = document.getElementById('pause').addEventListener('click', handleClick)
+
+function handleClick(e) {
+    const { name } = e.target;
+    if (name === 'play') {
+        myApp.play();
+    } 
+
+    if (name === 'pause'){
+        myApp.pause();
+    }
+}
+
