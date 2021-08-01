@@ -1,6 +1,7 @@
 import keys from './key.js';
 
 const article = {
+    api_key: keys.api_key,
     title: `Test Upload API`,
     body: `Charlotte Worthington ensured a dramatic start to Sunday's Olympic action with a thrilling gold medal in the women's BMX park freestyle final, while Duncan Scott continued to help Great Britain make history in the pool.
     Worthington fell on her first run but landed a ground-breaking 360-degree backflip on her second to score 97.50.
@@ -13,16 +14,14 @@ const article = {
     author: 'BBC',
 }
 
-async function sendAudio() {
+async function postAudio() {
 
     const fetchParams = {
         method: 'POST',
-        body: {
-            api_key: keys.api_key,
-            title: article.title,
-            body: article.body, 
-            author: article.author
-        }
+        headers: {
+            'Content-type': 'application/json'
+        },
+        body: JSON.stringify(article)
     }
 
     try {
@@ -34,5 +33,12 @@ async function sendAudio() {
         console.log(error);
     }
 }
+postAudio()
 
-sendAudio()
+async function getAudio(){
+    try {
+        const response = await fetch()
+    } catch (error) {
+        console.log(error);
+    }
+}
