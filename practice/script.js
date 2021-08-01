@@ -118,7 +118,7 @@ function embedAudio(src) {
     embedDestination.innerHTML =
         `<audio controls>
             <source src="${src}" type="audio/mpeg">
-        </audio>`
+        </audio>`;
 }
 
 async function listAudio() {
@@ -174,7 +174,6 @@ const duration = document.getElementById('duration');
 const remTime = document.getElementById('remTime');
 const playbackRate = document.getElementById('playbackRate');
 
-
 const rwd = document.getElementById('rwd').addEventListener('click', handleClick);
 const fwd = document.getElementById('fwd').addEventListener('click', handleClick);
 
@@ -203,12 +202,12 @@ const initParams = {
     externalId: keys.external_key,
     articleUrl: 'http://http://localhost:3000/',
     UIenabled: true,
-    renderNode: 'speechkit-player'
+    renderNode: 'speechkit-player',
+    isIframe: true
 };
 
 const myApp = await SpeechKit.sdk.player(initParams);
 duration.innerText = `${myApp.duration()}`;
-
 
 myApp.events.on('timeUpdate', dataEvent => {
     const { duration, progress } = dataEvent;
