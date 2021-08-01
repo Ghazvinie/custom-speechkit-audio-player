@@ -161,9 +161,9 @@ async function listProjects() {
 
 // -------------------------------------------------------------------------------------------------------------------------
 
-window.addEventListener('message', event => {
-    console.log('event -> data -> ', event.data)
-}, false)
+// window.addEventListener('message', event => {
+//     console.log('event -> data -> ', event.data)
+// }, false)
 
 const playerSdk = document.querySelector('.speechkit-audio-sdk-player');
 const play = document.getElementById('play').addEventListener('click', handleClick);
@@ -176,19 +176,16 @@ const remTime = document.getElementById('remTime');
 const rwd = document.getElementById('rwd').addEventListener('click', handleClick);
 const fwd = document.getElementById('fwd').addEventListener('click', handleClick);
 
-const playRate = document.getElementById('playRate').onchange = function(e){
-    const value = Number(e.target.value)
+const playRate = document.getElementById('playRate').onchange = function (e) {
+    const value = Number(e.target.value);
     myApp.changePlaybackRate(value);
-}
+};
 
 document.getElementById('changeTime').onsubmit = function (e) {
     e.preventDefault();
     const value = document.getElementById('changeTimeInput').value
     myApp.changeCurrentTime(value);
-}
-
-
-
+};
 
 const initParams = {
     projectId: keys.project_id,
@@ -203,20 +200,24 @@ SpeechKit.sdk.player(initParams).then(appInst => {
     myApp = appInst;
     duration.innerText = `${myApp.duration()}`;
 
-    setInterval(() => {
-        currTime.innerText = `${myApp.currentTime()}`
-        remTime.innerText = `${myApp.remainingTime()}`;
-    }, 100)
+    myApp.events.on('timeUpdate', dataEvent => {
+        const { duration, progress } = dataEvent;
+        currTime.innerText = progress;
+        remTime.innerText = duration - progress;
+    })
 });
 
 function handleClick(e) {
+
     const { name } = e.target;
     if (name === 'play') {
         myApp.play();
+        console.log(myApp.events.on('play', dateEvent => console.log(dateEvent)))
     }
 
     if (name === 'pause') {
         myApp.pause();
+        console.log(myApp.events.on('pause', dateEvent => console.log(dateEvent)))
     }
 
     if (name === 'rwd') {
@@ -227,4 +228,3 @@ function handleClick(e) {
         myApp.forward(2.00);
     }
 }
-
