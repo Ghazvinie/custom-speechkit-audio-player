@@ -165,7 +165,26 @@ window.addEventListener('message', event => {
     console.log('event -> data -> ', event.data)
 }, false)
 
-const playerSdk = document.querySelector('.speechkit-audio-sdk-player')
+const playerSdk = document.querySelector('.speechkit-audio-sdk-player');
+const play = document.getElementById('play').addEventListener('click', handleClick);
+const pause = document.getElementById('pause').addEventListener('click', handleClick);
+
+const currTime = document.getElementById('currTime');
+const duration = document.getElementById('duration');
+const remTime = document.getElementById('remTime');
+
+const rwd = document.getElementById('rwd').addEventListener('click', handleClick);
+const fwd = document.getElementById('fwd').addEventListener('click', handleClick);
+
+
+document.getElementById('changeTime').onsubmit = function (e) {
+    e.preventDefault();
+    const value = parseInt(document.getElementById('changeTimeInput').value).toFixed(2);
+    myApp.changeCurrentTime(value);
+}
+
+
+
 
 const initParams = {
     projectId: keys.project_id,
@@ -178,19 +197,30 @@ let myApp;
 
 SpeechKit.sdk.player(initParams).then(appInst => {
     myApp = appInst;
-});
+    duration.innerText = `${myApp.duration()}`;
 
-const play = document.getElementById('play').addEventListener('click', handleClick)
-const pause = document.getElementById('pause').addEventListener('click', handleClick)
+    setInterval(() => {
+        currTime.innerText = `${myApp.currentTime()}`
+        remTime.innerText = `${myApp.remainingTime()}`;
+    }, 100)
+});
 
 function handleClick(e) {
     const { name } = e.target;
     if (name === 'play') {
         myApp.play();
-    } 
+    }
 
-    if (name === 'pause'){
+    if (name === 'pause') {
         myApp.pause();
+    }
+
+    if (name === 'rwd') {
+        myApp.rewind(2.00);
+    }
+
+    if (name === 'fwd') {
+        myApp.forward(2.00);
     }
 }
 

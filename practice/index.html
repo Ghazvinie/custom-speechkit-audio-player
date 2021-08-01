@@ -19,9 +19,16 @@
     <div class='speechkit-audio-sdk-player'>
         <button id="play" name='play'>Play</button>
         <button id='pause' name='pause'>Pause</button>
-        <button onclick="handleClick">Get Curr Time</button>
-        <input type="text">
-        <h4 id='currTime'></h4>
+        <form id="changeTime">
+            <input type="text" id='changeTimeInput'>
+            <button type="submit">Change Current Time</button>
+        </form>
+        <button id='rwd' name='rwd'>RWD 2s</button>
+        <button id='fwd' name='fwd'>FWD 2s</button>
+
+        <h4>Current Time: </h4> <h4 id='currTime'></h4>
+        <h4>Duration: </h4> <h4 id='duration'></h4>
+        <h4>Remaining Time: </h4> <h4 id='remTime'></h4>
     </div>
 
     
