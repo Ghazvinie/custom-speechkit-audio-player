@@ -27,13 +27,14 @@ async function postAudio() {
     try {
         const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio`, fetchParams)
         console.log(response)
+        const data = await response.json();
+        console.log(data);
 
 
     } catch (error) {
         console.log(error);
     }
 }
-postAudio()
 
 async function getAudio(){
     try {
