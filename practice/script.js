@@ -32,8 +32,6 @@ async function postAudio() {
     }
 }
 
-
-
 const articleUpdate = {
     api_key: keys.api_key,
     external_id: keys.external_id,
@@ -48,8 +46,6 @@ const articleUpdate = {
     Pat McCormack will also fight for gold in the men's welterweight division after Ireland's Aidan Walsh pulled out of their semi-final with an ankle injury, while Frazer Clarke reached the super-heavyweight final after France's Mourad Aliev was disqualified.`,
     author: 'BBC',
 };
-
-
 
 async function updateAudio() {
 
@@ -95,4 +91,32 @@ async function deleteAudio() {
     }
 }
 
-deleteAudio()
+
+
+async function retrieveAudio() {
+
+    const fetchParams = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json'
+        }
+    };
+    try {
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424525?api_key=${keys.api_key}`, fetchParams)
+        console.log(response)
+        const data = await response.json();
+        console.log(data);
+        const src = data.media[0].url;
+        embedAudio(src);
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+function embedAudio(src) {
+    const embedDestination = document.querySelector('.speechkit-audio-player-mp3-test')
+    embedDestination.innerHTML =
+        `<audio controls>
+            <source src="${src}" type="audio/mpeg">
+        </audio>`
+}
