@@ -91,8 +91,6 @@ async function deleteAudio() {
     }
 }
 
-
-
 async function retrieveAudio() {
 
     const fetchParams = {
@@ -120,3 +118,24 @@ function embedAudio(src) {
             <source src="${src}" type="audio/mpeg">
         </audio>`
 }
+
+async function listAudio() {
+
+    const fetchParams = {
+        method: 'GET',
+        headers: {
+            'Content-type': 'application/json'
+        }
+    };
+    try {
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio?api_key=${keys.api_key}`, fetchParams)
+        console.log(response)
+        const data = await response.json();
+        console.log(data);
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
+listAudio()
