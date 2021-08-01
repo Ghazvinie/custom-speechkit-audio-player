@@ -1,0 +1,8 @@
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.speechkit-audio-player {
+    width: 50%
+}
