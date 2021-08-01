@@ -176,10 +176,15 @@ const remTime = document.getElementById('remTime');
 const rwd = document.getElementById('rwd').addEventListener('click', handleClick);
 const fwd = document.getElementById('fwd').addEventListener('click', handleClick);
 
+const playRate = document.getElementById('playRate').onchange = function(e){
+    const value = parseInt(e.target.value).toFixed(2);
+    console.log(value)
+    myApp.changePlaybackRate(value);
+}
 
 document.getElementById('changeTime').onsubmit = function (e) {
     e.preventDefault();
-    const value = parseInt(document.getElementById('changeTimeInput').value).toFixed(2);
+    const value = document.getElementById('changeTimeInput').value
     myApp.changeCurrentTime(value);
 }
 
