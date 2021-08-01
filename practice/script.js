@@ -177,8 +177,7 @@ const rwd = document.getElementById('rwd').addEventListener('click', handleClick
 const fwd = document.getElementById('fwd').addEventListener('click', handleClick);
 
 const playRate = document.getElementById('playRate').onchange = function(e){
-    const value = parseInt(e.target.value).toFixed(2);
-    console.log(value)
+    const value = Number(e.target.value)
     myApp.changePlaybackRate(value);
 }
 
