@@ -161,11 +161,11 @@ async function listProjects() {
 
 // -------------------------------------------------------------------------------------------------------------------------
 
-// window.addEventListener('message', event => {
-//     console.log('event -> data -> ', event.data)
-// }, false)
+window.addEventListener('message', event => {
+    console.log('event -> data -> ', event.data)
+}, false)
 
-const playerSdk = document.querySelector('.speechkit-audio-sdk-player');
+const playerSdk = document.querySelector('.speechkit-player');
 const play = document.getElementById('play').addEventListener('click', handleClick);
 const pause = document.getElementById('pause').addEventListener('click', handleClick);
 
@@ -192,26 +192,29 @@ document.getElementById('changeTime').onsubmit = function (e) {
     myApp.changeCurrentTime(value);
 };
 
+document.getElementById('changeLanguage').onsubmit = function (e) {
+    e.preventDefault();
+    const value = document.getElementById('changeLanguageInput').value
+    myApp.changeLang(value);
+};
+
 const initParams = {
     projectId: keys.project_id,
     externalId: keys.external_key,
     articleUrl: 'http://http://localhost:3000/',
-    renderNode: playerSdk,
+    UIenabled: true,
+    renderNode: 'speechkit-player'
 };
 
-let myApp;
+const myApp = await SpeechKit.sdk.player(initParams);
+duration.innerText = `${myApp.duration()}`;
 
-SpeechKit.sdk.player(initParams).then(appInst => {
-    myApp = appInst;
-    duration.innerText = `${myApp.duration()}`;
 
-    myApp.events.on('timeUpdate', dataEvent => {
-        const { duration, progress } = dataEvent;
-        currTime.innerText = progress;
-        remTime.innerText = duration - progress;
-    })
+myApp.events.on('timeUpdate', dataEvent => {
+    const { duration, progress } = dataEvent;
+    currTime.innerText = progress;
+    remTime.innerText = duration - progress;
 });
-
 
 function handleClick(e) {
 
