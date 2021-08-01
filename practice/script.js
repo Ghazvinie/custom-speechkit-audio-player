@@ -172,13 +172,18 @@ const pause = document.getElementById('pause').addEventListener('click', handleC
 const currTime = document.getElementById('currTime');
 const duration = document.getElementById('duration');
 const remTime = document.getElementById('remTime');
+const playbackRate = document.getElementById('playbackRate');
+
 
 const rwd = document.getElementById('rwd').addEventListener('click', handleClick);
 const fwd = document.getElementById('fwd').addEventListener('click', handleClick);
 
-const playRate = document.getElementById('playRate').onchange = function (e) {
+document.getElementById('playRate').onchange = function (e) {
     const value = Number(e.target.value);
     myApp.changePlaybackRate(value);
+    myApp.events.on('playbackRate', dataEvent => {
+        playbackRate.innerText = dataEvent.playbackRate;
+    });
 };
 
 document.getElementById('changeTime').onsubmit = function (e) {
@@ -206,6 +211,7 @@ SpeechKit.sdk.player(initParams).then(appInst => {
         remTime.innerText = duration - progress;
     })
 });
+
 
 function handleClick(e) {
 
