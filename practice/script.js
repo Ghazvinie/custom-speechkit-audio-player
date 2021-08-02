@@ -187,13 +187,14 @@ document.getElementById('playRate').onchange = function (e) {
 
 document.getElementById('changeTime').onsubmit = function (e) {
     e.preventDefault();
-    const value = document.getElementById('changeTimeInput').value
+    const value = document.getElementById('changeTimeInput').value;
     myApp.changeCurrentTime(value);
 };
 
 document.getElementById('changeLanguage').onsubmit = function (e) {
     e.preventDefault();
-    const value = document.getElementById('changeLanguageInput').value
+    const value = document.getElementById('changeLanguageInput').value;
+    console.log(value);
     myApp.changeLang(value);
 };
 
