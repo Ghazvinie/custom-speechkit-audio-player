@@ -18,12 +18,12 @@ function Player() {
       const instance = await SpeechKitSdk.player(initParams);
       setPlayerInstance(instance);
     };
-    return getPlayer();
+    getPlayer();
   }, []);
 
   return (
     <div className='player-container'>
-
+      {console.log('rendered')}
     </div>
 
   );
