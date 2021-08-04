@@ -1,9 +1,9 @@
-import './App.css';
+import Player from './components/Player';
 
 function App() {
   return (
-    <h1>Hello</h1>
-  )
+    <Player />
+  );
 }
 
 export default App;
