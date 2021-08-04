@@ -25,8 +25,8 @@ async function postAudio() {
         body: JSON.stringify(article)
     };
     try {
-        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio`, fetchParams)
-        console.log(response)
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio`, fetchParams);
+        console.log(response);
         const data = await response.json();
         console.log(data);
     } catch (error) {
@@ -59,8 +59,8 @@ async function updateAudio() {
         body: JSON.stringify(articleDelete)
     };
     try {
-        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424443`, fetchParams)
-        console.log(response)
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424443`, fetchParams);
+        console.log(response);
         const data = await response.json();
         console.log(data);
 
@@ -83,8 +83,8 @@ async function deleteAudio() {
         body: JSON.stringify(articleUpdate)
     };
     try {
-        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424443`, fetchParams)
-        console.log(response)
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424443`, fetchParams);
+        console.log(response);
         const data = await response.json();
         console.log(data);
 
@@ -102,8 +102,8 @@ async function retrieveAudio() {
         }
     };
     try {
-        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424525?api_key=${keys.api_key}`, fetchParams)
-        console.log(response)
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio/2424525?api_key=${keys.api_key}`, fetchParams);
+        console.log(response);
         const data = await response.json();
         console.log(data);
         const src = data.media[0].url;
@@ -130,7 +130,7 @@ async function listAudio() {
         }
     };
     try {
-        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio?api_key=${keys.api_key}`, fetchParams)
+        const response = await fetch(`https://app.speechkit.io/api/v3/projects/${keys.project_id}/audio?api_key=${keys.api_key}`, fetchParams);
         console.log(response)
         const data = await response.json();
         console.log(data);
@@ -163,7 +163,7 @@ async function listProjects() {
 
 window.addEventListener('message', event => {
     console.log('event -> data -> ', event.data)
-}, false)
+}, false);
 
 const playerSdk = document.querySelector('.speechkit-player');
 const play = document.getElementById('play').addEventListener('click', handleClick);
@@ -200,11 +200,11 @@ document.getElementById('changeLanguage').onsubmit = function (e) {
 
 const initParams = {
     projectId: keys.project_id,
-    externalId: keys.external_key,
+    externalId: keys.external_id,
     articleUrl: 'http://http://localhost:3000/',
-    UIenabled: true,
-    renderNode: 'speechkit-player',
-    isIframe: true
+    // UIenabled: true,
+    // renderNode: 'speechkit-player',
+    // isIframe: true
 };
 
 const myApp = await SpeechKit.sdk.player(initParams);
@@ -221,19 +221,19 @@ function handleClick(e) {
     const { name } = e.target;
     if (name === 'play') {
         myApp.play();
-        console.log(myApp.events.on('play', dateEvent => console.log(dateEvent)))
-    }
+        console.log(myApp.events.on('play', dateEvent => console.log(dateEvent)));
+    };
 
     if (name === 'pause') {
         myApp.pause();
-        console.log(myApp.events.on('pause', dateEvent => console.log(dateEvent)))
-    }
+        console.log(myApp.events.on('pause', dateEvent => console.log(dateEvent)));
+    };
 
     if (name === 'rwd') {
         myApp.rewind(2.00);
-    }
+    };
 
     if (name === 'fwd') {
         myApp.forward(2.00);
-    }
+    };
 }
