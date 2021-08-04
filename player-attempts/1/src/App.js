@@ -1,9 +1,11 @@
 import Player from './components/Player';
-import '../src/App.css'
+import './App.css'
 
 function App() {
   return (
+    <main>
     <Player />
+    </main>
   );
 }
 

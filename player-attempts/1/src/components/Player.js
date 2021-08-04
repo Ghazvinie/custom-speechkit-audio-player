@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import keys from '../keys';
+import '../Player.css'
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 
 const initParams = {
@@ -23,7 +24,26 @@ function Player() {
 
   return (
     <div className='player-container'>
-      PLayer
+
+      <div className='player-label-container'>
+        <h4 className='label'>Player Label</h4>
+      </div>
+
+      <div className='buttons-container'>
+
+        <button>Rewind</button>
+        <button>Play/Pause</button>
+        <button>Forward</button>
+      </div>
+      
+      <div className='range-container'>
+        <input type='range' />
+      </div>
+
+      <div className='timer-container'>
+        0:00
+      </div>
+
     </div>
 
   );
