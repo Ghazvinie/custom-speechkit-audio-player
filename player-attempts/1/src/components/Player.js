@@ -23,7 +23,7 @@ function Player() {
 
   return (
     <div className='player-container'>
-      {console.log('rendered')}
+      PLayer
     </div>
 
   );
