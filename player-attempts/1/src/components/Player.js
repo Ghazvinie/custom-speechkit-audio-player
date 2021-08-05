@@ -25,20 +25,18 @@ function Player() {
   return (
     <div className='player-container'>
 
-      <div className='player-label-container'>
+
         <h4 className='label'>Player Label</h4>
-      </div>
 
-      <div className='buttons-container'>
 
-        <button>Rewind</button>
-        <button>Play/Pause</button>
-        <button>Forward</button>
-      </div>
+        <button> - </button>
+        <button>V</button>
+        <button>+</button>
+
       
-      <div className='range-container'>
+
         <input type='range' />
-      </div>
+
 
       <div className='timer-container'>
         0:00

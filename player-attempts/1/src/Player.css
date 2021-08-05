@@ -1,25 +1,24 @@
 .player-container {
     display: flex;
+    flex-wrap: wrap;
     width: 100%;
-
 }
 
-.player-label-container {
+
+
+.label {
+    width: 100%;
+    text-align: center;
     justify-content: center;
-    display: flex;
-    width: 100%;
-    margin: 0;
-}
-
-/* .label {
-    width: 100%;
+    align-items: center;
     margin: 0;
 
 }
 
 .play-toggle-container{
+    align-items: center;
     padding: 3px;
-    width: 25%;
+    width: 15%;
 }
 
 .range-container {
@@ -28,4 +27,11 @@
 
 .timer-container {
     width: 25%;
-} */
+} 
+
+button {
+    display: flex;
+    border: none;
+    align-items: center;
+    cursor: pointer;
+}
