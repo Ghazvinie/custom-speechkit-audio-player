@@ -24,7 +24,7 @@ button {
     align-items: center;
     justify-content: center;
     cursor: pointer;
-    background-color:rgba(59, 59, 59, 0)
+    background-color:rgba(59, 59, 59, 0);
 }
 
 .rwd-fwd {
@@ -44,8 +44,18 @@ button {
 
 .scrubber {
     width: 50%;
+    /* appearance: none; */
+    background: rgba(59, 59, 59, 0);
+    outline: none;
 }
 
 .timer-container{
     display: flex;
+}
+
+input[type=range]:focus {
+    outline: none;
+}
+input[type=range]::-webkit-slider-runnable-track {
+    background-color: red;
 }
