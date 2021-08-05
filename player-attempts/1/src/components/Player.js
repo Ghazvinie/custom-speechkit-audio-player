@@ -29,13 +29,13 @@ function Player() {
         <h4 className='label'>Player Label</h4>
 
 
-        <button> - </button>
-        <button>V</button>
-        <button>+</button>
+        <button className='rwd-fwd'> -5s </button>
+        <button className='play-pause'>V</button>
+        <button className='rwd-fwd'>+5s</button>
 
       
 
-        <input type='range' />
+        <input className='scrubber' type='range' />
 
 
       <div className='timer-container'>

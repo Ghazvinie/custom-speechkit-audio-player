@@ -2,8 +2,10 @@
     display: flex;
     flex-wrap: wrap;
     width: 100%;
+    background-color:rgba(59, 59, 59, 0.055);
+    font-family: 'Courier New', Courier, monospace;
+    font-style: normal;
 }
-
 
 
 .label {
@@ -11,27 +13,39 @@
     text-align: center;
     justify-content: center;
     align-items: center;
-    margin: 0;
+    margin-bottom: 5px;
+    margin-top: 0;
 
 }
-
-.play-toggle-container{
-    align-items: center;
-    padding: 3px;
-    width: 15%;
-}
-
-.range-container {
-    width: 35%;
-}
-
-.timer-container {
-    width: 25%;
-} 
 
 button {
     display: flex;
     border: none;
     align-items: center;
+    justify-content: center;
     cursor: pointer;
+    background-color:rgba(59, 59, 59, 0)
+}
+
+.rwd-fwd {
+    width: 20px;
+    height: 15px;
+    /* width: 5%; */
+}
+
+.play-pause {
+   width: 35px;
+   height: 15px;
+}
+
+.timer-container, .scrubber, button {
+    margin: 5px;
+}
+
+.scrubber {
+    width: 50%;
+}
+
+.timer-container{
+    display: flex;
 }
