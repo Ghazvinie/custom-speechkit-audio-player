@@ -61,11 +61,11 @@ button {
     border-radius: 3px;
   }
   
-  .progress__filled {
+  .progress-filled {
     width: 50%;
     background: rgba(59, 59, 59, 0.5);
-    /* flex: 0; */
-    flex-basis: 50%;
+    flex: 0;
+    flex-basis: 0%;
     margin: 3px;
   }
 
