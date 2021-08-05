@@ -22,6 +22,11 @@ function Player() {
     getPlayer();
   }, []);
 
+  const progressClick = (e) => {
+    const target = e.target;
+  }
+
+
   return (
     <div className='player-container'>
 
@@ -33,12 +38,15 @@ function Player() {
         <button className='play-pause'>V</button>
         <button className='rwd-fwd'>+5s</button>
 
-      
+        <div className="progress">
+        <div className="progress__filled"></div>
+       </div>
+        {/* <div className='progress'></div> */}
 
-        <input className='scrubber' type='range' />
+        {/* <input className='scrubber' type='range' /> */}
 
 
-      <div className='timer-container'>
+      <div className='timer'>
         0:00
       </div>
 
