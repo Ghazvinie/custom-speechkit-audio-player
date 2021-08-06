@@ -2,12 +2,9 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
     width:500px;
     background-color:rgba(59, 59, 59, 0.055);
     font-family: 'Courier New', Courier, monospace;
-    font-style: normal;
 }
 
 
@@ -21,6 +18,13 @@
 
 }
 
+.controls {
+display: inline-flex;
+justify-content: center;
+align-items: center;
+    width: 100%;
+}
+
 button {
     display: flex;
     border: none;
@@ -31,36 +35,40 @@ button {
 }
 
 .rwd-fwd {
-    width: 10px;
+
     height: 15px;
-    width: 5%;
+    flex: 1;
     font-size: 0.5rem;
 }
 
 .play-pause {
-   width: 5%;
+
    height: 15px;
    font-size: 0.7rem;
 }
 
-.timer-container, .scrubber, button {
+.timer-container, button {
     margin: 2px;
 }
 .timer{
-    flex: 0 0 auto;
+    flex: 2;
     margin: 5px;
     cursor: pointer;
     font-size: 0.7rem;
 
+
 }
 .progress-container {
+    flex: 9
+    ;
     padding: 2px;
-    width: 55%;
+    width: 4%;
+    /* position: absolute; */
 }
 
 .progress {
-    width: 100%;
-    position: relative;
+    /* width: 100%; */
+    /* position: relative; */
     display: flex;
     height: 11px;
     transition: height 0.3s;

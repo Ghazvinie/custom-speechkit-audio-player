@@ -73,7 +73,7 @@ function Player() {
       case 'dual':
         return timeDisplays.dual;
       default:
-        return '0:00'
+        return '0:00';
     };
 
   }
@@ -112,6 +112,12 @@ function Player() {
     };
   };
 
+  const handleSkip = (e) => {
+    const { name } = e.target;
+    const skipValue = 5;
+    name === 'rwd' ? playerInstance.rewind(skipValue) : playerInstance.forward(skipValue);
+  }
+
   return (
     <div className='player-container' style={!playerInstance ? { display: 'none' } : {}}>
 
@@ -119,23 +125,29 @@ function Player() {
       <h4 className='label'>Player Label</h4>
 
 
-      <button className='rwd-fwd'> -5s </button>
-      <button className='play-pause' onClick={() => handlePlayPause()}>V</button>
-      <button className='rwd-fwd'>+5s</button>
+      <div className='controls'>
 
-      <div className='progress-container'>
-        <div className="progress" onClick={(e) => progressClick(e)}>
-          <div className="progress-filled" ref={filledRef} ></div>
+
+
+        <button className='rwd-fwd' name='rwd' onClick={(e) => handleSkip(e)}>-5s</button>
+        <button className='play-pause' onClick={() => handlePlayPause()}>V</button>
+        <button className='rwd-fwd' name='fwd' onClick={(e) => handleSkip(e)}>+5s</button>
+
+        <div className='progress-container'>
+          <div className="progress" onClick={(e) => progressClick(e)}>
+            <div className="progress-filled" ref={filledRef} ></div>
+          </div>
+        </div>
+
+
+        <div className='timer' onClick={() => handleTimeClick()}>
+          {timeDisplay()}
         </div>
 
       </div>
 
-
-      <div className='timer' onClick={() => handleTimeClick()}>
-        {timeDisplay()}
-      </div>
-
     </div>
+
 
   );
 }
