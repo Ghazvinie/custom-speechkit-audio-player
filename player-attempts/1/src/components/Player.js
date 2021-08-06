@@ -16,7 +16,7 @@ function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
   const [currentTime, setCurrentTime] = useState(0);
-  const [timeDisplays, setTimeDisplays] = useState(null);
+  const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
 
 
 
@@ -28,6 +28,7 @@ function Player() {
 
       setPlayerInstance(instance);
       setTrackDuration(instance.duration());
+      formatTimeDisplays();
     };
     getPlayer();
   }, []);
@@ -50,18 +51,31 @@ function Player() {
   const formatTimeDisplays = () => {
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
-    const minsSecsDuration = `${minsDuration < 1 ? '0' : ''}${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
+    const durationFormat = `${minsDuration < 1 ? '0' : ''}${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 
     const subMins = Math.floor((trackDuration - currentTime) / 60)
     const subSecs = Math.floor((trackDuration - currentTime) % 60)
-    const subMinsSecsDuration = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
+    const subFormat = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
 
-    setTimeDisplays({ minsSecsDuration, subMinsSecsDuration });
+    const dual = `${durationFormat} / ${subFormat}`
+    setTimeDisplays(prevDisplay => ({...prevDisplay, durationFormat, subFormat, dual }));
   };
 
-  // const handleTimeDisplay = () => {
-  //   if (currentTime === 0) return '0:00';
-  // }
+  const timeDisplay = () => {
+    if (timeDisplays.displayType === 'duration') {
+      return timeDisplays.durationFormat;
+    };
+
+    if (timeDisplays.displayType === 'timeLeft'){
+      return timeDisplays.subFormat;
+    }
+    
+    if (timeDisplays.displayType === 'both'){
+      return timeDisplays.dual;
+    }
+  }
+
+  const 
 
   const handlePlayPause = () => {
     if (!isPlaying) {
@@ -98,8 +112,8 @@ function Player() {
       </div>
 
 
-      <div className='timer'>
-        {/* {handleTimeDisplay()} */}
+      <div className='timer' onClick>
+        {timeDisplay()}
       </div>
 
     </div>
