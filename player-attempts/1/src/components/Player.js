@@ -28,15 +28,13 @@ function Player() {
 
       setPlayerInstance(instance);
       setTrackDuration(instance.duration());
-
-      instance.events.on('timeUpdate', dataEvent => {
-        const { progress, duration } = dataEvent;
-        setCurrentTime(progress);
-        handleProgress(progress, duration);
-      });
     };
     getPlayer();
   }, []);
+
+  useEffect(() => {
+    createTimeDisplays()
+  }, [currentTime])
 
   const handleProgress = (currentTime = playerInstance.currentTime(), duration = trackDuration) => {
     const percent = (currentTime / duration) * 100;
@@ -44,23 +42,38 @@ function Player() {
   }
 
   const progressClick = (e) => {
-    const {x, y} = e.target.getBoundingClientRect();
+    const { x, y } = e.target.getBoundingClientRect();
     console.log(x, y)
 
   };
 
   const createTimeDisplays = () => {
-    const mins = trackDuration / 60;
-    const secs = trackDuration % 60;
 
-    const minsAndSecs = `${mins < 1 ? '0' : ''}${mins}:${secs > 10 ? '0' : ''}`;
-    console.log(minsAndSecs)
+    const minsDuration = Math.floor(trackDuration / 60);
+    const secsDuration = Math.floor(trackDuration % 60);
+
+    const minsSecsDuration = `${minsDuration < 1 ? '0' : ''}${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
+
+    const subMins = Math.floor((trackDuration - currentTime) / 60)
+    const subSecs = Math.floor((trackDuration - currentTime) % 60)
+
+    const subMinsSecsDuration = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
+
+
+    setTimeDisplays({ minsSecsDuration, subMinsSecsDuration })
   }
 
   const handlePlayPause = () => {
     if (!isPlaying) {
       setIsPlaying(true);
       playerInstance.play();
+      createTimeDisplays();
+      playerInstance.events.on('timeUpdate', dataEvent => {
+        const { progress, duration } = dataEvent;
+        setCurrentTime(progress);
+        handleProgress(progress, duration);
+        createTimeDisplays()
+      });
     } else {
       setIsPlaying(false);
       playerInstance.pause();
@@ -79,16 +92,15 @@ function Player() {
       <button className='rwd-fwd'>+5s</button>
 
       <div className='progress-container'>
-      <div className="progress" onClick={(e) => progressClick(e)}>
-        <div className="progress-filled" ref={filledRef} ></div>
-      </div>
+        <div className="progress" onClick={(e) => progressClick(e)}>
+          <div className="progress-filled" ref={filledRef} ></div>
+        </div>
 
       </div>
-
 
 
       <div className='timer'>
-        {currentTime.toFixed(2)}/{Math.round(trackDuration / 60)}:{Math.round(trackDuration % 60)}
+        { }
       </div>
 
     </div>
