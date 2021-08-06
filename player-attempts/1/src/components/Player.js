@@ -60,7 +60,7 @@ function Player() {
     const subSecs = Math.floor((trackDuration - currentTime) % 60)
     const subFormat = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
 
-    const dual = `${subFormat} / ${durationFormat}`
+    const dual = `${subFormat}/${durationFormat}`
     setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, subFormat, dual }));
   };
 
@@ -80,8 +80,8 @@ function Player() {
   }
 
   const handleTimeClick = () => {
-    if(!isPlaying) return;
-    
+    // if(!isPlaying) return;
+
     switch (timeDisplays.displayType) {
       case 'duration':
         setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'timeLeft' }));

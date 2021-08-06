@@ -31,23 +31,26 @@ button {
 }
 
 .rwd-fwd {
-    width: 20px;
+    width: 10px;
     height: 15px;
-    /* width: 5%; */
+    width: 5%;
+    font-size: 0.5rem;
 }
 
 .play-pause {
-   width: 35px;
+   width: 5%;
    height: 15px;
+   font-size: 0.7rem;
 }
 
 .timer-container, .scrubber, button {
-    margin: 5px;
+    margin: 2px;
 }
 .timer{
     flex: 0 0 auto;
     margin: 5px;
     cursor: pointer;
+    font-size: 0.7rem;
 
 }
 .progress-container {
