@@ -28,13 +28,15 @@ function Player() {
 
       setPlayerInstance(instance);
       setTrackDuration(instance.duration());
-      formatTimeDisplays();
+
+
     };
     getPlayer();
+    formatTimeDisplays();
   }, []);
 
   useEffect(() => {
-    formatTimeDisplays()
+    formatTimeDisplays();
   }, [currentTime])
 
   const handleProgress = (currentTime = playerInstance.currentTime(), duration = trackDuration) => {
@@ -49,6 +51,7 @@ function Player() {
   };
 
   const formatTimeDisplays = () => {
+
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
     const durationFormat = `${minsDuration < 1 ? '0' : ''}${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
@@ -57,25 +60,42 @@ function Player() {
     const subSecs = Math.floor((trackDuration - currentTime) % 60)
     const subFormat = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
 
-    const dual = `${durationFormat} / ${subFormat}`
-    setTimeDisplays(prevDisplay => ({...prevDisplay, durationFormat, subFormat, dual }));
+    const dual = `${subFormat} / ${durationFormat}`
+    setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, subFormat, dual }));
   };
 
   const timeDisplay = () => {
-    if (timeDisplays.displayType === 'duration') {
-      return timeDisplays.durationFormat;
+
+    switch (timeDisplays.displayType) {
+      case 'duration':
+        return timeDisplays.durationFormat;
+      case 'timeLeft':
+        return timeDisplays.subFormat;
+      case 'dual':
+        return timeDisplays.dual;
+      default:
+        return '0:00'
     };
 
-    if (timeDisplays.displayType === 'timeLeft'){
-      return timeDisplays.subFormat;
-    }
-    
-    if (timeDisplays.displayType === 'both'){
-      return timeDisplays.dual;
-    }
   }
 
-  const 
+  const handleTimeClick = () => {
+    if(!isPlaying) return;
+    
+    switch (timeDisplays.displayType) {
+      case 'duration':
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'timeLeft' }));
+        break;
+      case 'timeLeft':
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'dual' }));
+        break;
+      case 'dual':
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'duration' }));
+        break;
+      default:
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'duration' }));
+    };
+  }
 
   const handlePlayPause = () => {
     if (!isPlaying) {
@@ -112,7 +132,7 @@ function Player() {
       </div>
 
 
-      <div className='timer' onClick>
+      <div className='timer' onClick={()=> handleTimeClick()}>
         {timeDisplay()}
       </div>
 

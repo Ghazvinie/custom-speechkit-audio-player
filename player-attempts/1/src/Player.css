@@ -47,6 +47,7 @@ button {
 .timer{
     flex: 0 0 auto;
     margin: 5px;
+    cursor: pointer;
 
 }
 .progress-container {
