@@ -13,73 +13,82 @@ const initParams = {
 
 function Player() {
   const [playerInstance, setPlayerInstance] = useState(null);
-  // const [progressBar, setProgressBar] = useState(50);
   const [isPlaying, setIsPlaying] = useState(false);
+  const [trackDuration, setTrackDuration] = useState(0);
+  const [currentTime, setCurrentTime] = useState(0);
+  const [timeDisplays, setTimeDisplays] = useState(null);
 
-  
+
+
   const filledRef = useRef(null);
 
   useEffect(() => {
     async function getPlayer() {
       const instance = await SpeechKitSdk.player(initParams);
+
       setPlayerInstance(instance);
+      setTrackDuration(instance.duration());
+
+      instance.events.on('timeUpdate', dataEvent => {
+        const { progress, duration } = dataEvent;
+        setCurrentTime(progress);
+        handleProgress(progress, duration);
+      });
     };
     getPlayer();
   }, []);
 
-//   useEffect(() => {
-//       playerInstance.events.on('timeUpdate', dataEvent => {
-//    progressClick();
-// });
-//   },[])
+  const handleProgress = (currentTime = playerInstance.currentTime(), duration = trackDuration) => {
+    const percent = (currentTime / duration) * 100;
+    filledRef.current.style.flexBasis = `${percent}%`;
+  }
 
   const progressClick = (e) => {
-    console.log('called')
-    const percent = (playerInstance.currentTime() / playerInstance.duration()) * 100;
-    // setProgressBar(percent)
-    filledRef.current.style.flexBasis = `${percent}%`;
+    const {x, y} = e.target.getBoundingClientRect();
+    console.log(x, y)
+
   };
+
+  const createTimeDisplays = () => {
+    const mins = trackDuration / 60;
+    const secs = trackDuration % 60;
+
+    const minsAndSecs = `${mins < 1 ? '0' : ''}${mins}:${secs > 10 ? '0' : ''}`;
+    console.log(minsAndSecs)
+  }
 
   const handlePlayPause = () => {
     if (!isPlaying) {
       setIsPlaying(true);
       playerInstance.play();
-      playerInstance.events.on('timeUpdate', dataEvent => {
-        progressClick();
-     });
     } else {
       setIsPlaying(false);
       playerInstance.pause();
     };
   };
 
-
-
-//   playerInstance.events.on('timeUpdate', dataEvent => {
-//    progressClick();
-// });
-
   return (
     <div className='player-container'>
 
 
-        <h4 className='label'>Player Label</h4>
+      <h4 className='label'>Player Label</h4>
 
 
-        <button className='rwd-fwd'> -5s </button>
-        <button className='play-pause' onClick={()=> handlePlayPause()}>V</button>
-        <button className='rwd-fwd'>+5s</button>
+      <button className='rwd-fwd'> -5s </button>
+      <button className='play-pause' onClick={() => handlePlayPause()}>V</button>
+      <button className='rwd-fwd'>+5s</button>
 
-        <div className="progress" onClick={(e) => progressClick(e)}>
-        <div className="progress-filled" ref={filledRef}></div>
-       </div>
-        {/* <div className='progress'></div> */}
+      <div className='progress-container'>
+      <div className="progress" onClick={(e) => progressClick(e)}>
+        <div className="progress-filled" ref={filledRef} ></div>
+      </div>
 
-        {/* <input className='scrubber' type='range' /> */}
+      </div>
+
 
 
       <div className='timer'>
-        0:00
+        {currentTime.toFixed(2)}/{Math.round(trackDuration / 60)}:{Math.round(trackDuration % 60)}
       </div>
 
     </div>
