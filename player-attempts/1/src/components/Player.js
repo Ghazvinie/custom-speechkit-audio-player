@@ -33,7 +33,7 @@ function Player() {
   }, []);
 
   useEffect(() => {
-    createTimeDisplays()
+    formatTimeDisplays()
   }, [currentTime])
 
   const handleProgress = (currentTime = playerInstance.currentTime(), duration = trackDuration) => {
@@ -47,32 +47,31 @@ function Player() {
 
   };
 
-  const createTimeDisplays = () => {
-
+  const formatTimeDisplays = () => {
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
-
     const minsSecsDuration = `${minsDuration < 1 ? '0' : ''}${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 
     const subMins = Math.floor((trackDuration - currentTime) / 60)
     const subSecs = Math.floor((trackDuration - currentTime) % 60)
-
     const subMinsSecsDuration = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
 
+    setTimeDisplays({ minsSecsDuration, subMinsSecsDuration });
+  };
 
-    setTimeDisplays({ minsSecsDuration, subMinsSecsDuration })
-  }
+  // const handleTimeDisplay = () => {
+  //   if (currentTime === 0) return '0:00';
+  // }
 
   const handlePlayPause = () => {
     if (!isPlaying) {
       setIsPlaying(true);
       playerInstance.play();
-      createTimeDisplays();
       playerInstance.events.on('timeUpdate', dataEvent => {
         const { progress, duration } = dataEvent;
         setCurrentTime(progress);
         handleProgress(progress, duration);
-        createTimeDisplays()
+        formatTimeDisplays()
       });
     } else {
       setIsPlaying(false);
@@ -100,7 +99,7 @@ function Player() {
 
 
       <div className='timer'>
-        { }
+        {/* {handleTimeDisplay()} */}
       </div>
 
     </div>
