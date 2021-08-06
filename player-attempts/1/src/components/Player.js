@@ -1,4 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
+import {FaPlay} from 'react-icons/fa';
 import keys from '../keys';
 import '../Player.css'
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
@@ -130,7 +131,7 @@ function Player() {
 
 
         <button className='rwd-fwd' name='rwd' onClick={(e) => handleSkip(e)}>-5s</button>
-        <button className='play-pause' onClick={() => handlePlayPause()}>V</button>
+        <button className='play-pause' onClick={() => handlePlayPause()}><FaPlay/></button>
         <button className='rwd-fwd' name='fwd' onClick={(e) => handleSkip(e)}>+5s</button>
 
         <div className='progress-container'>
