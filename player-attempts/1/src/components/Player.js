@@ -18,18 +18,17 @@ function Player() {
   const [currentTime, setCurrentTime] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
 
-
-
   const filledRef = useRef(null);
 
   useEffect(() => {
     async function getPlayer() {
-      const instance = await SpeechKitSdk.player(initParams);
+      const playerReady = await SpeechKitSdk.isAudioReady(initParams);
 
-      setPlayerInstance(instance);
-      setTrackDuration(instance.duration());
-
-
+      if (playerReady) {
+        const instance = await SpeechKitSdk.player(initParams);
+        setPlayerInstance(instance);
+        setTrackDuration(instance.duration());
+      };
     };
     getPlayer();
     formatTimeDisplays();
@@ -114,7 +113,7 @@ function Player() {
   };
 
   return (
-    <div className='player-container'>
+    <div className='player-container' style={!playerInstance ? { display: 'none' } : {}}>
 
 
       <h4 className='label'>Player Label</h4>
@@ -132,7 +131,7 @@ function Player() {
       </div>
 
 
-      <div className='timer' onClick={()=> handleTimeClick()}>
+      <div className='timer' onClick={() => handleTimeClick()}>
         {timeDisplay()}
       </div>
 
