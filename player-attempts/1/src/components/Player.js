@@ -66,11 +66,11 @@ function Player() {
 
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
-    const durationFormat = `${minsDuration < 1 ? '0' : ''}${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
+    const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 
     const subMins = Math.floor((trackDuration - currentTime) / 60)
     const subSecs = Math.floor((trackDuration - currentTime) % 60)
-    const subFormat = `-${subMins < 1 ? '0' : ''}${subMins}:${subSecs < 10 ? '0' : ''}${subSecs}`;
+    const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 
     const dual = `${subFormat}/${durationFormat}`
     setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, subFormat, dual }));
