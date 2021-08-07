@@ -3,6 +3,7 @@ import {FaPlay} from 'react-icons/fa';
 import keys from '../keys';
 import '../Player.css'
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
+import { c } from '@speechkit/speechkit-audio-player-v2/dist/module/sdk-efc46e75';
 
 const initParams = {
   projectId: keys.project_id,
@@ -20,6 +21,7 @@ function Player() {
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
 
   const filledRef = useRef(null);
+  const progressRef = useRef(null);
 
   useEffect(() => {
     async function getPlayer() {
@@ -45,8 +47,18 @@ function Player() {
   }
 
   const progressClick = (e) => {
-    const { x, y } = e.target.getBoundingClientRect();
-    console.log(x, y)
+
+
+  const {width, left} = progressRef.current.getBoundingClientRect();
+  const x = e.nativeEvent.clientX - left;
+  
+  const percent = (x / width) * 100;
+  const time = ((trackDuration / 100) * percent).toFixed(2);
+
+  filledRef.current.style.flexBasis = `${percent}%`;
+  playerInstance.changeCurrentTime(time);
+  
+
 
   };
 
@@ -80,7 +92,7 @@ function Player() {
   }
 
   const handleTimeClick = () => {
-    // if(!isPlaying) return;
+
 
     switch (timeDisplays.displayType) {
       case 'duration':
@@ -134,11 +146,10 @@ function Player() {
         <button className='play-pause' onClick={() => handlePlayPause()}><FaPlay/></button>
         <button className='rwd-fwd' name='fwd' onClick={(e) => handleSkip(e)}>+5s</button>
 
-        <div className='progress-container'>
-          <div className="progress" onClick={(e) => progressClick(e)}>
+          <div className="progress" ref={progressRef} onClick={(e) => progressClick(e)}>
             <div className="progress-filled" ref={filledRef} ></div>
           </div>
-        </div>
+
 
 
         <div className='timer' onClick={() => handleTimeClick()}>

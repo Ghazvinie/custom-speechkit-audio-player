@@ -58,16 +58,9 @@ button {
 
 
 }
-.progress-container {
-    flex: 9
-    ;
-    padding: 2px;
-    width: 4%;
-    /* position: absolute; */
-}
 
 .progress {
-    /* width: 100%; */
+    width: 100%;
     /* position: relative; */
     display: flex;
     height: 11px;
