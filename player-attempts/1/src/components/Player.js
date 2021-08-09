@@ -118,10 +118,17 @@ function Player() {
   };
 
   const handleSkip = (e) => {
-    const { name } = e.target.parentNode
+    const { name } = e.target.parentNode;
     const skipValue = 5;
-    name === 'rwd' ? playerInstance.changeCurrentTime(trackCurrentTime - skipValue) : playerInstance.changeCurrentTime(trackCurrentTime + skipValue);
-    setCurrentTime(trackCurrentTime - skipValue)
+    if (name === 'rwd'){
+      playerInstance.changeCurrentTime(trackCurrentTime - skipValue);
+      setCurrentTime(trackCurrentTime - skipValue);
+    };
+
+    if (name === 'fwd'){
+      playerInstance.changeCurrentTime(trackCurrentTime + skipValue);
+      setCurrentTime(trackCurrentTime + skipValue)
+    }
     handleProgress();
   };
 
