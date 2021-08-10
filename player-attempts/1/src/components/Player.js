@@ -1,8 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { IoPlayOutline, IoPlayBackOutline, IoPlayForwardOutline } from 'react-icons/io5';
-import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io'
+import { IoPlayOutline } from 'react-icons/io5';
+import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import keys from '../keys';
 import '../Player.css'
+import Dropdown from './Dropdown';
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 
 const initParams = {
@@ -23,6 +24,7 @@ function Player() {
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     async function getPlayer() {
@@ -102,19 +104,20 @@ function Player() {
   };
 
   const handlePlayPause = () => {
-    if (!isPlaying) {
-      setIsPlaying(true);
-      playerInstance.play();
-      playerInstance.events.on('timeUpdate', dataEvent => {
-        const { progress, duration } = dataEvent;
-        setCurrentTime(progress);
-        handleProgress(progress, duration);
-        formatTimeDisplays();
-      });
-    } else {
-      setIsPlaying(false);
-      playerInstance.pause();
-    };
+   console.log(dropdownRef.current.style)
+    // if (!isPlaying) {
+    //   setIsPlaying(true);
+    //   playerInstance.play();
+    //   playerInstance.events.on('timeUpdate', dataEvent => {
+    //     const { progress, duration } = dataEvent;
+    //     setCurrentTime(progress);
+    //     handleProgress(progress, duration);
+    //     formatTimeDisplays();
+    //   });
+    // } else {
+    //   setIsPlaying(false);
+    //   playerInstance.pause();
+    // };
   };
 
   const handleSkip = (e) => {
@@ -135,6 +138,7 @@ function Player() {
 
 
   return (
+    <>
     <div className='player-container' style={!playerInstance ? { display: 'none' } : {}}>
 
 
@@ -160,7 +164,8 @@ function Player() {
       </div>
 
     </div>
-
+    <Dropdown ref={dropdownRef}/>
+</>
 
   );
 }
