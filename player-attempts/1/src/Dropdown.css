@@ -1,0 +1,13 @@
+.dropdown-container {
+    margin: 11px;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width:500px;
+    background-color:rgba(59, 59, 59, 0.055);
+    font-family: 'Courier New', Courier, monospace;
+}
+
+.dropdown-header {
+    font-size: 15px;
+}

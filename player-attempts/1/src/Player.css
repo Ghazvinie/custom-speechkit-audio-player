@@ -34,19 +34,13 @@ button {
     background-color:rgba(59, 59, 59, 0);
 }
 
-.rwd-fwd {
-
-    height: 15px;
-    font-size: 0.5rem;
-}
-
 .rwd-fwd-svg{
+    font-size: 0.5rem;
     cursor: pointer;
 }
 
 .play-pause {
    cursor: pointer;
-   height: 15px;
    font-size: 0.7rem;
 }
 
@@ -54,8 +48,9 @@ button {
     margin: 2px;
 }
 .timer{
+    height: 11px;
     text-align: right;
-min-width: 13%;
+    min-width: 14%;
     margin: 5px;
     cursor: pointer;
     font-size: 0.7rem;

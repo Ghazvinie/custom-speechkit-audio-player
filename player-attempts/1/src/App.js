@@ -1,10 +1,13 @@
 import Player from './components/Player';
-import './App.css'
+import Dropdown from './components/Dropdown';
+import './App.css';
+
 
 function App() {
   return (
     <main>
     <Player />
+    <Dropdown />
     </main>
   );
 }
