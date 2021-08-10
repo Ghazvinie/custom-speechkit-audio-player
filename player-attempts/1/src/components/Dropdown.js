@@ -4,10 +4,12 @@ import '../Dropdown.css'
 function Dropdown() {
     return (
         <div className='dropdown-container'>
-            <div className='dropdown-header'>Want to continue listening?</div>
-            <form>
-                <label></label>
-            </form>
+            <h2>Like what you hear?</h2>
+            <h3>Subscribe to hear this article and more</h3>
+            <button className='signup-btn' value='hello'>Subscribe</button>
+            <p className='signin-or'>or</p>
+            <button className='signup-btn' value='hello'>Sign In</button>
+
         </div>
 
     )

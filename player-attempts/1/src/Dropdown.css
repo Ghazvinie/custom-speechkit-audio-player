@@ -1,13 +1,56 @@
 .dropdown-container {
-    margin: 11px;
+    margin: 5px;
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
+    align-items: center;
+    justify-content: center;
     width:500px;
     background-color:rgba(59, 59, 59, 0.055);
-    font-family: 'Courier New', Courier, monospace;
+    font-family: Arial, Helvetica, sans-serif;
 }
 
-.dropdown-header {
-    font-size: 15px;
+h2 {
+    text-align: center;
+    width: 100%;
+    font-size: 16px;
+    font-weight: 600;
+    margin: 10px;
+}
+
+h3 {
+    font-size: 13px;
+    font-weight: 200;
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+}
+
+.signup-btn {
+    padding: 5px;
+    margin: 10px;
+    width: 125px;
+    height: 20px;
+    background-color:rgba(59, 59, 59, 0.100);
+    font-weight: 200;
+    font-size: 13px;
+    font-family: Arial, Helvetica, sans-serif;
+    cursor: pointer;
+}
+
+.signin {
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+}
+
+.signin-or {
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    margin: 0;
+}
+
+a {
+    color: black;
 }

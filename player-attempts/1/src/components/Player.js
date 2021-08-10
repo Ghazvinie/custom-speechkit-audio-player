@@ -120,17 +120,19 @@ function Player() {
   const handleSkip = (e) => {
     const { name } = e.target.parentNode;
     const skipValue = 5;
-    if (name === 'rwd'){
+    if (name === 'rwd') {
       playerInstance.changeCurrentTime(trackCurrentTime - skipValue);
       setCurrentTime(trackCurrentTime - skipValue);
     };
 
-    if (name === 'fwd'){
+    if (name === 'fwd') {
       playerInstance.changeCurrentTime(trackCurrentTime + skipValue);
       setCurrentTime(trackCurrentTime + skipValue)
     }
     handleProgress();
   };
+
+
 
   return (
     <div className='player-container' style={!playerInstance ? { display: 'none' } : {}}>
