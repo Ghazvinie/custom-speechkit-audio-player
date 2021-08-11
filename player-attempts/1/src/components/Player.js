@@ -2,8 +2,10 @@ import React, { useEffect, useRef, useState } from 'react';
 import { IoPlayOutline } from 'react-icons/io5';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import keys from '../keys';
-import '../Player.css'
-import Dropdown from './Dropdown';
+
+import '../Player.css';
+import '../Dropdown.css'
+
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 
 const initParams = {
@@ -21,6 +23,8 @@ function Player() {
   const [trackDuration, setTrackDuration] = useState(0);
   const [trackCurrentTime, setCurrentTime] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
+  const [userLoggedIn, setUserLoggedIn] = useState(false);
+
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
@@ -104,7 +108,12 @@ function Player() {
   };
 
   const handlePlayPause = () => {
-   console.log(dropdownRef.current.style)
+    setUserLoggedIn(true)
+    dropdownRef.current.style.display = 'flex';
+    dropdownRef.current.style.top = '0px';
+    dropdownRef.current.style.opacity = 1;
+    dropdownRef.current.style.height = 'auto';
+
     // if (!isPlaying) {
     //   setIsPlaying(true);
     //   playerInstance.play();
@@ -164,7 +173,14 @@ function Player() {
       </div>
 
     </div>
-    <Dropdown ref={dropdownRef}/>
+
+    <div className='dropdown-container' ref={dropdownRef}>
+            <h2>Like what you hear?</h2>
+            <h3>Subscribe to hear this article and more</h3>
+            <button className='signup-btn' value='hello'>Subscribe</button>
+            <p className='signin-or'>or</p>
+            <button className='signup-btn' value='hello'>Sign In</button>
+        </div>
 </>
 
   );

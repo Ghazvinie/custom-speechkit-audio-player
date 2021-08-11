@@ -1,16 +1,23 @@
 .dropdown-container {
-    margin: 5px;
-    display: flex;
+    display: block;
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+
     flex-wrap: wrap;
     flex-direction: row;
     align-items: center;
     justify-content: center;
+    margin: 5px;
     width:500px;
-    top: -500px;
+    top: -90px;
     position: relative;
     background-color:rgba(59, 59, 59, 0.055);
     font-family: Arial, Helvetica, sans-serif;
     letter-spacing: 0.2px;
+
+    transition: all 1000ms ease-in-out;
+
 }
 /* .dropdown-container:hover {
     display: none;
