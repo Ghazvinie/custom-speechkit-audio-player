@@ -1,14 +1,7 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import '../Dropdown.css'
 
-function Dropdown(props) {
-
-
-console.log(props.userLoggedIn)
-    useEffect(() => {
-        console.log('change')
-    }, [props.useLoggedIn])
-
+function Dropdown() {
     return (
         <div className='dropdown-container' style={{backgroundColor: 'red'}}>
             <h2>Like what you hear?</h2>
