@@ -1,19 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 import { IoPlayOutline } from 'react-icons/io5';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import keys from '../keys';
-
 import '../Player.css';
-import '../Dropdown.css'
-
-import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
+import '../Dropdown.css';
 
 const initParams = {
   projectId: keys.project_id,
   externalId: keys.external_id,
-  // UIenabled: true,
-  // renderNode: 'speechkit-player',
-  // isIframe: true
+
 };
 
 function Player() {
@@ -21,18 +17,18 @@ function Player() {
   const [playerInstance, setPlayerInstance] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
-  const [trackCurrentTime, setCurrentTime] = useState(0);
+  const [trackCurrentTime, setTrackCurrentTime] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
-  const [userLoggedIn, setUserLoggedIn] = useState(false);
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
 
+  // Creates player instance and stores in state
   useEffect(() => {
     async function getPlayer() {
       const playerReady = await SpeechKitSdk.isAudioReady(initParams);
-
       if (playerReady) {
         const instance = await SpeechKitSdk.player(initParams);
         setPlayerInstance(instance);
@@ -43,27 +39,31 @@ function Player() {
     formatTimeDisplays();
   }, []);
 
+  // Formats time displays when current time changes
   useEffect(() => {
     formatTimeDisplays();
   }, [trackCurrentTime]);
 
+  // Updates progress bar 
   const handleProgress = (currentTime = trackCurrentTime, duration = trackDuration) => {
-    console.log('valled')
     const percent = (currentTime / duration) * 100;
-    console.log(percent)
     filledRef.current.style.flexBasis = `${percent}%`;
   };
 
+  // Handles user clicks on progress bar
   const progressClick = (e) => {
     const { width, left } = progressRef.current.getBoundingClientRect();
     const x = e.nativeEvent.clientX - left;
     const percent = (x / width) * 100;
     const time = ((trackDuration / 100) * percent).toFixed(2);
 
+
     filledRef.current.style.flexBasis = `${percent}%`;
+    setTrackCurrentTime(time);
     playerInstance.changeCurrentTime(time);
   };
 
+  // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
@@ -77,6 +77,7 @@ function Player() {
     setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, subFormat, dual }));
   };
 
+  // Displays the user selected time display 
   const timeDisplay = () => {
     switch (timeDisplays.displayType) {
       case 'duration':
@@ -90,6 +91,7 @@ function Player() {
     };
   };
 
+  // Cycles through the different time displays
   const handleTimeClick = () => {
     switch (timeDisplays.displayType) {
       case 'duration':
@@ -106,39 +108,56 @@ function Player() {
     };
   };
 
+  // Handles play and pause button
   const handlePlayPause = () => {
+    // Displays dropdown if user is not logged in
     if (!userLoggedIn) {
       dropdownRef.current.className += ' dropdown-active';
       return;
-    }
-    if (!isPlaying) {
+    };
+
+    if (!isPlaying && userLoggedIn) {
+      // Starts play
       setIsPlaying(true);
+
+
+      playerInstance.currentTime()
+
       playerInstance.play();
       playerInstance.events.on('timeUpdate', dataEvent => {
         const { progress, duration } = dataEvent;
-        setCurrentTime(progress);
+        setTrackCurrentTime(progress);
         handleProgress(progress, duration);
         formatTimeDisplays();
       });
     } else {
+      // Pauses play
       setIsPlaying(false);
       playerInstance.pause();
     };
   };
 
+  // Handles rwd and ffwd buttons
   const handleSkip = (e) => {
     const { name } = e.target.parentNode;
     const skipValue = 5;
+
     if (name === 'rwd') {
-      playerInstance.changeCurrentTime(trackCurrentTime - skipValue);
-      setCurrentTime(trackCurrentTime - skipValue);
+      const updateTime = (skipValue - trackCurrentTime).toFixed(2);
+      playerInstance.changeCurrentTime(updateTime);
+      setTrackCurrentTime(updateTime);
     };
 
     if (name === 'fwd') {
-      playerInstance.changeCurrentTime(trackCurrentTime + skipValue);
-      setCurrentTime(trackCurrentTime + skipValue)
+      const updateTime = (skipValue + trackCurrentTime).toFixed(2);
+      console.log(updateTime)
+      playerInstance.changeCurrentTime(updateTime);
+      setTrackCurrentTime(updateTime);
     }
+
     handleProgress();
+    // console.log(trackCurrentTime)
+    // console.log(playerInstance.currentTime())
   };
 
 
