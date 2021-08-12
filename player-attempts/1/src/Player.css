@@ -49,7 +49,7 @@ button {
 .timer{
     height: 11px;
     text-align: right;
-    min-width: 10%;
+    min-width: 9%;
     margin: 5px;
     cursor: pointer;
     font-size: 0.6rem;

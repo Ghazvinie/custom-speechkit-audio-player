@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 import { IoPlayOutline } from 'react-icons/io5';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
+import { RiPauseLine } from 'react-icons/ri';
 import keys from '../keys';
 import '../Player.css';
 import '../Dropdown.css';
@@ -167,13 +168,13 @@ function Player() {
       <div className='player-container' style={!playerInstance ? { display: 'none' } : {}}>
 
 
-        <h4 className='label'>Listen To Article</h4>
+        <h4 className='label'>Title Placeholder</h4>
 
 
         <div className='controls'>
 
           <button className='rwd-fwd' name='rwd'><IoIosArrowBack className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
-          <button className='play-pause' onClick={() => handlePlayPause()}><IoPlayOutline /></button>
+          <button className='play-pause' onClick={() => handlePlayPause()}>{!isPlaying ? <IoPlayOutline /> : <RiPauseLine />}</button>
           <button className='rwd-fwd' name='fwd'><IoIosArrowForward className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
 
           <div className="progress" ref={progressRef} onClick={(e) => progressClick(e)}>
