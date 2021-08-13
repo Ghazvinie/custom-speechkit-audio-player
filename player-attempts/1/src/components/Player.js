@@ -120,39 +120,21 @@ function Player() {
     };
 
 
-    
     if (!isPlaying && userLoggedIn) {
-      // Starts play
-      setTimer(setInterval(() => {
-        const progress = playerInstance.currentTime();
-        const duration = playerInstance.duration()
+      // Starts play 
+     playerInstance.play();
+     setIsPlaying(true);
+     playerInstance.events.on('timeUpdate', dataEvent => {
+        const { progress, duration } = dataEvent;
         setTrackCurrentTime(progress);
-        handleProgress(progress, duration)
+        handleProgress(progress, duration);
         formatTimeDisplays();
-      }, 250))
-
-
-      // const { progress, duration } = dataEvent;
-      // console.log('called')
-      // setTrackCurrentTime(progress);
-      // handleProgress(progress, duration);
-      // formatTimeDisplays();
-
-  
-      playerInstance.play();
-     playerInstance.events.on('timeUpdate', dataEvent => {}
-        // const { progress, duration } = dataEvent;
-        // console.log('called')
-        // setTrackCurrentTime(progress);
-        // handleProgress(progress, duration);
-        // formatTimeDisplays();
-      );
+     });
     } else {
       // Pauses play   
-
+      console.log('jello')
       setIsPlaying(false);
       playerInstance.pause();
-      clearInterval(timer)
 
     };
   };
