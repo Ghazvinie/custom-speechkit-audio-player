@@ -53,13 +53,11 @@ function Player() {
     timeDisplay();
   }, [timeDisplays]);
 
-
   // Updates progress bar 
   const handleProgress = () => {
-    console.log('called')
     const currentTime = playerInstance.currentTime();
     const percent = (currentTime / trackDuration) * 100;
-    filledRef.current.style.flexBasis = `${percent}%`;
+    filledRef.current.style.width = `${percent}%`;
   };
 
   // Handles user clicks on progress bar
@@ -152,24 +150,17 @@ function Player() {
     const skipValue = 5.00;
 
     if (name === 'rwd') {
-      const skipTime = Number((trackCurrentTime - skipValue).toFixed(2));
-      console.log(skipTime)
       playerInstance.rewind(skipValue)
-      // console.log(playerInstance.currentTime())
-      // console.log(trackCurrentTime)
-      // handleProgress(5.00)
-
+      handleProgress();
+      formatTimeDisplays();
     };
 
     if (name === 'fwd') {
-      const skipTime = Number((trackCurrentTime + skipValue).toFixed(2));
-      console.log(skipTime)
       playerInstance.forward(skipValue);
+      handleProgress();
+      formatTimeDisplays();
     }
-
-
   };
-
 
   return (
     <>
@@ -190,8 +181,6 @@ function Player() {
           <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>
 
         </div>
-
-
 
       </div>
 

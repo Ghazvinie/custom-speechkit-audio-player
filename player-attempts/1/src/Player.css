@@ -65,7 +65,7 @@ button {
   }
   
   .progress-filled {
-    width: 0%;
+    width: 28%;
     background-color: rgba(59, 59, 59, 0.5);
     margin: 3px;
   }
