@@ -38,6 +38,7 @@ function Player() {
         const instance = await SpeechKitSdk.player(initParams);
         setPlayerInstance(instance);
         setTrackDuration(instance.duration());
+        formatTimeDisplays();
       };
     };
     getPlayer();
@@ -48,9 +49,14 @@ function Player() {
     formatTimeDisplays();
   }, [trackCurrentTime]);
   
+  // Following two useEffect() format time displays when the player fully loads
   useEffect(() => {
+    formatTimeDisplays();
+  },[trackDuration]);
 
-  },[timerRef])
+  useEffect(() => {
+    timeDisplay();
+  }, [timeDisplays]);
 
   // Updates progress bar 
   const handleProgress = (currentTime = trackCurrentTime, duration = trackDuration) => {
@@ -71,6 +77,7 @@ function Player() {
 
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
+    console.log('called')
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
@@ -87,14 +94,17 @@ function Player() {
   const timeDisplay = () => {
     switch (timeDisplays.displayType) {
       case 'duration':
-        return timeDisplays.durationFormat;
+        return timerRef.current.innerText = timeDisplays.durationFormat;
       case 'timeLeft':
-        return timeDisplays.subFormat;
+        return timerRef.current.innerText = timeDisplays.subFormat;
       case 'dual':
-        return timeDisplays.dual;
+        return timerRef.current.innerText = timeDisplays.dual;
+      case undefined:
+        return 'hello'
       default:
         return timeDisplays.durationFormat;
     };
+
   };
 
   // Cycles through the different time displays
@@ -185,8 +195,9 @@ function Player() {
           </div>
 
           <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}>
-            {timeDisplay()}
           </div>
+
+          {console.log(playerReady)}
         </div>
 
       </div>
