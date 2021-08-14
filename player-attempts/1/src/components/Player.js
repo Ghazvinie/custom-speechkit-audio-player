@@ -14,6 +14,7 @@ const initParams = {
 
 function Player() {
 
+  const [playerReady, setPlayerReady] = useState(false);
   const [playerInstance, setPlayerInstance] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
@@ -23,30 +24,33 @@ function Player() {
   const [timer, setTimer] = useState(null);
 
  
-
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
+  const timerRef = useRef(null);
 
   // Creates player instance and stores in state
   useEffect(() => {
     async function getPlayer() {
-      const playerReady = await SpeechKitSdk.isAudioReady(initParams);
-      if (playerReady) {
+      const isReady = await SpeechKitSdk.isAudioReady(initParams);
+      setPlayerReady(isReady);
+      if (isReady) {
         const instance = await SpeechKitSdk.player(initParams);
         setPlayerInstance(instance);
         setTrackDuration(instance.duration());
       };
     };
     getPlayer();
-    formatTimeDisplays();
   }, []);
 
   // Formats time displays when current time changes
   useEffect(() => {
     formatTimeDisplays();
-    // console.log(trackCurrentTime)
   }, [trackCurrentTime]);
+  
+  useEffect(() => {
+
+  },[timerRef])
 
   // Updates progress bar 
   const handleProgress = (currentTime = trackCurrentTime, duration = trackDuration) => {
@@ -60,7 +64,6 @@ function Player() {
     const x = e.nativeEvent.clientX - left;
     const percent = (x / width) * 100;
     const time = Number(((trackDuration / 100) * percent).toFixed(2));
-
     filledRef.current.style.flexBasis = `${percent}%`;
     setTrackCurrentTime(time);
     playerInstance.changeCurrentTime(time);
@@ -90,7 +93,7 @@ function Player() {
       case 'dual':
         return timeDisplays.dual;
       default:
-        return '0:00';
+        return timeDisplays.durationFormat;
     };
   };
 
@@ -132,22 +135,20 @@ function Player() {
      });
     } else {
       // Pauses play   
-      console.log('jello')
       setIsPlaying(false);
       playerInstance.pause();
-
     };
   };
 
   // Handles rwd and ffwd buttons
   const handleSkip = (e) => {
     const { name } = e.target.parentNode;
-    const skipValue = 5;
+    const skipValue = 5.00;
 
     if (name === 'rwd') {
       const skipTime = Number((trackCurrentTime - skipValue).toFixed(2));
       console.log(skipTime)
-      // // playerInstance.rewind(skipValue)
+      playerInstance.rewind(skipValue)
       // console.log(playerInstance.currentTime())
       // console.log(trackCurrentTime)
       // handleProgress(5.00)
@@ -157,10 +158,7 @@ function Player() {
     if (name === 'fwd') {
       const skipTime = Number((trackCurrentTime + skipValue).toFixed(2));
       console.log(skipTime)
-      // playerInstance.forward(skipValue);
-      // console.log(playerInstance.currentTime() + 5)
-      // console.log(trackCurrentTime + 5)
-
+      playerInstance.forward(skipValue);
     }
 
     // handleProgress();
@@ -170,10 +168,9 @@ function Player() {
   };
 
 
-
   return (
     <>
-      <div className='player-container' style={!playerInstance ? { display: 'none' } : {}}>
+      <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
 
         <h4 className='label'>Title Placeholder</h4>
 
@@ -187,7 +184,7 @@ function Player() {
             <div className="progress-filled" ref={filledRef} ></div>
           </div>
 
-          <div className='timer' onClick={() => handleTimeClick()}>
+          <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}>
             {timeDisplay()}
           </div>
         </div>
