@@ -58,6 +58,7 @@ function Player() {
     timeDisplay();
   }, [timeDisplays]);
 
+
   // Updates progress bar 
   const handleProgress = (currentTime = trackCurrentTime, duration = trackDuration) => {
     const percent = (currentTime / duration) * 100;
@@ -77,7 +78,6 @@ function Player() {
 
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
-    console.log('called')
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
@@ -92,15 +92,15 @@ function Player() {
 
   // Displays the user selected time display 
   const timeDisplay = () => {
+    if (trackDuration <=0 ) return; // Does not display time if there is no track duration i.e. the audio hasn't loaded
+
     switch (timeDisplays.displayType) {
       case 'duration':
-        return timerRef.current.innerText = timeDisplays.durationFormat;
+        return timerRef.current.innerText = timeDisplays.durationFormat
       case 'timeLeft':
         return timerRef.current.innerText = timeDisplays.subFormat;
       case 'dual':
         return timerRef.current.innerText = timeDisplays.dual;
-      case undefined:
-        return 'hello'
       default:
         return timeDisplays.durationFormat;
     };
@@ -194,10 +194,7 @@ function Player() {
             <div className="progress-filled" ref={filledRef} ></div>
           </div>
 
-          <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}>
-          </div>
-
-          {console.log(playerReady)}
+          <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>
         </div>
 
       </div>
