@@ -33,9 +33,15 @@ button {
     background-color:rgba(59, 59, 59, 0);
 }
 
+.rwd-fwd {
+    padding: 0;
+}
+
 .rwd-fwd-svg{
     font-size: 0.5rem;
     cursor: pointer;
+    padding: 3px;
+    margin: 2px;
 }
 
 .play-pause {
@@ -65,7 +71,7 @@ button {
   }
   
   .progress-filled {
-    width: 28%;
+    width: 0;
     background-color: rgba(59, 59, 59, 0.5);
     margin: 3px;
   }

@@ -143,14 +143,16 @@ function Player() {
       clearInterval(timer)
     };
   };
-
+  
   // Handles rwd and ffwd buttons
   const handleSkip = (e) => {
+
     const { name } = e.target.parentNode;
     const skipValue = 5.00;
 
     if (name === 'rwd') {
       playerInstance.rewind(skipValue)
+
       handleProgress();
       formatTimeDisplays();
     };
@@ -160,6 +162,7 @@ function Player() {
       handleProgress();
       formatTimeDisplays();
     }
+
   };
 
   return (
