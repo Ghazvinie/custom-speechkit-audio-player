@@ -23,7 +23,7 @@ function Player() {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [timer, setTimer] = useState(null);
 
- 
+
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -44,15 +44,10 @@ function Player() {
     getPlayer();
   }, []);
 
-  // Formats time displays when current time changes
-  useEffect(() => {
-    formatTimeDisplays();
-  }, [trackCurrentTime]);
-  
   // Following two useEffect() format time displays when the player fully loads
   useEffect(() => {
     formatTimeDisplays();
-  },[trackDuration]);
+  }, [trackDuration]);
 
   useEffect(() => {
     timeDisplay();
@@ -60,8 +55,10 @@ function Player() {
 
 
   // Updates progress bar 
-  const handleProgress = (currentTime = trackCurrentTime, duration = trackDuration) => {
-    const percent = (currentTime / duration) * 100;
+  const handleProgress = () => {
+    console.log('called')
+    const currentTime = playerInstance.currentTime();
+    const percent = (currentTime / trackDuration) * 100;
     filledRef.current.style.flexBasis = `${percent}%`;
   };
 
@@ -69,21 +66,22 @@ function Player() {
   const progressClick = (e) => {
     const { width, left } = progressRef.current.getBoundingClientRect();
     const x = e.nativeEvent.clientX - left;
-    const percent = (x / width) * 100;
+    const percent = (x / width) * 100
     const time = Number(((trackDuration / 100) * percent).toFixed(2));
-    filledRef.current.style.flexBasis = `${percent}%`;
-    setTrackCurrentTime(time);
+    filledRef.current.style.width = `${percent}%`;
     playerInstance.changeCurrentTime(time);
   };
 
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
+    const currentTime = playerInstance === null ? 0 : playerInstance.currentTime()
+
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 
-    const subMins = Math.floor((trackDuration - trackCurrentTime) / 60);
-    const subSecs = Math.floor((trackDuration - trackCurrentTime) % 60);
+    const subMins = Math.floor((trackDuration - currentTime) / 60);
+    const subSecs = Math.floor((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 
     const dual = `${subFormat}/${durationFormat}`;
@@ -92,8 +90,7 @@ function Player() {
 
   // Displays the user selected time display 
   const timeDisplay = () => {
-    if (trackDuration <=0 ) return; // Does not display time if there is no track duration i.e. the audio hasn't loaded
-
+    if (trackDuration <= 0) return; // Does not display time if there is no track duration i.e. the audio hasn't loaded
     switch (timeDisplays.displayType) {
       case 'duration':
         return timerRef.current.innerText = timeDisplays.durationFormat
@@ -132,21 +129,20 @@ function Player() {
       return;
     };
 
-
     if (!isPlaying && userLoggedIn) {
       // Starts play 
-     playerInstance.play();
-     setIsPlaying(true);
-     playerInstance.events.on('timeUpdate', dataEvent => {
-        const { progress, duration } = dataEvent;
-        setTrackCurrentTime(progress);
-        handleProgress(progress, duration);
+      playerInstance.play();
+      setIsPlaying(true);
+      setTimer(setInterval(() => {
+        handleProgress();
         formatTimeDisplays();
-     });
+      }, 350));
+
     } else {
       // Pauses play   
       setIsPlaying(false);
       playerInstance.pause();
+      clearInterval(timer)
     };
   };
 
@@ -171,10 +167,7 @@ function Player() {
       playerInstance.forward(skipValue);
     }
 
-    // handleProgress();
-    // playerInstance.changeCurrentTime(5.01)
-    // console.log(trackCurrentTime)
-    // console.log(playerInstance.currentTime())
+
   };
 
 
@@ -195,7 +188,10 @@ function Player() {
           </div>
 
           <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>
+
         </div>
+
+
 
       </div>
 
