@@ -9,10 +9,8 @@ function Dropdown() {
             <button className='signup-btn' value='hello'>Subscribe</button>
             <p className='signin-or'>or</p>
             <button className='signup-btn' value='hello'>Sign In</button>
-
         </div>
-
-    )
+    );
 }
 
 export default Dropdown;
