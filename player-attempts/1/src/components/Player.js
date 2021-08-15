@@ -122,11 +122,10 @@ function Player() {
   const handlePlayPause = () => {
     // Displays dropdown if user is not logged in
     if (!userLoggedIn) {
-      dropdownRef.current.className = 'dropdown-container dropdown-active'
-      console.log(dropdownRef.current.className)
+      dropdownRef.current.className = 'dropdown-container dropdown-active';
       return;
     } else {
-      dropdownRef.current.className = 'dropdown-container'
+      dropdownRef.current.className = 'dropdown-container';
     };
 
     if (!isPlaying && userLoggedIn) {
@@ -145,7 +144,7 @@ function Player() {
       clearInterval(timer)
     };
   };
-  
+
   // Handles rwd and ffwd buttons
   const handleSkip = (e) => {
 
@@ -163,19 +162,18 @@ function Player() {
     formatTimeDisplays();
 
   };
-
-  function handleLogin(){
+  function handleLogin() {
     setUserLoggedIn(prevState => !prevState)
- };
+  };
 
   return (
     <>
-      <button className='login-btn' onClick={(e)=>handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
+      <button className='login-btn' onClick={(e) => handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
 
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
 
         <h4 className='label'>Title Placeholder</h4>
-       
+
         <div className='controls'>
 
           <button className='rwd-fwd' name='rwd'><IoIosArrowBack className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
@@ -185,7 +183,7 @@ function Player() {
           <div className="progress" ref={progressRef} onClick={(e) => progressClick(e)}>
             <div className="progress-filled" ref={filledRef} ></div>
           </div>
-
+          
           <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>
 
         </div>
