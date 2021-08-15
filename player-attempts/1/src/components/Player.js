@@ -18,7 +18,6 @@ function Player() {
   const [playerInstance, setPlayerInstance] = useState(null);
   const [isPlaying, setIsPlaying] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
-  const [trackCurrentTime, setTrackCurrentTime] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [timer, setTimer] = useState(null);
@@ -165,8 +164,14 @@ function Player() {
 
   };
 
+  function handleLogin(){
+    setUserLoggedIn(prevState => !prevState)
+ };
+
   return (
     <>
+      <button className='login-btn' onClick={(e)=>handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
+
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
 
         <h4 className='label'>Title Placeholder</h4>

@@ -79,7 +79,11 @@ button {
     background-color: rgba(59, 59, 59, 0.5);
     margin: 3px;
   }
-
-  .progress-container {
-      width:50%;
-  }
+  
+  .login-btn {
+    display: flex;
+    border: solid 1px;
+    background-color:rgba(59, 59, 59, 0);
+    cursor: pointer;
+    margin-bottom: 100px;
+}
