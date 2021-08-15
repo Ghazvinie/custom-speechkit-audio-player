@@ -170,7 +170,7 @@ function Player() {
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
 
         <h4 className='label'>Title Placeholder</h4>
-
+       
         <div className='controls'>
 
           <button className='rwd-fwd' name='rwd'><IoIosArrowBack className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
