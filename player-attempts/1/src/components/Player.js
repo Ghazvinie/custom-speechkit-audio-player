@@ -122,8 +122,11 @@ function Player() {
   const handlePlayPause = () => {
     // Displays dropdown if user is not logged in
     if (!userLoggedIn) {
-      dropdownRef.current.className += ' dropdown-active';
+      dropdownRef.current.className = 'dropdown-container dropdown-active'
+      console.log(dropdownRef.current.className)
       return;
+    } else {
+      dropdownRef.current.className = 'dropdown-container'
     };
 
     if (!isPlaying && userLoggedIn) {
@@ -151,16 +154,13 @@ function Player() {
 
     if (name === 'rwd') {
       playerInstance.rewind(skipValue)
-
-      handleProgress();
-      formatTimeDisplays();
     };
 
     if (name === 'fwd') {
       playerInstance.forward(skipValue);
-      handleProgress();
-      formatTimeDisplays();
     }
+    handleProgress();
+    formatTimeDisplays();
 
   };
 
