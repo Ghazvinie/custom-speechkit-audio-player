@@ -6,11 +6,3 @@ main {
     justify-content: center;
     align-items: center;
 }
-
-.login-btn {
-    display: flex;
-    border: solid 1px;
-    background-color:rgba(59, 59, 59, 0);
-    cursor: pointer;
-    margin-bottom: 100px;
-}
