@@ -16,7 +16,7 @@
     align-items: center;
     margin-bottom: 5px;
     margin-top: 3px;
-    font-size: 0.8rem;
+    font-size: 0.85rem;
     font-weight: 200;
     font-style: italic;
 }
@@ -63,7 +63,7 @@ button {
     min-width: 9%;
     margin: 5px;
     cursor: pointer;
-    font-size: 0.7rem;
+    font-size: 0.75rem;
 }
 
 .progress {
