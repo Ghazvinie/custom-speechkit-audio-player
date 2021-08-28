@@ -77,12 +77,17 @@ function Player() {
     const secsDuration = Math.floor(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 
+    const mins = Math.floor(currentTime / 60);
+    const secs = Math.floor(currentTime % 60);
+    const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
+
     const subMins = Math.floor((trackDuration - currentTime) / 60);
     const subSecs = Math.floor((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 
-    const dual = `${subFormat}/${durationFormat}`;
-    setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, subFormat, dual }));
+    const dualUp = `${upFormat}/${durationFormat}`
+    const dualSub = `${subFormat}/${durationFormat}`;
+    setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, upFormat, dualUp, subFormat, dualSub }));
   };
 
   // Displays the user selected time display 
@@ -90,11 +95,15 @@ function Player() {
     if (trackDuration <= 0) return; // Does not display time if there is no track duration i.e. the audio hasn't loaded
     switch (timeDisplays.displayType) {
       case 'duration':
-        return timerRef.current.innerText = timeDisplays.durationFormat
-      case 'timeLeft':
+        return timerRef.current.innerText = timeDisplays.durationFormat;
+      case 'upFormat':
+        return timerRef.current.innerText = timeDisplays.upFormat;
+      case 'dualUp':
+        return timerRef.current.innerText = timeDisplays.dualUp;
+      case 'subFormat':
         return timerRef.current.innerText = timeDisplays.subFormat;
-      case 'dual':
-        return timerRef.current.innerText = timeDisplays.dual;
+      case 'dualSub':
+        return timerRef.current.innerText = timeDisplays.dualSub;
       default:
         return timeDisplays.durationFormat;
     };
@@ -105,12 +114,18 @@ function Player() {
   const handleTimeClick = () => {
     switch (timeDisplays.displayType) {
       case 'duration':
-        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'timeLeft' }));
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'upFormat' }));
         break;
-      case 'timeLeft':
-        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'dual' }));
+      case 'upFormat':
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'dualUp' }));
         break;
-      case 'dual':
+      case 'dualUp':
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'subFormat' }));
+        break;
+      case 'subFormat':
+        setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'dualSub' }));
+        break;
+      case 'dualSub':
         setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'duration' }));
         break;
       default:
@@ -183,7 +198,7 @@ function Player() {
           <div className="progress" ref={progressRef} onClick={(e) => progressClick(e)}>
             <div className="progress-filled" ref={filledRef} ></div>
           </div>
-          
+
           <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>
 
         </div>
