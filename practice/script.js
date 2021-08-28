@@ -139,7 +139,6 @@ async function listAudio() {
         console.log(error);
     }
 }
-
 async function listProjects() {
 
     const fetchParams = {
@@ -210,11 +209,16 @@ const initParams = {
 const myApp = await SpeechKit.sdk.player(initParams);
 duration.innerText = `${myApp.duration()}`;
 
-myApp.events.on('timeUpdate', dataEvent => {
-    const { duration, progress } = dataEvent;
-    currTime.innerText = progress;
-    remTime.innerText = duration - progress;
-});
+// myApp.events.on('timeUpdate', dataEvent => {
+//     const { duration, progress } = dataEvent;
+//     currTime.innerText = progress;
+//     remTime.innerText = duration - progress;
+//     console.log(progress)
+// });
+
+const handleEvent = (dataEvent) => {
+    console.log(dataEvent.progress)
+}
 
 function handleClick(e) {
 
@@ -222,11 +226,20 @@ function handleClick(e) {
     if (name === 'play') {
         myApp.play();
         console.log(myApp.events.on('play', dateEvent => console.log(dateEvent)));
+        // myApp.events.on('timeUpdate', dataEvent => {
+        //     const { duration, progress } = dataEvent;
+        //     currTime.innerText = progress;
+        //     remTime.innerText = duration - progress;
+        //     console.log(progress)
+        // });
+
+        myApp.events.on('timeUpdate', handleEvent);
     };
 
     if (name === 'pause') {
         myApp.pause();
         console.log(myApp.events.on('pause', dateEvent => console.log(dateEvent)));
+        myApp.events.off('timeUpdate', handleEvent);
     };
 
     if (name === 'rwd') {
