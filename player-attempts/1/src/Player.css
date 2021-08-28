@@ -42,7 +42,7 @@ button {
 
 .rwd-fwd-svg{
     color: rgba(59, 59, 59, 0.900);
-    font-size: 0.8rem;
+
     cursor: pointer;
     padding: 3px;
     margin: 2px;
@@ -52,7 +52,6 @@ button {
 .play-pause {
    color: rgba(59, 59, 59, 0.900);
    cursor: pointer;
-   font-size: 1rem;
 }
 
 .timer-container, button {
