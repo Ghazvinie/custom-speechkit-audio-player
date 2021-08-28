@@ -6,6 +6,7 @@ import { RiPauseLine } from 'react-icons/ri';
 import keys from '../keys';
 import '../Player.css';
 import '../Dropdown.css';
+import Test from './test';
 
 const initParams = {
   projectId: keys.project_id,
@@ -201,7 +202,10 @@ function Player() {
 
   return (
     <>
+
       <button className='login-btn' onClick={(e) => handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
+      <Test num={18}/>
+      <h1>dsads</h1>
 
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
 
