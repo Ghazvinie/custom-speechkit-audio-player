@@ -25,6 +25,7 @@ function Player() {
   const [timer, setTimer] = useState(null);
 
 
+const playerRef = useRef(null);
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -38,6 +39,7 @@ function Player() {
       if (isReady) {
         const instance = await SpeechKitSdk.player(initParams);
         setPlayerInstance(instance);
+        playerRef.current = instance;
         setTrackDuration(instance.duration());
         formatTimeDisplays();
       };
@@ -147,7 +149,9 @@ function Player() {
 
     if (!isPlaying && userLoggedIn) {
       // Starts play 
-      playerInstance.play();
+      // playerInstance.play();
+      playerRef.current.play();
+      playerRef.current.events.on('timeUpdate', (dataEvent) => console.log(dataEvent))
       setIsPlaying(true);
       setTimer(setInterval(() => {
         handleProgress();
@@ -155,9 +159,15 @@ function Player() {
       }, 350));
 
     } else {
+      const handleEvent = (dataEvent) => {
+        console.log(dataEvent.progress)
+    }
       // Pauses play   
       setIsPlaying(false);
-      playerInstance.pause();
+      // playerInstance.pause();
+      playerRef.current.pause();
+      playerRef.current.events.off('timeUpdate', (dataEvent) => handleEvent)
+
       clearInterval(timer)
     };
   };
