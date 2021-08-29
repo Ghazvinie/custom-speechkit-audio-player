@@ -159,9 +159,6 @@ const playerRef = useRef(null);
       }, 350));
 
     } else {
-      const handleEvent = (dataEvent) => {
-        console.log(dataEvent.progress)
-    }
       // Pauses play   
       setIsPlaying(false);
       // playerInstance.pause();
