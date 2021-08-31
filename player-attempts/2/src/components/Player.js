@@ -163,7 +163,6 @@ const playerRef = useRef(null);
       setIsPlaying(false);
       // playerInstance.pause();
       playerRef.current.pause();
-      playerRef.current.events.off('timeUpdate', (dataEvent) => handleEvent)
 
       clearInterval(timer)
     };
