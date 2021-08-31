@@ -4,7 +4,6 @@ import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import PlayPause from './PlayPause';
 import PlayerInstance from './PlayerInstance';
 
-
 import keys from '../keys';
 import '../Player.css';
 import '../Dropdown.css';
@@ -23,16 +22,12 @@ function Player() {
   const [trackDuration, setTrackDuration] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-  const [currentTime, setCurrentTime] = useState(null);
+  const [currentTime, setCurrentTime] = useState(0);
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
   const timerRef = useRef(null);
-
-  const handleEvent = (dataEvent) => {
-    return;
-  }
 
   // Creates player instance and stores in state
   useEffect(() => {
@@ -58,14 +53,18 @@ function Player() {
     timeDisplay();
   }, [timeDisplays]);
 
-
+  const handleEvent = (dataEvent) => {
+    handleProgress();
+    formatTimeDisplays();
+    return;
+  }
   useEffect(() => {
     if (playerInstance) {
       return () => {
         playerInstance.events.off('timeUpdate', handleEvent)
       }
     }
-  }, [isPlaying])
+  }, [isPlaying]);
 
   // Updates progress bar 
   const handleProgress = () => {
@@ -81,14 +80,12 @@ function Player() {
     const percent = (x / width) * 100
     const time = Number(((trackDuration / 100) * percent).toFixed(2));
     filledRef.current.style.width = `${percent}%`;
-    console.log(playerInstance.currentTime())
-    console.log(time)
-    // playerInstance.changeCurrentTime(time);
+    playerInstance.changeCurrentTime(time);
   };
 
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
-    const currentTime = playerInstance === null ? 0 : playerInstance.currentTime()
+    const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
 
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
@@ -124,7 +121,6 @@ function Player() {
       default:
         return timeDisplays.durationFormat;
     };
-
   };
 
   // Cycles through the different time displays
@@ -175,18 +171,14 @@ function Player() {
 
   // Handles rwd and ffwd buttons
   const handleSkip = (e) => {
-
     const { name } = e.target.parentNode;
     const skipValue = 5.00;
-
     if (name === 'rwd') {
-      playerInstance.rewind(skipValue)
+      playerInstance.rewind(skipValue);
     };
-
     if (name === 'fwd') {
       playerInstance.forward(skipValue);
-    }
-    handleProgress();
+    };
     formatTimeDisplays();
   };
 
