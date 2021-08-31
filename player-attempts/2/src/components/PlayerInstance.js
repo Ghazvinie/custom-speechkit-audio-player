@@ -5,7 +5,6 @@ import React, { useEffect, useRef, useState } from 'react';
 function PlayerInstance(props){
     const {playerInstance, setCurrentTime, setIsPlaying, isPlaying} = props;
     const handleEvent = (dataEvent) => {
-        console.log(dataEvent.progress)
       
     }
 

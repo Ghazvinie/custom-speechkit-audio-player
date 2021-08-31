@@ -23,13 +23,16 @@ function Player() {
   const [trackDuration, setTrackDuration] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-  const [timer, setTimer] = useState(null);
   const [currentTime, setCurrentTime] = useState(null);
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
   const timerRef = useRef(null);
+
+  const handleEvent = (dataEvent) => {
+    return;
+  }
 
   // Creates player instance and stores in state
   useEffect(() => {
@@ -55,9 +58,14 @@ function Player() {
     timeDisplay();
   }, [timeDisplays]);
 
-  useEffect(() => {
 
-  }, )
+  useEffect(() => {
+    if (playerInstance) {
+      return () => {
+        playerInstance.events.off('timeUpdate', handleEvent)
+      }
+    }
+  }, [isPlaying])
 
   // Updates progress bar 
   const handleProgress = () => {
@@ -152,24 +160,16 @@ function Player() {
       dropdownRef.current.className = 'dropdown-container';
     };
 
+
     if (!isPlaying && userLoggedIn) {
       // Starts play 
       playerInstance.play();
       setIsPlaying(true);
-      let start = Date.now();
-      setTimer(setInterval(() => {
-        const diff = (Date.now() - start) / 1000
-        console.log(playerInstance.currentTime())
-        console.log('diff' + diff.toFixed(2))
-
-      }, 250));
-
+      playerInstance.events.on('timeUpdate', handleEvent);
     } else {
       // Pauses play   
       setIsPlaying(false);
       playerInstance.pause();
-
-      clearInterval(timer)
     };
   };
 
@@ -196,7 +196,6 @@ function Player() {
 
   return (
     <>
-      <PlayerInstance playerInstance={playerInstance} setCurrentTime={setCurrentTime} setIsPlaying={setIsPlaying} isPlaying={isPlaying}/>
       <button className='login-btn' onClick={(e) => handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
 
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
@@ -207,7 +206,7 @@ function Player() {
 
           <button className='rwd-fwd' name='rwd'><IoIosArrowBack className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
 
-          <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying}/></button>
+          <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying} /></button>
 
           <button className='rwd-fwd' name='fwd'><IoIosArrowForward className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
 
@@ -225,9 +224,9 @@ function Player() {
 
         <h2>Like what you hear?</h2>
         <h3>Subscribe to hear this article and more</h3>
-        <button className='signup-btn' value='hello'>Subscribe</button>
+        <button className='signup-btn'>Subscribe</button>
         <p className='signin-or'>or</p>
-        <button className='signup-btn' value='hello'>Sign In</button>
+        <button className='signup-btn'>Sign In</button>
 
       </div>
     </>
