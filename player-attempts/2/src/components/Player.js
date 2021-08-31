@@ -22,7 +22,6 @@ function Player() {
   const [trackDuration, setTrackDuration] = useState(0);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
-  const [currentTime, setCurrentTime] = useState(0);
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
@@ -53,7 +52,7 @@ function Player() {
     timeDisplay();
   }, [timeDisplays]);
 
-  const handleEvent = (dataEvent) => {
+  const handleEvent = () => {
     handleProgress();
     formatTimeDisplays();
     return;
@@ -62,8 +61,8 @@ function Player() {
     if (playerInstance) {
       return () => {
         playerInstance.events.off('timeUpdate', handleEvent)
-      }
-    }
+      };
+    };
   }, [isPlaying]);
 
   // Updates progress bar 
