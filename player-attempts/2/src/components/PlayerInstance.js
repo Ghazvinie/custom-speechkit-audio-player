@@ -3,26 +3,29 @@ import React, { useEffect, useRef, useState } from 'react';
 
 
 function PlayerInstance(props){
-    console.log('hello')
-    const instance = props.playerInstance;
-    console.log(instance)
-
+    const {playerInstance, setCurrentTime, setIsPlaying, isPlaying} = props;
     const handleEvent = (dataEvent) => {
         console.log(dataEvent.progress)
+      
     }
 
-    let isPlaying = false;
+    useEffect(() => {
+        if (playerInstance){
+            return () => {
+                playerInstance.events.off('timeUpdate', handleEvent)
+            }
+        }
+    }, [isPlaying])
+
     const handlePlayPause = () => {
             if (!isPlaying){
-                instance.play()
-                instance.events.on('timeUpdate', handleEvent)
-                isPlaying = !isPlaying
+                playerInstance.play()
+                playerInstance.events.on('timeUpdate', handleEvent)
+                setIsPlaying(true)
             } else if (isPlaying) {
-                instance.pause()
-                isPlaying = !isPlaying
-                instance.events.off('timeUpdate', handleEvent)
+                playerInstance.pause()
+                setIsPlaying(false)
             }
-
       };
 
     return (

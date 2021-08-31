@@ -24,6 +24,7 @@ function Player() {
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [timer, setTimer] = useState(null);
+  const [currentTime, setCurrentTime] = useState(null);
 
   const filledRef = useRef(null);
   const progressRef = useRef(null);
@@ -195,7 +196,7 @@ function Player() {
 
   return (
     <>
-      <PlayerInstance playerInstance={playerInstance}/>
+      <PlayerInstance playerInstance={playerInstance} setCurrentTime={setCurrentTime} setIsPlaying={setIsPlaying} isPlaying={isPlaying}/>
       <button className='login-btn' onClick={(e) => handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
 
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
