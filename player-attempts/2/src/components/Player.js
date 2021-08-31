@@ -2,6 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import PlayPause from './PlayPause';
+import PlayerInstance from './PlayerInstance';
 
 
 import keys from '../keys';
@@ -24,8 +25,6 @@ function Player() {
   const [userLoggedIn, setUserLoggedIn] = useState(true);
   const [timer, setTimer] = useState(null);
 
-
-const playerRef = useRef(null);
   const filledRef = useRef(null);
   const progressRef = useRef(null);
   const dropdownRef = useRef(null);
@@ -39,7 +38,6 @@ const playerRef = useRef(null);
       if (isReady) {
         const instance = await SpeechKitSdk.player(initParams);
         setPlayerInstance(instance);
-        playerRef.current = instance;
         setTrackDuration(instance.duration());
         formatTimeDisplays();
       };
@@ -56,6 +54,10 @@ const playerRef = useRef(null);
     timeDisplay();
   }, [timeDisplays]);
 
+  useEffect(() => {
+
+  }, )
+
   // Updates progress bar 
   const handleProgress = () => {
     const currentTime = playerInstance.currentTime();
@@ -70,7 +72,9 @@ const playerRef = useRef(null);
     const percent = (x / width) * 100
     const time = Number(((trackDuration / 100) * percent).toFixed(2));
     filledRef.current.style.width = `${percent}%`;
-    playerInstance.changeCurrentTime(time);
+    console.log(playerInstance.currentTime())
+    console.log(time)
+    // playerInstance.changeCurrentTime(time);
   };
 
   // Formats all the time displays and stores to state
@@ -149,20 +153,20 @@ const playerRef = useRef(null);
 
     if (!isPlaying && userLoggedIn) {
       // Starts play 
-      // playerInstance.play();
-      playerRef.current.play();
-      playerRef.current.events.on('timeUpdate', (dataEvent) => console.log(dataEvent))
+      playerInstance.play();
       setIsPlaying(true);
+      let start = Date.now();
       setTimer(setInterval(() => {
-        handleProgress();
-        formatTimeDisplays();
-      }, 350));
+        const diff = (Date.now() - start) / 1000
+        console.log(playerInstance.currentTime())
+        console.log('diff' + diff.toFixed(2))
+
+      }, 250));
 
     } else {
       // Pauses play   
       setIsPlaying(false);
-      // playerInstance.pause();
-      playerRef.current.pause();
+      playerInstance.pause();
 
       clearInterval(timer)
     };
@@ -183,13 +187,15 @@ const playerRef = useRef(null);
     }
     handleProgress();
     formatTimeDisplays();
-
   };
+
   function handleLogin() {
     setUserLoggedIn(prevState => !prevState)
   };
+
   return (
     <>
+      <PlayerInstance playerInstance={playerInstance}/>
       <button className='login-btn' onClick={(e) => handleLogin(e)}>{userLoggedIn ? 'Logged In' : 'Logged Out'}</button>
 
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>

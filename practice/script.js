@@ -160,9 +160,9 @@ async function listProjects() {
 
 // -------------------------------------------------------------------------------------------------------------------------
 
-window.addEventListener('message', event => {
-    console.log('event -> data -> ', event.data)
-}, false);
+// window.addEventListener('message', event => {
+//     console.log('event -> data -> ', event.data)
+// }, false);
 
 const playerSdk = document.querySelector('.speechkit-player');
 const play = document.getElementById('play').addEventListener('click', handleClick);
@@ -238,8 +238,8 @@ function handleClick(e) {
 
     if (name === 'pause') {
         myApp.pause();
-        console.log(myApp.events.on('pause', dateEvent => console.log(dateEvent)));
-        myApp.events.off('timeUpdate', handleEvent);
+        // console.log(myApp.events.on('pause', dateEvent => console.log(dateEvent)));
+        myApp.events.off('timeUpdate' , handleEvent);
     };
 
     if (name === 'rwd') {
