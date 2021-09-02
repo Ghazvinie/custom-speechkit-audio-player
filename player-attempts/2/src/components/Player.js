@@ -2,7 +2,6 @@ import React, { useEffect, useRef, useState } from 'react';
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 import { IoIosArrowForward, IoIosArrowBack } from 'react-icons/io';
 import PlayPause from './PlayPause';
-import PlayerInstance from './PlayerInstance';
 
 import keys from '../keys';
 import '../Player.css';
