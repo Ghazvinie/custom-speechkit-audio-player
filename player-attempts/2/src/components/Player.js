@@ -52,7 +52,8 @@ function Player() {
     timeDisplay();
   }, [timeDisplays]);
 
-  const handleEvent = () => {
+  const handleEvent = (dataEvent) => {
+    console.log(`progress - ${dataEvent.progress}`)
     handleProgress();
     formatTimeDisplays();
     return;
@@ -66,8 +67,15 @@ function Player() {
   }, [isPlaying]);
 
   // Updates progress bar 
-  const handleProgress = (a) => {
-    playerInstance.changeCurrentTime(a)
+  const handleProgress = (a,b) => {
+    if (a){
+      console.log(a,b)
+
+      filledRef.current.style.width = `${a}%`;
+
+      playerInstance.changeCurrentTime(b);
+      return
+    }
     console.log(`progress time - ${playerInstance.currentTime()}`)
 
     const currentTime = playerInstance.currentTime();
@@ -75,6 +83,8 @@ function Player() {
     console.log(`progress time - ${currentTime}`)
     console.log(`progress % - ${percent}`)
     filledRef.current.style.width = `${percent}%`;
+
+
   };
 
   // Handles user clicks on progress bar
@@ -90,7 +100,7 @@ function Player() {
 
     filledRef.current.style.width = `${percent}%`;
     playerInstance.changeCurrentTime(time);
-    handleProgress(time)
+    handleProgress(percent, time)
     console.log(`click time aftr - ${playerInstance.currentTime()}`)
 
   };
