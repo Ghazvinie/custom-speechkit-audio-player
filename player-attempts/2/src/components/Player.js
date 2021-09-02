@@ -66,22 +66,34 @@ function Player() {
   }, [isPlaying]);
 
   // Updates progress bar 
-  const handleProgress = () => {
+  const handleProgress = (a) => {
+    playerInstance.changeCurrentTime(a)
+    console.log(`progress time - ${playerInstance.currentTime()}`)
+
     const currentTime = playerInstance.currentTime();
     const percent = (currentTime / trackDuration) * 100;
+    console.log(`progress time - ${currentTime}`)
+    console.log(`progress % - ${percent}`)
     filledRef.current.style.width = `${percent}%`;
   };
 
   // Handles user clicks on progress bar
   const progressClick = (e) => {
+    console.log(`click time - ${playerInstance.currentTime()}`)
     const { width, left } = progressRef.current.getBoundingClientRect();
     const x = e.nativeEvent.clientX - left;
     const percent = (x / width) * 100
     const time = Number(((trackDuration / 100) * percent).toFixed(2));
+    console.log(`click time - ${playerInstance.currentTime()}`)
+    console.log(`click calc time - ${time}`)
+    console.log(`click percent - ${percent}`)
+
     filledRef.current.style.width = `${percent}%`;
     playerInstance.changeCurrentTime(time);
-  };
+    handleProgress(time)
+    console.log(`click time aftr - ${playerInstance.currentTime()}`)
 
+  };
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
