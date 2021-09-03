@@ -13,8 +13,23 @@ Install the Player SDK
 npm install @speechkit/speechkit-audio-player-v2
 ```
 
-Set up the React application with your prefered method. The easiest way to do this is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
+Setup the React application using your preferred method. The easiest way is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
 
-### Getting Started
-1. Create a new component called `Player.js`
-2. 
+## Creating The Player
+
+### Player Component
+* Create a component called `Player.js`
+* Import the useEffect, useRef and useState hooks, as well as the SpeechKit SDK
+
+```javascript
+import React, { useEffect, useRef, useState } from 'react';
+import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
+```
+* Create a Player function, and set it as the default export
+
+```
+function Player() {
+ }
+ 
+export default Player;
+```
