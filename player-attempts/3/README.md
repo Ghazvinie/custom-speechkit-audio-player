@@ -67,7 +67,7 @@ The player style can be customised however you like. In this example it was kept
 
 In `App.css`:
 
-```javascript
+```css
 main {
     width: 100%;
     padding: 2rem 0;
@@ -80,7 +80,7 @@ Create `Player.css`
 
 Add the basic styles for the container which will hold the player:
 
-```javascript
+```css
 .player-container {
     display: flex;
     flex-wrap: wrap;
