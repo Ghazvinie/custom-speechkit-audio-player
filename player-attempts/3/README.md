@@ -11,7 +11,7 @@ It also provides an example of how the audio player can be customised to increas
 
 Install the Player SDK
 
-```bash
+```
 npm install @speechkit/speechkit-audio-player-v2
 ```
 
@@ -106,12 +106,12 @@ There are six state values that are maintained:
 6.  `userLoggedIn` - Whether the user is logged in/has a subscription
 
 ```javascript
-  const [playerInstance, setPlayerInstance] = useState(null);
-  const [playerReady, setPlayerReady] = useState(false);
-  const [trackDuration, setTrackDuration] = useState(0);
-  const [isPlaying, setIsPlaying] = useState(false);
-  const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
-  const [userLoggedIn, setUserLoggedIn] = useState(true);
+const [playerInstance, setPlayerInstance] = useState(null);
+const [playerReady, setPlayerReady] = useState(false);
+const [trackDuration, setTrackDuration] = useState(0);
+const [isPlaying, setIsPlaying] = useState(false);
+const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
+const [userLoggedIn, setUserLoggedIn] = useState(true);
 ```
 
 ### useRef()
@@ -123,18 +123,62 @@ Four ref values are required:
 4. `dropRef` - The login/subscribe dropdown 
 
 ```javascript
+const progressRef = useRef(null);
+const filledRef = useRef(null);
+const timerRef = useRef(null);
+const dropdownRef = useRef(null);
+```
+
+## Player HTML
+
+### HTML
+
+The player as displayed to the user is essentially a collection of buttons acting as controls for specific methods, a progress bar and a clock/timer. The HTML structure for this is as follows:
+
+```html
+<div className='player-container'>
+
+  <h4 className='label'>Title Placeholder</h4>
+
+  <div className='controls'>
+
+    <button className='rwd-fwd' name='rwd'></button>
+
+    <button className='play-pause'></button>
+
+    <button className='rwd-fwd' name='fwd'></button>
+
+    <div className='progress' ref={progressRef}>
+      <div className='progress-filled' ref={filledRef}></div>
+    </div>
+
+    <div className='timer' ref={timerRef}></div>
+
+  </div>
+
+</div>
+```
+
+Your `Player` component should now look like this:
+
+```javascript
+
+function Player() {
+  const [playerInstance, setPlayerInstance] = useState(null);
+  const [playerReady, setPlayerReady] = useState(false);
+  const [trackDuration, setTrackDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
+  const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
+  const [userLoggedIn, setUserLoggedIn] = useState(true);
+
   const progressRef = useRef(null);
   const filledRef = useRef(null);
   const timerRef = useRef(null);
   const dropdownRef = useRef(null);
-```
 
-## Player HTML 
-
-The player as displayed to the user is essentially a collection of buttons acting as controls for specific methods, a progress bar and a clock/timer. 
-
-```html
-<div className='player-container'>
+  return (
+    <>
+      <div className='player-container'>
 
         <h4 className='label'>Title Placeholder</h4>
 
@@ -142,17 +186,53 @@ The player as displayed to the user is essentially a collection of buttons actin
 
           <button className='rwd-fwd' name='rwd'></button>
 
-          <button className='play-pause'</button>
+          <button className='play-pause'></button>
 
-          <button className='rwd-fwd' </button>
+          <button className='rwd-fwd' name='fwd'></button>
 
-          <div className='progress' ref={progressRef} >
-            <div className='progress-filled' ref={filledRef} ></div>
+          <div className='progress' ref={progressRef}>
+            <div className='progress-filled' ref={filledRef}></div>
           </div>
 
-          <div className='timer' ref={timerRef} </div>
+          <div className='timer' ref={timerRef}></div>
 
         </div>
 
       </div>
+    </>
+  );
+}
 ```
+
+The styles for each element can be found in the `Player.css` file. 
+
+## useEffect() Hooks
+
+Several useEffect() hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a useEffect() is essential in initialising the player from the SDK. 
+
+### Initialising the Player
+When the comoponent first renders the Player (as accessed through the SDK) it will asynchronously begin initialisation. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
+
+* An async function is used to initialise the player:
+ * `playerReady` state is updated with a boolean value
+ * An instance of the player is created and stored in state, as well as the track duration
+ * The time displays are updated
+* This function is called once when the component first renders
+
+```javascript 
+useEffect(() => {
+  async function getPlayer() { // Async function
+    const isReady = await SpeechKitSdk.isAudioReady(initParams); // Boolean value
+    setPlayerReady(isReady); // Update state
+    if (isReady) {
+      const instance = await SpeechKitSdk.player(initParams); // Creates a player instance
+      setPlayerInstance(instance); // Stores instance in state
+      setTrackDuration(instance.duration()); // Stores track duration in state
+      formatTimeDisplays(); // Updates time displays
+    };
+  };
+  getPlayer(); // Called at first render
+}, []);
+```
+
+

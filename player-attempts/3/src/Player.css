@@ -42,11 +42,9 @@ button {
 
 .rwd-fwd-svg{
     color: rgba(59, 59, 59, 0.900);
-
     cursor: pointer;
     padding: 3px;
     margin: 2px;
-    pointer-events: all;
 }
 
 .play-pause {
