@@ -7,7 +7,6 @@ import keys from '../keys';
 import '../Player.css';
 import '../Dropdown.css';
 
-
 const initParams = {
   projectId: keys.project_id,
   externalId: keys.external_id
