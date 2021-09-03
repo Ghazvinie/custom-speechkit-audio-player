@@ -11,7 +11,7 @@ It also provides an example of how the audio player can be customised to increas
 
 Install the Player SDK
 
-```
+```bash
 npm install @speechkit/speechkit-audio-player-v2
 ```
 
