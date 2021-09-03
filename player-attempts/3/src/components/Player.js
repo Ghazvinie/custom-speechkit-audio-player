@@ -14,17 +14,17 @@ const initParams = {
 
 function Player() {
 
-  const [playerReady, setPlayerReady] = useState(false);
   const [playerInstance, setPlayerInstance] = useState(null);
-  const [isPlaying, setIsPlaying] = useState(false);
+  const [playerReady, setPlayerReady] = useState(false);
   const [trackDuration, setTrackDuration] = useState(0);
+  const [isPlaying, setIsPlaying] = useState(false);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
 
-  const filledRef = useRef(null);
   const progressRef = useRef(null);
-  const dropdownRef = useRef(null);
+  const filledRef = useRef(null);
   const timerRef = useRef(null);
+  const dropdownRef = useRef(null);
 
   // Creates player instance and stores in state
   useEffect(() => {
