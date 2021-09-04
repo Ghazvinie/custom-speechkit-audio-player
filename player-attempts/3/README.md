@@ -13,6 +13,10 @@ Install the Player SDK
 npm install @speechkit/speechkit-audio-player-v2
 ```
 
+https://user-images.githubusercontent.com/68420629/132100793-64d67959-cca9-4281-81cf-98a27eeb55fa.mov
+
+
+
 Setup the React application using your preferred method. The easiest way is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
 
 ## Player Setup
