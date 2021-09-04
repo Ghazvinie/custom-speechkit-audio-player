@@ -244,7 +244,7 @@ With the player instance ready the controls of the player can be created.
 ### Play and Pause
 Within the HTML add your chosen Play/Pause icons and set to conditionally render depending on the `isPlaying` state, as well as a `handlePlayPause` `onClick` event handler. 
 
-```javascript
+```html
 <button className='play-pause' onClick={() => handlePlayPause()}>{!isPlaying ? <PlayIcon /> : <PlayIcon />}</button>
 ```
 
