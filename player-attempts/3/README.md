@@ -4,7 +4,6 @@ SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-p
 
 It also provides an example of how the audio player can be customised to increase user engagement by enticing them to subscribe - the player is displayed, but will only work if the user has a valid subscription, if not, a dropdown prompts them to do so. 
 
-![giphy](https://user-images.githubusercontent.com/68420629/132100900-523c5e4d-a777-4728-be76-4385bd26b097.gif)
 ## Initial Setup
 
 Install the Player SDK
