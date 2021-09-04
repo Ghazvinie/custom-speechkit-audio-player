@@ -4,7 +4,7 @@ SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-p
 
 It also provides an example of how the audio player can be customised to increase user engagement by enticing them to subscribe - the player is displayed, but will only work if the user has a valid subscription, if not, a dropdown prompts them to do so. 
 
-![drop down example](https://user-images.githubusercontent.com/68420629/132100727-879c2d73-f16a-47a7-9ca1-22f5f2cfff93.mov)
+![giphy](https://user-images.githubusercontent.com/68420629/132100900-523c5e4d-a777-4728-be76-4385bd26b097.gif)
 ## Initial Setup
 
 Install the Player SDK
@@ -12,11 +12,6 @@ Install the Player SDK
 ```drop
 npm install @speechkit/speechkit-audio-player-v2
 ```
-
-https://user-images.githubusercontent.com/68420629/132100793-64d67959-cca9-4281-81cf-98a27eeb55fa.mov
-
-
-
 Setup the React application using your preferred method. The easiest way is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
 
 ## Player Setup
