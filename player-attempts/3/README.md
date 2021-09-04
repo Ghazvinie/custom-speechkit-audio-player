@@ -43,12 +43,12 @@ To intialise the player some parameters are required, these can be obtained from
 ```javascript
 const initParams = {
   // Mandatory Parameter
-  projectId: '...',
+  projectId: 'YOUR_ID',
   
   // One of the following parameters
-  podcastId: '...',
-  articleUrl: '...',
-  externalId: '...',
+  podcastId: 'YOUR_ID',
+  articleUrl: 'YOUR_URL',
+  externalId: 'YOUR_ID',
 };
 ```
 
@@ -206,18 +206,18 @@ function Player() {
 
 The styles for each element can be found in the `Player.css` file. 
 
-## useEffect() Hooks
+## Initiliasing the Player with useEffect() Hook
 
 Several useEffect() hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a useEffect() is essential in initialising the player from the SDK. 
 
 ### Initialising the Player
-When the comoponent first renders the Player (as accessed through the SDK) it will asynchronously begin initialisation. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
+When the comoponent first renders the Player component it will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
 
 * An async function is used to initialise the player:
  * `playerReady` state is updated with a boolean value
  * An instance of the player is created and stored in state, as well as the track duration
  * The time displays are updated
-* This function is called once when the component first renders
+* This function is called once, when the component first renders
 
 ```javascript 
 useEffect(() => {
@@ -233,6 +233,19 @@ useEffect(() => {
   };
   getPlayer(); // Called at first render
 }, []);
+```
+
+The other useEffect() hooks will be detailed when they are used later in the guide. 
+
+With the player instance ready the controls of the player can be created. 
+
+## Player Controls
+
+### Play and Pause
+Within the HTML add your chosen Play/Pause icons and set to conditionally render depending on the `isPlaying` state, as well as a `handlePlayPause` `onClick` event handler. 
+
+```react
+<button className='play-pause' onClick={() => handlePlayPause()}>{!isPlaying ? <PlayIcon /> : <PlayIcon />}</button>
 ```
 
 
