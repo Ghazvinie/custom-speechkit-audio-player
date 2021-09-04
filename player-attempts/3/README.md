@@ -22,7 +22,7 @@ Setup the React application using your preferred method. The easiest way is to u
 ### Player Component
 Create a component called `Player.js`
 
-Import the useEffect, useRef and useState hooks, as well as the SpeechKit SDK:
+Import the `useEffect`, `useRef` and `useState` hooks, as well as the SpeechKit SDK:
 
 ```javascript
 import React, { useEffect, useRef, useState } from 'react';
@@ -38,7 +38,7 @@ export default Player;
 ```
 
 ### Player Init Params
-To intialise the player some parameters are required, these can be obtained from your SpeechKit account.
+To initialise the player some parameters are required, these can be obtained from your SpeechKit account.
 
 ```javascript
 const initParams = {
@@ -76,22 +76,7 @@ main {
     align-items: center;
 }
 ```
-Create `Player.css`
-
-Add the basic styles for the container which will hold the player:
-
-```css
-.player-container {
-    display: flex;
-    flex-wrap: wrap;
-    flex-direction: row;
-    width:650px;
-    height: 55px;
-    background-color:rgba(59, 59, 59, 0.055);
-    color: rgba(59, 59, 59, 0.900);
-    font-family: -apple-system
-}
-```
+Create `Player.css`, styles will be added to this later.
 
 ## State and Refs
 There are numerous state and references that are required, their use will be explained in greater detail when they are used. 
@@ -129,7 +114,7 @@ const timerRef = useRef(null);
 const dropdownRef = useRef(null);
 ```
 
-## Player HTML
+## Player HTML and Styling
 
 ### HTML
 
@@ -204,14 +189,154 @@ function Player() {
 }
 ```
 
-The styles for each element can be found in the `Player.css` file. 
+### Styling
 
-## Initiliasing the Player with useEffect() Hook
+In `Player.css` add styling for the player container, label, controls and buttons
 
-Several useEffect() hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a useEffect() is essential in initialising the player from the SDK. 
+```css
+.player-container {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    width: 650px;
+    height: 55px;
+    background-color: rgba(59, 59, 59, 0.055);
+    color: rgba(59, 59, 59, 0.900);
+    font-family: -apple-system;
+}
+.label {
+    width: 100%;
+    text-align: center;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 5px;
+    margin-top: 3px;
+    font-size: 0.85rem;
+    font-weight: 200;
+    font-style: italic;
+}
+.controls {
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+button {
+    display: flex;
+    border: none;
+    align-items: center;
+    justify-content: center;
+    margin: 2px;
+    background-color: rgba(59, 59, 59, 0);
+}
+```
+
+## Login / Subscribe Dropdown Box
+
+The player should only function if the user has a valid subscription and is logged in. If this is not the case, a dropdown box is displayed with methods for the user to login or subscribe. 
+
+Add the necessary url paths to your login or subscription pages. 
+
+```html
+<div className='dropdown-container' ref={dropdownRef}>
+
+    <h2>Like what you hear?</h2>
+
+    <h3>Subscribe to hear this article and more</h3>
+
+    <button className='signup-btn'>
+        <a href='YOUR_PATH'>Subscribe</a>
+    </button>
+
+    <p className='signin-or'>or</p>
+
+    <button className='signup-btn'>
+        <a href='YOUR_PATH'>Sign In</a>
+    </button>
+
+</div>
+```
+
+### Styling
+
+This dropdown is hidden from view until the user attempts to play the audio, it will remain hidden if the user is logged in. 
+
+Create `Dropdown.css`
+
+Add styling for the container (this styling will render it hidden):
+
+```css
+.dropdown-container {
+    opacity: 0;
+    height: 0;
+    overflow: hidden;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    margin: 5px;
+    width: 650px;
+    top: -90px;
+    position: relative;
+    background-color: rgba(59, 59, 59, 0.055);
+    font-family: -apple-system;
+    letter-spacing: 0.2px;
+    transition: all 1000ms ease-in-out;
+}
+```
+Create an active class to be added for the dropdown to display:
+
+```css
+.dropdown-active {
+    top: 0;
+    height: auto;
+    opacity: 1;
+}
+```
+
+Add the rest of the dropdown styling:
+
+```css
+h2, h3 {
+    text-align: center;
+    width: 100%;
+    margin: 10px;
+}
+h2 {
+    font-size: 16px;
+    font-weight: 600;
+}
+h3 {
+    font-size: 13px;
+    font-weight: 400;
+}
+.signup-btn {
+    padding: 5px;
+    margin: 10px;
+    width: 125px;
+    height: 20px;
+    background-color: rgba(59, 59, 59, 0.100);
+    font-weight: 200;
+    font-size: 13px;
+    letter-spacing: 0.2px;
+    font-family: -apple-system;
+    cursor: pointer;
+}
+.signin-or {
+    text-align: center;
+    width: 100%;
+    font-size: 12px;
+    margin: 0;
+}
+```
+
+## Initialising the Player with `useEffect()` Hook
+
+Several useEffect() hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a `useEffect()` is essential in initialising the player from the SDK. 
 
 ### Initialising the Player
-When the comoponent first renders the Player component it will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
+When the component first renders the Player component it will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
 
 * An async function is used to initialise the player:
  * `playerReady` state is updated with a boolean value
@@ -235,17 +360,344 @@ useEffect(() => {
 }, []);
 ```
 
-The other useEffect() hooks will be detailed when they are used later in the guide. 
+The other `useEffect()` hooks will be detailed when they are used later in the guide. 
 
 With the player instance ready the controls of the player can be created. 
 
 ## Player Controls
 
 ### Play and Pause
-Within the HTML add your chosen Play/Pause icons and set to conditionally render depending on the `isPlaying` state, as well as a `handlePlayPause` `onClick` event handler. 
+Within the HTML add your chosen Play/Pause icons. Conditionally render them depending on the `isPlaying` state. 
+
+Add a `handlePlayPause` `onClick` event handler:
+
+```javascript
+<button className='play-pause' onClick={() => handlePlayPause()}>
+	{!isPlaying ? <PlayIcon /> : <PlayIcon />}
+</button>
+```
+
+Create a `handlePlayPause` function.
+
+This function needs to two conditionals:
+
+* Is user logged in, display dropdown if not
+* Play or pause audio depending current `isPlaying` value
+ * An event listener is started to provide time / progress tracking functionality
+
+```javascript
+const handlePlayPause = () => {
+    // Displays dropdown if user is not logged in
+    if (!userLoggedIn) {
+        dropdownRef.current.classList.add('dropdown-active');
+        return;
+    } else {
+        dropdownRef.current.classList.remove('dropdown-active');
+    };
+
+    if (!isPlaying && userLoggedIn) {
+        // Starts play 
+        playerInstance.play();
+        setIsPlaying(true);
+        playerInstance.events.on('timeUpdate', handleEvent);
+    } else {
+        // Pauses play   
+        setIsPlaying(false);
+        playerInstance.pause();
+    };
+};
+```
+
+##### Handling the `timeUpdate` event
+
+When audio starts playing an event listener is created. This listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously.
+
+External to `handlePlayPause` create a `handleEvent` function:
+
+```javascript
+const handleEvent = () => {};
+```
+
+Create a `useEffect()` to turn off the event listener:
+
+
+```javascript
+useEffect(() => {
+    if (playerInstance) { // Check required to avoid error if playerInstance is null or undefined
+        return () => {
+            playerInstance.events.off('timeUpdate', handleEvent)
+        };
+    };
+}, [isPlaying]);
+```
+
+##### Styling
+
+In `Player.css`:
+
+```css
+.play-pause {
+    color: rgba(59, 59, 59, 0.900);
+    cursor: pointer;
+}
+```
+
+### Skip 
+
+Add your chosen skip icons.
+
+Add a `handleSkip` `onClick` event handler:
+
 
 ```html
-<button className='play-pause' onClick={() => handlePlayPause()}>{!isPlaying ? <PlayIcon /> : <PlayIcon />}</button>
+<button className='rwd-fwd' name='rwd'>
+    <RwdIcon onClick={(e) => handleSkip(e)} />
+</button>
+
+<button className='rwd-fwd' name='fwd'>
+    <FwdIcon onClick={(e) => handleSkip(e)} />
+</button>
 ```
+
+Create a `handleSkip` function:
+
+```javascript
+const handleSkip = (e) => {
+    const { name } = e.target.parentNode;
+    const skipValue = 5.00;
+    if (name === 'rwd') {
+        playerInstance.rewind(skipValue);
+    };
+    if (name === 'fwd') {
+        playerInstance.forward(skipValue);
+    };
+    formatTimeDisplays();
+};
+```
+
+##### Styling
+
+In `Player.css`:
+
+```css
+.rwd-fwd {
+    padding: 0;
+}
+.rwd-fwd-svg {
+    color: rgba(59, 59, 59, 0.900);
+    cursor: pointer;
+    padding: 3px;
+    margin: 2px;
+}
+```
+
+### Time Display
+
+Multiple time display formats are able to be cycled through by clicking the timer. 
+
+Create a `formatTimeDisplays` function to format the time displays and save them to state:
+
+```javascript
+const formatTimeDisplays = () => {
+    const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
+
+	// Format duration - 0:00
+    const minsDuration = Math.floor(trackDuration / 60);
+    const secsDuration = Math.floor(trackDuration % 60);
+    const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
+	
+	// Format timer to count up from zero - 0:00+
+    const mins = Math.floor(currentTime / 60);
+    const secs = Math.floor(currentTime % 60);
+    const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
+	
+	// Format timer to count down from track duration - 0:00-
+    const subMins = Math.floor((trackDuration - currentTime) / 60);
+    const subSecs = Math.floor((trackDuration - currentTime) % 60);
+    const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
+	
+	// Count up or down next to duration - 0:00/0:00
+    const dualUp = `${upFormat}/${durationFormat}`;
+    const dualSub = `${subFormat}/${durationFormat}`;
+    
+    // Store all in state
+    setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, upFormat, dualUp, subFormat, dualSub }));
+};
+```
+
+Create a `displayTimer` function that displays the selected time format:
+
+```javascript
+const displayTimer = () => {
+    if (trackDuration <= 0) return; // Does not display time if there is no track duration i.e. the audio hasn't loaded
+    switch (timeDisplays.displayType) {
+        case 'duration':
+            return timerRef.current.innerText = timeDisplays.durationFormat;
+        case 'upFormat':
+            return timerRef.current.innerText = timeDisplays.upFormat;
+        case 'dualUp':
+            return timerRef.current.innerText = timeDisplays.dualUp;
+        case 'subFormat':
+            return timerRef.current.innerText = timeDisplays.subFormat;
+        case 'dualSub':
+            return timerRef.current.innerText = timeDisplays.dualSub;
+        default:
+            return timeDisplays.durationFormat;
+    };
+};
+```
+
+Add a `handleTimeClick` `onClick` event handler:
+
+```html
+<div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>
+```
+
+Create a `handleTimeClick` function that cycles through the various formats based on the currently displayed format:
+
+```javascript
+const handleTimeClick = () => {
+    switch (timeDisplays.displayType) {
+        case 'duration':
+            setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'upFormat' }));
+            break;
+        case 'upFormat':
+            setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'dualUp' }));
+            break;
+        case 'dualUp':
+            setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'subFormat' }));
+            break;
+        case 'subFormat':
+            setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'dualSub' }));
+            break;
+        case 'dualSub':
+            setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'duration' }));
+            break;
+        default:
+            setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'duration' }));
+            break;
+    };
+};
+```
+
+##### Displaying time on initial audio load
+
+To display an initial timer format when audio is first loaded (rather than 0:00) two `useEffect()` hooks are needed.
+
+ * First to format the time displays once a track duration has been: 
+
+```javascript
+useEffect(() => {
+    formatTimeDisplays();
+}, [trackDuration]);
+```
+
+* Then, to display the timer:
+
+```javascript
+useEffect(() => {
+    displayTimer();
+}, [timeDisplays]);
+```
+
+##### Keeping the timer display updated
+
+Call `formatTimeDisplays()` in the `handleEvent()` function:
+
+```javascript
+const handleEvent = () => {
+    formatTimeDisplays()
+};
+```
+##### Styling
+
+In `Player.css`:
+
+```css
+.timer-container {
+    margin: 2px;
+}
+.timer {
+    height: 11px;
+    text-align: right;
+    min-width: 9%;
+    margin: 5px;
+    cursor: pointer;
+    font-size: 0.75rem;
+}
+```
+
+### Progress Bar
+
+The progress bar is made up of a container with an internal 'filled' part that tracks the progress of the audio. 
+
+The user can click on the progress bar to change the audio playback position. 
+
+Create a `handleProgress` function to update the filled part of the progress bar as the audio progresses:
+
+```javascript
+const handleProgress = () => {
+    const currentTime = playerInstance.currentTime();
+    const percent = (currentTime / trackDuration) * 100;
+    filledRef.current.style.width = `${percent}%`; // Width of filled part is updated
+};
+```
+
+##### Keeping the progress bar updated
+
+Call `handleProgress()` in `handleEvent()`:
+
+```javascript
+const handleEvent = () => {
+    handleProgress();
+    formatTimeDisplays();
+};
+```
+
+Add a `progressClick` `onClick` event handler:
+
+```html
+<div className='progress' ref={progressRef} onClick={(e) => progressClick(e)}>
+    <div className='progress-filled' ref={filledRef} ></div>
+</div>
+```
+
+Create a `progressClick` function that updates the playback position to match the user's click. 
+
+The click position can be calculated using the coordinates of progress bar relative to the rest of the page.
+
+```javascript
+const progressClick = (e) => {
+    const { width, left } = progressRef.current.getBoundingClientRect(); // Progress bar coordinates
+    const x = e.nativeEvent.clientX - left; // Position of click relative to progress bar
+    const percent = (x / width) * 100 // Percentage of progress bar to fill
+    const time = Number(((trackDuration / 100) * percent).toFixed(2)); // New time to start playback from 
+    
+    filledRef.current.style.width = `${percent}%`; // Update filled width
+    playerInstance.changeCurrentTime(time); // Update playback position
+};
+```
+
+##### Styling
+
+In `Player.css`:
+
+```css
+.progress {
+    width: 100%;
+    display: flex;
+    height: 11px;
+    background: rgba(59, 59, 59, 0.100);
+    cursor: pointer;
+    border-radius: 3px;
+}
+.progress-filled {
+    width: 0;
+    background-color: rgba(59, 59, 59, 0.5);
+    margin: 3px;
+}
+```
+
+## Summary
 
 

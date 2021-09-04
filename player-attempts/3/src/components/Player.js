@@ -12,6 +12,7 @@ const initParams = {
   externalId: keys.external_id
 };
 
+
 function Player() {
 
   const [playerInstance, setPlayerInstance] = useState(null);
@@ -47,13 +48,12 @@ function Player() {
   }, [trackDuration]);
 
   useEffect(() => {
-    timeDisplay();
+    displayTimer();
   }, [timeDisplays]);
 
   const handleEvent = () => {
     handleProgress();
     formatTimeDisplays();
-    return;
   }
   useEffect(() => {
     if (playerInstance) {
@@ -84,25 +84,31 @@ function Player() {
   const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
 
+	// Format duration - 0:00
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.floor(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
-
+	
+	// Format timer to count up from zero - 0:00+
     const mins = Math.floor(currentTime / 60);
     const secs = Math.floor(currentTime % 60);
     const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
-
+	
+	// Format timer to count down from track duration - 0:00-
     const subMins = Math.floor((trackDuration - currentTime) / 60);
     const subSecs = Math.floor((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
-
-    const dualUp = `${upFormat}/${durationFormat}`
+	
+	// Count up or down next to duration - 0:00/0:00
+    const dualUp = `${upFormat}/${durationFormat}`;
     const dualSub = `${subFormat}/${durationFormat}`;
+    
+    // Store all in state
     setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, upFormat, dualUp, subFormat, dualSub }));
-  };
+};
 
   // Displays the user selected time display 
-  const timeDisplay = () => {
+  const displayTimer = () => {
     if (trackDuration <= 0) return; // Does not display time if there is no track duration i.e. the audio hasn't loaded
     switch (timeDisplays.displayType) {
       case 'duration':
@@ -140,6 +146,7 @@ function Player() {
         break;
       default:
         setTimeDisplays(prevDisplay => ({ ...prevDisplay, displayType: 'duration' }));
+        break;
     };
   };
 
@@ -147,10 +154,10 @@ function Player() {
   const handlePlayPause = () => {
     // Displays dropdown if user is not logged in
     if (!userLoggedIn) {
-      dropdownRef.current.className = 'dropdown-container dropdown-active';
+      dropdownRef.current.classList.add('dropdown-active');
       return;
     } else {
-      dropdownRef.current.className = 'dropdown-container';
+      dropdownRef.current.classList.remove('dropdown-active');
     };
 
 
@@ -179,7 +186,7 @@ function Player() {
     formatTimeDisplays();
   };
 
-  function handleLogin() {
+  const handleLogin = () => {
     setUserLoggedIn(prevState => !prevState)
   };
 
@@ -199,8 +206,8 @@ function Player() {
 
           <button className='rwd-fwd' name='fwd'><IoIosArrowForward className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
 
-          <div className="progress" ref={progressRef} onClick={(e) => progressClick(e)}>
-            <div className="progress-filled" ref={filledRef} ></div>
+          <div className='progress' ref={progressRef} onClick={(e) => progressClick(e)}>
+            <div className='progress-filled' ref={filledRef} ></div>
           </div>
 
           <div className='timer' ref={timerRef} onClick={() => handleTimeClick()}></div>

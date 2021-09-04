@@ -2,11 +2,11 @@
     display: flex;
     flex-wrap: wrap;
     flex-direction: row;
-    width:650px;
+    width: 650px;
     height: 55px;
-    background-color:rgba(59, 59, 59, 0.055);
+    background-color: rgba(59, 59, 59, 0.055);
     color: rgba(59, 59, 59, 0.900);
-    font-family: -apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen,Ubuntu,Cantarell,Fira Sans,Droid Sans,Helvetica Neue,sans-serif;
+    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen, Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
 .label {
@@ -33,14 +33,15 @@ button {
     border: none;
     align-items: center;
     justify-content: center;
-    background-color:rgba(59, 59, 59, 0);
+    margin: 2px;
+    background-color: rgba(59, 59, 59, 0);
 }
 
 .rwd-fwd {
     padding: 0;
 }
 
-.rwd-fwd-svg{
+.rwd-fwd-svg {
     color: rgba(59, 59, 59, 0.900);
     cursor: pointer;
     padding: 3px;
@@ -48,14 +49,15 @@ button {
 }
 
 .play-pause {
-   color: rgba(59, 59, 59, 0.900);
-   cursor: pointer;
+    color: rgba(59, 59, 59, 0.900);
+    cursor: pointer;
 }
 
-.timer-container, button {
+.timer-container {
     margin: 2px;
 }
-.timer{
+
+.timer {
     height: 11px;
     text-align: right;
     min-width: 9%;
@@ -69,20 +71,20 @@ button {
     display: flex;
     height: 11px;
     background: rgba(59, 59, 59, 0.100);
-    cursor:pointer;
+    cursor: pointer;
     border-radius: 3px;
-  }
-  
-  .progress-filled {
+}
+
+.progress-filled {
     width: 0;
     background-color: rgba(59, 59, 59, 0.5);
     margin: 3px;
-  }
-  
-  .login-btn {
+}
+
+.login-btn {
     display: flex;
     border: solid 1px;
-    background-color:rgba(59, 59, 59, 0);
+    background-color: rgba(59, 59, 59, 0);
     cursor: pointer;
     margin-bottom: 100px;
 }
