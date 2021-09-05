@@ -51,10 +51,21 @@ function Player() {
     displayTimer();
   }, [timeDisplays]);
 
-  const handleEvent = () => {
+  const handleEvent = (dataEvent) => {
+    const {duration, progress} = dataEvent;
+
+    if ((duration - progress) < 0.5){
+      setIsPlaying(false)
+      playerInstance.changeCurrentTime(0);
+      playerInstance.pause();
+    }
+
     handleProgress();
     formatTimeDisplays();
-  }
+  };
+
+
+
   useEffect(() => {
     if (playerInstance) {
       return () => {
@@ -85,18 +96,18 @@ function Player() {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
 
 	// Format duration - 0:00
-    const minsDuration = Math.floor(trackDuration / 60);
-    const secsDuration = Math.floor(trackDuration % 60);
+    const minsDuration = Math.round(trackDuration / 60);
+    const secsDuration = Math.round(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 	
 	// Format timer to count up from zero - 0:00+
-    const mins = Math.floor(currentTime / 60);
-    const secs = Math.floor(currentTime % 60);
+    const mins = Math.round(currentTime / 60);
+    const secs = Math.round(currentTime % 60);
     const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
 	
 	// Format timer to count down from track duration - 0:00-
-    const subMins = Math.floor((trackDuration - currentTime) / 60);
-    const subSecs = Math.floor((trackDuration - currentTime) % 60);
+    const subMins = Math.round((trackDuration - currentTime) / 60);
+    const subSecs = Math.round((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 	
 	// Count up or down next to duration - 0:00/0:00
