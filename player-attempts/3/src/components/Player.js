@@ -52,7 +52,7 @@ function Player() {
   }, [timeDisplays]);
 
   const handleEvent = (dataEvent) => {
-    if (Object.keys(dataEvent).length === 1){
+    if (Object.keys(dataEvent).length === 1) {
       setIsPlaying(false)
       playerInstance.changeCurrentTime(0);
       playerInstance.pause();
@@ -91,28 +91,28 @@ function Player() {
   const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
 
-	// Format duration - 0:00
+    // Format duration - 0:00
     const minsDuration = Math.round(trackDuration / 60);
     const secsDuration = Math.round(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
-	
-	// Format timer to count up from zero - 0:00+
+
+    // Format timer to count up from zero - 0:00+
     const mins = Math.round(currentTime / 60);
     const secs = Math.round(currentTime % 60);
     const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
-	
-	// Format timer to count down from track duration - 0:00-
+
+    // Format timer to count down from track duration - 0:00-
     const subMins = Math.round((trackDuration - currentTime) / 60);
     const subSecs = Math.round((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
-	
-	// Count up or down next to duration - 0:00/0:00
+
+    // Count up or down next to duration - 0:00/0:00
     const dualUp = `${upFormat}/${durationFormat}`;
     const dualSub = `${subFormat}/${durationFormat}`;
-    
+
     // Store all in state
     setTimeDisplays(prevDisplay => ({ ...prevDisplay, durationFormat, upFormat, dualUp, subFormat, dualSub }));
-};
+  };
 
   // Displays the user selected time display 
   const displayTimer = () => {
@@ -228,10 +228,13 @@ function Player() {
 
         <h2>Like what you hear?</h2>
         <h3>Subscribe to hear this article and more</h3>
-        <button className='signup-btn'>Subscribe</button>
+        <button className='signup-btn'>
+          <a href='YOUR_PATH'>Subscribe</a>
+        </button>
         <p className='signin-or'>or</p>
-        <button className='signup-btn'>Sign In</button>
-
+        <button className='signup-btn'>
+          <a href='YOUR_PATH'>Sign In</a>
+        </button>
       </div>
     </>
 

@@ -1,8 +1,10 @@
 # Creating a custom audio player using the SpeechKit Player SDK
 	
-SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-player-and-sdk) that can be used to create custom audio players for your audio projects. This repository provides a simple example built using ReactJS. 
+SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-player-and-sdk) that can be used to create custom audio players for your audio projects. This repository provides an example built using ReactJS. 
 
-It also provides an example of how the audio player can be customised to increase user engagement by enticing them to subscribe - the player is displayed, but will only work if the user has a valid subscription, if not, a dropdown prompts them to do so. 
+A key feature of creating a custom player is the ability to create extra features, for example, to increase user engagement. 
+
+As shown here this can be achieved by displaying the player to the user, but only making it usable to those with a subscription. If they are not subscribed a drop down box entices them to do so. 
 
 <p align="center">
   <img src="./assets/dropdown.gif">
@@ -10,7 +12,7 @@ It also provides an example of how the audio player can be customised to increas
 
 ## Initial Setup
 
-Install the Player SDK
+Install the Player SDK:
 
 ```drop
 npm install @speechkit/speechkit-audio-player-v2
@@ -38,7 +40,7 @@ function Player() {
 export default Player;
 ```
 
-### Player Init Params
+### Player Initialisation Parameters
 To initialise the player some parameters are required, these can be obtained from your SpeechKit account.
 
 ```javascript
@@ -66,7 +68,7 @@ const initParams = {
 ## Basic Styling
 The player style can be customised however you like. In this example it was kept to a simple shape and neutral colours, and the player dimensions fixed to a specified size. 
 
-In `App.css`:
+Add some page styling to `App.css`:
 
 ```css
 main {
@@ -88,7 +90,7 @@ There are six state values that are maintained:
 2.  `playerReady` - Whether the player is ready to play audio
 3.  `trackDuration` - The duration of audio
 4.  `isPlaying` - Whether audio is playing
-5.  `timeDisplays` - The audio timer/clocks
+5.  `timeDisplays` - The audio clock/timers
 6.  `userLoggedIn` - Whether the user is logged in/has a subscription
 
 ```javascript
@@ -101,7 +103,7 @@ const [userLoggedIn, setUserLoggedIn] = useState(true);
 ```
 
 ### useRef()
-Four ref values are required:
+Four reference values are required:
 
 1. `progressRef` - The progress bar
 2. `filledRef` - The 'filled' part of the progress bar
@@ -148,7 +150,6 @@ The player as displayed to the user is essentially a collection of buttons actin
 Your `Player` component should now look like this:
 
 ```javascript
-
 function Player() {
   const [playerInstance, setPlayerInstance] = useState(null);
   const [playerReady, setPlayerReady] = useState(false);

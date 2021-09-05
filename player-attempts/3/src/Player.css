@@ -37,6 +37,12 @@ button {
     background-color: rgba(59, 59, 59, 0);
 }
 
+a {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
+
 .rwd-fwd {
     padding: 0;
 }
