@@ -407,6 +407,7 @@ const handlePlayPause = () => {
         playerInstance.play();
         setIsPlaying(true);
         playerInstance.events.on('timeUpdate', handleEvent);
+        playerInstance.events.on('ended', handleEvent);
     } else {
         // Pauses play   
         setIsPlaying(false);
@@ -415,7 +416,7 @@ const handlePlayPause = () => {
 };
 ```
 
-##### Handling the `timeUpdate` event
+##### Handling the `timeUpdate` and `ended` events
 
 When audio starts playing an event listener is created. This listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously.
 
@@ -438,7 +439,21 @@ useEffect(() => {
 }, [isPlaying]);
 ```
 
-##### 
+Whenever an event is fired a `dataEvent` object will be passed to the event handler.
+
+As there are two events being handled the objects for each will be different, by measuring their length they can be distinguished between. 
+
+When audio has finsihed playing and has ended, playback can be reset to the start. Add this to `handleEvent`:
+
+```javascript
+const handleEvent = (dataEvent) => {
+    if (Object.keys(dataEvent).length === 1) { // 'ended' data event has a length of 1, 'timeUpdate' has a length of 3
+        setIsPlaying(false)
+        playerInstance.changeCurrentTime(0);
+        playerInstance.pause();
+    };
+};
+```
 
 ##### Styling
 
