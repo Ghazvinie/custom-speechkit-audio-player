@@ -52,19 +52,15 @@ function Player() {
   }, [timeDisplays]);
 
   const handleEvent = (dataEvent) => {
-    const {duration, progress} = dataEvent;
-
-    if ((duration - progress) < 0.5){
+    if (Object.keys(dataEvent).length === 1){
       setIsPlaying(false)
       playerInstance.changeCurrentTime(0);
       playerInstance.pause();
-    }
+    };
 
     handleProgress();
     formatTimeDisplays();
   };
-
-
 
   useEffect(() => {
     if (playerInstance) {
@@ -177,6 +173,7 @@ function Player() {
       playerInstance.play();
       setIsPlaying(true);
       playerInstance.events.on('timeUpdate', handleEvent);
+      playerInstance.events.on('ended', handleEvent)
     } else {
       // Pauses play   
       setIsPlaying(false);
