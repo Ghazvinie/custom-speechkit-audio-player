@@ -1,6 +1,8 @@
 # Creating a custom audio player using the SpeechKit Player SDK
 	
-SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-player-and-sdk) that can be used to create custom audio players for your audio projects. This repository provides an example built using ReactJS. 
+SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-player-and-sdk) that can be used to create custom audio players for your audio projects. 
+
+This repository provides an example built using ReactJS. 
 
 A key feature of creating a custom player is the ability to create extra features, for example, to increase user engagement. 
 
