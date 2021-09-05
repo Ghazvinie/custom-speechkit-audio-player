@@ -4,7 +4,7 @@ SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-p
 
 A key feature of creating a custom player is the ability to create extra features, for example, to increase user engagement. 
 
-As shown here this can be achieved by displaying the player to the user, but only making it usable to those with a subscription. If they are not subscribed a drop down box entices them to do so. 
+One way this can be achieved is by displaying the player to the user, but only making it usable to those with a subscription. If they are not subscribed a drop down box entices them to do so.
 
 <p align="center">
   <img src="./assets/dropdown.gif">
@@ -41,21 +41,23 @@ export default Player;
 ```
 
 ### Player Initialisation Parameters
-To initialise the player some parameters are required, these can be obtained from your SpeechKit account.
+To initialise the player using the SDK some parameters are required, these can be obtained from your SpeechKit account.
+
+Create an `initParams` object:
 
 ```javascript
 const initParams = {
   // Mandatory Parameter
-  projectId: 'YOUR_ID',
+  projectId: 'YOUR_PROJECT_ID',
   
   // One of the following parameters
-  podcastId: 'YOUR_ID',
-  articleUrl: 'YOUR_URL',
-  externalId: 'YOUR_ID',
+  podcastId: 'YOUR_PODCAST_ID',
+  articleUrl: 'YOUR_ARTICLE_URL',
+  externalId: 'YOUR_EXTERNAL_ID',
 };
 ```
 
-These keys should be stored securely. For simplicity, in this example they are stored in a separate `keys` file:
+Your keys and IDs should be stored securely. For simplicity, in this example they are stored in a separate `keys` file:
 
 ```javascript
 const initParams = {
@@ -65,7 +67,7 @@ const initParams = {
 ```
 
 
-## Basic Styling
+## Page Styling
 The player style can be customised however you like. In this example it was kept to a simple shape and neutral colours, and the player dimensions fixed to a specified size. 
 
 Add some page styling to `App.css`:
@@ -79,10 +81,20 @@ main {
     align-items: center;
 }
 ```
-Create `Player.css`, styles will be added to this later.
+Create `Player.css` and `Dropdown.css`
+
+Styles will be added to these files later.
+
+Import them to the `Player` component:
+
+```javascript
+import '../Player.css';
+import '../Dropdown.css';
+```
 
 ## State and Refs
-There are numerous state and references that are required, their use will be explained in greater detail when they are used. 
+Numerous state and reference values are required.
+
 ### useState()
 There are six state values that are maintained:
 
@@ -237,9 +249,9 @@ button {
 
 ![drop down example](./assets/dropdownimg.png)
 
-The player should only function if the user has a valid subscription and is logged in. If this is not the case, a dropdown box is displayed with methods for the user to login or subscribe. 
+The player should only function if the user has a valid subscription and is logged in. If this is not the case a dropdown box is displayed with methods for the user to login or subscribe. 
 
-Add the dropdown box below the player and provide the necessary url paths to your login or subscription pages:
+Add the dropdown box below the player and provide the necessary URL paths to your login or subscription pages:
 
 ```html
 <div className='dropdown-container' ref={dropdownRef}>
@@ -265,9 +277,7 @@ Add the dropdown box below the player and provide the necessary url paths to you
 
 This dropdown is hidden from view until the user attempts to play the audio, it will remain hidden if the user is logged in. 
 
-Create `Dropdown.css`
-
-Add styling for the container (this styling will render it hidden):
+Add styling for the dropdown container to `Dropdown.css` (this styling will render it hidden):
 
 ```css
 .dropdown-container {
@@ -289,7 +299,7 @@ Add styling for the container (this styling will render it hidden):
     transition: all 1000ms ease-in-out;
 }
 ```
-Create an active class to be added for the dropdown to display:
+Create an active class to be added when the dropdown is required to display:
 
 ```css
 .dropdown-active {
@@ -342,15 +352,15 @@ a {
 
 ## Initialising the Player with `useEffect()` Hook
 
-Several useEffect() hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a `useEffect()` is essential in initialising the player from the SDK. 
+Several `useEffect` hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a `useEffect` is essential in initialising the player from the SDK. 
 
 ### Initialising the Player
 When the component first renders the Player component it will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
 
 * An async function is used to initialise the player:
- * `playerReady` state is updated with a boolean value
- * An instance of the player is created and stored in state, as well as the track duration
- * The time displays are updated
+	* `playerReady` state is updated with a boolean value
+	* An instance of the player is created and stored in state, as well as the track duration
+	* The time displays are updated
 * This function is called once, when the component first renders
 
 ```javascript 
@@ -369,7 +379,7 @@ useEffect(() => {
 }, []);
 ```
 
-With the player instance ready the controls of the player can be created. 
+With the player instance ready the controls of the player can be added. 
 
 ## Player Controls
 
@@ -393,14 +403,14 @@ Create a `handlePlayPause` function.
 This function needs to two conditionals:
 
 * Is user logged in, display dropdown and make audio unavailable if not
-* Play or pause audio depending current `isPlaying` value
+* Play or pause audio depending on current `isPlaying` value
  * An event listener is started to provide time / progress tracking functionality
 
 ```javascript
 const handlePlayPause = () => {
     if (!userLoggedIn) {
         dropdownRef.current.classList.add('dropdown-active'); // Displays dropdown if user is not logged in
-        return;
+        return; // Stops any further execution
     } else {
         dropdownRef.current.classList.remove('dropdown-active');
     };
@@ -421,7 +431,7 @@ const handlePlayPause = () => {
 
 ##### Handling the `timeUpdate` and `ended` events
 
-When audio starts playing an event listener is created. This listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously.
+When audio starts playing two event listeners are created. The `timeUpdate` listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously after each re-mounting. 
 
 External to `handlePlayPause` create a `handleEvent` function:
 
@@ -429,7 +439,7 @@ External to `handlePlayPause` create a `handleEvent` function:
 const handleEvent = () => {};
 ```
 
-Create a `useEffect` hook to turn off the event listener when the component unmounts:
+Create a `useEffect` hook to turn off the `timeUpdate` event listener when the component unmounts:
 
 
 ```javascript
@@ -444,9 +454,11 @@ useEffect(() => {
 
 Whenever an event is fired a `dataEvent` object will be passed to the event handler.
 
-As there are two events being handled the objects for each will be different, by measuring their length they can be distinguished between. 
+As there are two events being handled the objects for each will be different. 
 
-When audio has finished playing and has ended, playback can be reset to the start. Add this to `handleEvent`:
+By measuring their length they can be distinguished between. 
+
+When audio has finished playing and has ended, playback can be reset to the start. Add this functionality to `handleEvent`:
 
 ```javascript
 const handleEvent = (dataEvent) => {
@@ -641,7 +653,7 @@ useEffect(() => {
 
 ##### Keeping the timer display updated
 
-Call `formatTimeDisplays()` in the `handleEvent()` function so that the `timeDisplays` is continuously updated:
+Call `formatTimeDisplays()` in the `handleEvent()` function so that `timeDisplays` is continuously updated:
 
 ```javascript
 const handleEvent = () => {
@@ -745,5 +757,5 @@ In `Player.css`:
 
 The player is now complete and should operate fully. 
 
-This guide provided the basic functionality for the player to be usable, and examples of how this functionality can be expanded upon to bring additional features. With this in mind it is worth spending time experimenting and developing other features you deem worthwhile. 
+This guide provides basic functionality for a player to be usable, and examples of how this functionality can be expanded upon to create additional features. With this in mind it is worth spending time experimenting and developing other features you deem worthwhile. 
 
