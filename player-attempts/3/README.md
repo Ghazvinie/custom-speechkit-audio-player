@@ -239,7 +239,7 @@ button {
 
 The player should only function if the user has a valid subscription and is logged in. If this is not the case, a dropdown box is displayed with methods for the user to login or subscribe. 
 
-Add the necessary url paths to your login or subscription pages. 
+Add the dropdown box below the player and provide the necessary url paths to your login or subscription pages:
 
 ```html
 <div className='dropdown-container' ref={dropdownRef}>
@@ -333,6 +333,11 @@ h3 {
     font-size: 12px;
     margin: 0;
 }
+a {
+    text-decoration: inherit;
+    color: inherit;
+    cursor: auto;
+}
 ```
 
 ## Initialising the Player with `useEffect()` Hook
@@ -364,8 +369,6 @@ useEffect(() => {
 }, []);
 ```
 
-The other `useEffect()` hooks will be detailed when they are used later in the guide. 
-
 With the player instance ready the controls of the player can be created. 
 
 ## Player Controls
@@ -381,7 +384,7 @@ Add a `handlePlayPause` `onClick` event handler:
 
 ```javascript
 <button className='play-pause' onClick={() => handlePlayPause()}>
-	{!isPlaying ? <PlayIcon /> : <PlayIcon />}
+	{!isPlaying ? <PauseIcon /> : <PlayIcon />}
 </button>
 ```
 
@@ -389,15 +392,14 @@ Create a `handlePlayPause` function.
 
 This function needs to two conditionals:
 
-* Is user logged in, display dropdown if not 
+* Is user logged in, display dropdown and make audio unavailable if not
 * Play or pause audio depending current `isPlaying` value
  * An event listener is started to provide time / progress tracking functionality
 
 ```javascript
 const handlePlayPause = () => {
-    // Displays dropdown if user is not logged in
     if (!userLoggedIn) {
-        dropdownRef.current.classList.add('dropdown-active');
+        dropdownRef.current.classList.add('dropdown-active'); // Displays dropdown if user is not logged in
         return;
     } else {
         dropdownRef.current.classList.remove('dropdown-active');
@@ -427,7 +429,7 @@ External to `handlePlayPause` create a `handleEvent` function:
 const handleEvent = () => {};
 ```
 
-Create a `useEffect()` to turn off the event listener when the component unmounts:
+Create a `useEffect` hook to turn off the event listener when the component unmounts:
 
 
 ```javascript
@@ -532,28 +534,28 @@ In `Player.css`:
 
 Multiple time display formats are able to be cycled through by clicking the timer. 
 
-Create a `formatTimeDisplays` function to format the time displays and save them to state:
+Create a `formatTimeDisplays` function to format the time displays and store them to state:
 
 ```javascript
 const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
 
-	// Format duration - 0:00
+	// Format duration: 0:00
     const minsDuration = Math.round(trackDuration / 60);
     const secsDuration = Math.round(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 	
-	// Format timer to count up from zero - 0:00+
+	// Format timer to count up from zero: 0:00+
     const mins = Math.round(currentTime / 60);
     const secs = Math.round(currentTime % 60);
     const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
 	
-	// Format timer to count down from track duration - 0:00-
+	// Format timer to count down from track duration: -0:00
     const subMins = Math.round((trackDuration - currentTime) / 60);
     const subSecs = Math.round((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 	
-	// Count up or down next to duration - 0:00/0:00
+	// Count up or down next to duration: 0:00/0:00
     const dualUp = `${upFormat}/${durationFormat}`;
     const dualSub = `${subFormat}/${durationFormat}`;
     
@@ -619,9 +621,9 @@ const handleTimeClick = () => {
 
 ##### Displaying time on initial audio load
 
-To display an initial timer format when audio is first loaded (rather than 0:00) two `useEffect()` hooks are needed.
+To display a timer when audio is first loaded (rather than 0:00) two `useEffect` hooks are needed.
 
- * First to format the time displays once a track duration has been: 
+ * First to call `formatTimeDisplays()` once a track duration has been stored: 
 
 ```javascript
 useEffect(() => {
@@ -629,7 +631,7 @@ useEffect(() => {
 }, [trackDuration]);
 ```
 
-* Then, to display the timer:
+* The second tracks any changes in `timeDisplays` and keeps the clock/timers updated by calling `displayTimer()`:
 
 ```javascript
 useEffect(() => {
@@ -639,7 +641,7 @@ useEffect(() => {
 
 ##### Keeping the timer display updated
 
-Call `formatTimeDisplays()` in the `handleEvent()` function:
+Call `formatTimeDisplays()` in the `handleEvent()` function so that the `timeDisplays` is continuously updated:
 
 ```javascript
 const handleEvent = () => {
@@ -686,7 +688,7 @@ const handleProgress = () => {
 
 ##### Keeping the progress bar updated
 
-Call `handleProgress()` in `handleEvent()`:
+Call `handleProgress()` in `handleEvent()` to keep the progress bar continuously updated:
 
 ```javascript
 const handleEvent = () => {
