@@ -443,7 +443,7 @@ Whenever an event is fired a `dataEvent` object will be passed to the event hand
 
 As there are two events being handled the objects for each will be different, by measuring their length they can be distinguished between. 
 
-When audio has finsihed playing and has ended, playback can be reset to the start. Add this to `handleEvent`:
+When audio has finished playing and has ended, playback can be reset to the start. Add this to `handleEvent`:
 
 ```javascript
 const handleEvent = (dataEvent) => {
