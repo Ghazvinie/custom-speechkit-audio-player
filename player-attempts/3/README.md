@@ -4,8 +4,9 @@ SpeechKit offers a [JavaScript Player SDK](https://docs.speechkit.io/player/js-p
 
 It also provides an example of how the audio player can be customised to increase user engagement by enticing them to subscribe - the player is displayed, but will only work if the user has a valid subscription, if not, a dropdown prompts them to do so. 
 
-![drop down example](./assets/dropdown.webm.mov)
-[./assets/dropdown.webm.mov]
+<p align="center">
+  <img src="./assets/dropdown.gif">
+</p>
 
 ## Initial Setup
 
@@ -14,6 +15,7 @@ Install the Player SDK
 ```drop
 npm install @speechkit/speechkit-audio-player-v2
 ```
+
 Setup the React application using your preferred method. The easiest way is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
 
 ## Player Setup
@@ -369,7 +371,7 @@ With the player instance ready the controls of the player can be created.
 
 ### Play and Pause
 <p align="center">
-  <img src="./assets/playPause.mov">
+  <img src="./assets/playpause.gif">
 </p>
 
 Within the HTML add your chosen Play/Pause icons. Conditionally render them depending on the `isPlaying` state. 
@@ -507,7 +509,7 @@ In `Player.css`:
 ### Time Display
 
 <p align="center">
-  <img src="./assets/timer.mov">
+  <img src="./assets/timer.gif">
 </p>
 
 Multiple time display formats are able to be cycled through by clicking the timer. 
@@ -647,7 +649,7 @@ In `Player.css`:
 ### Progress Bar
 
 <p align="center">
-  <img src="./assets/progress.mov">
+  <img src="./assets/progress.gif">
 </p>
 
 The progress bar is made up of a container with an internal 'filled' part that tracks the progress of the audio. 
