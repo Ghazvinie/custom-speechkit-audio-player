@@ -415,7 +415,7 @@ This function needs to two conditionals:
 
 * Is user logged in, display dropdown and make audio unavailable if not
 * Play or pause audio depending on current `isPlaying` value
- * An event listener is started to provide time / progress tracking functionality
+    * An event listener is started to provide time / progress tracking functionality
 
 ```javascript
 const handlePlayPause = () => {
