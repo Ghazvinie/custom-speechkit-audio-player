@@ -139,7 +139,11 @@ const dropdownRef = useRef(null);
 
 ### HTML
 
-The player as displayed to the user is essentially a collection of buttons acting as controls for specific methods, a progress bar and a clock/timer. The HTML structure for this is as follows:
+The player interface is essentially a collection of buttons acting as controls for specific player instance methods. 
+
+At a minimum an audio player will be expected to have a play/pause button and a progress bar. In this example rewind and forward skip buttons are also included as well as clock/timer that the user can click to display different the audio time in different formats. 
+
+The HTML structure for this is as follows:
 
 ```html
 <div className='player-container'>
@@ -361,6 +365,7 @@ a {
 Several `useEffect` hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a `useEffect` is essential in initialising the player from the SDK. 
 
 ### Initialising the Player
+
 When the component first renders the Player component it will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
 
 * An async function is used to initialise the player:
@@ -460,9 +465,7 @@ useEffect(() => {
 
 Whenever an event is fired a `dataEvent` object will be passed to the event handler.
 
-As there are two events being handled the objects for each will be different. 
-
-By measuring their length they can be distinguished between. 
+As there are two events being handled the objects for each will be different. By measuring their length they can be distinguished between. 
 
 When audio has finished playing and has ended, playback can be reset to the start. Add this functionality to `handleEvent`:
 
@@ -763,5 +766,6 @@ In `Player.css`:
 
 The player is now complete and should operate fully. 
 
-This guide provides basic functionality for a player to be usable, and examples of how this functionality can be expanded upon to create additional features. With this in mind it is worth spending time experimenting and developing other features you deem worthwhile. 
+This guide provides the basic functionality for a player to be usable, and examples of how this functionality can be expanded upon to create additional features. 
 
+It did not include all of the methods available from the SpeechKit SDK, so it is worth reading through the [documentation](https://docs.speechkit.io/player/js-player-and-sdk) to see what other functionality can provide the features you require.
