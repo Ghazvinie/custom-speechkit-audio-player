@@ -455,7 +455,7 @@ const handleEvent = () => {};
 
 N.B. The `timeUpdate` listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously after each re-mounting. 
 
-Create a `useEffect` hook to turn off the `timeUpdate` event listener when the component unmounts:
+Create a `useEffect` hook to turn off the `timeUpdate` event listener before the component unmounts:
 
 ```javascript
 useEffect(() => {
