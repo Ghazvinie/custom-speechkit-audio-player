@@ -6,7 +6,7 @@ This repository provides an example built using ReactJS.
 
 A key feature of creating a custom player is the ability to create extra features, for example, to increase user engagement. 
 
-One way this can be achieved is by displaying the player to the user, but only making it usable to those with a subscription. If they are not subscribed a drop down box entices them to do so.
+One way this can be achieved is by displaying the player interface to the user, but only making it usable to those with a subscription. If they are not subscribed a drop down box entices them to do so.
 
 <p align="center">
   <img src="./assets/dropdown.gif">
@@ -37,7 +37,7 @@ Import the `useEffect`, `useRef` and `useState` hooks, as well as the SpeechKit 
 import React, { useEffect, useRef, useState } from 'react';
 import { SpeechKitSdk } from '@speechkit/speechkit-audio-player-v2';
 ```
-Create a Player function, and set it as the default export:
+Create a `Player` function, and set it as the default export:
 
 ```javascript
 function Player() {
@@ -63,7 +63,7 @@ const initParams = {
 };
 ```
 
-Your keys and IDs should be stored securely. For simplicity, in this example they are stored in a separate `keys` file:
+Your keys and IDs should be stored securely. For ease, in this example they are stored in a separate `keys` file (this method is not secure for production):
 
 ```javascript
 const initParams = {
@@ -72,11 +72,8 @@ const initParams = {
 };
 ```
 
-
-## Page Styling
-The player style can be customised however you like. In this example it was kept to a simple shape and neutral colours, and the player dimensions fixed to a specified size. 
-
-Add some page styling to `App.css`:
+## Styling Setup
+Add some foundational page styling to `App.css`:
 
 ```css
 main {
@@ -141,7 +138,7 @@ const dropdownRef = useRef(null);
 
 The player interface is essentially a collection of buttons acting as controls for specific player instance methods. 
 
-At a minimum an audio player will be expected to have a play/pause button and a progress bar. In this example rewind and forward skip buttons are also included as well as clock/timer that the user can click to display different the audio time in different formats. 
+At a minimum an audio player will be expected to have a play/pause button and a progress bar. In this example rewind and forward skip buttons are also included as well as a clock/timer that the user can click to display different the audio time in different formats. 
 
 The HTML structure for this is as follows:
 
@@ -214,6 +211,8 @@ function Player() {
 ```
 
 ### Styling
+
+The player style can be customised to the design standards you require. In this example it is kept to a simple shape and neutral colours, and the player dimensions fixed to a specified size. 
 
 In `Player.css` add styling for the player container, label, controls and buttons
 
@@ -360,17 +359,18 @@ a {
 }
 ```
 
-## Initialising the Player with `useEffect()` Hook
+## Initialising the Player with a `useEffect` Hook
 
 Several `useEffect` hooks are required for updating the component when certain values change and for turning off player event listeners. However, most importantly, a `useEffect` is essential in initialising the player from the SDK. 
 
 ### Initialising the Player
 
-When the component first renders the Player component it will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
+When the component first renders the Player component will asynchronously begin initialisation through the SDK. Once initialised the player instance will be stored in state and become available for use to play audio etc, if this process fails state will be updated accordingly. 
 
 * An async function is used to initialise the player:
 	* `playerReady` state is updated with a boolean value
-	* An instance of the player is created and stored in state, as well as the track duration
+	* An instance of the player is created and stored in state
+    * Track duration is stored in state
 	* The time displays are updated
 * This function is called once, when the component first renders
 
@@ -461,13 +461,13 @@ Create a `useEffect` hook to turn off the `timeUpdate` event listener before the
 useEffect(() => {
     if (playerInstance) { // Check required to avoid error if playerInstance is null or undefined
         return () => {
-            playerInstance.events.off('timeUpdate', handleEvent)
+            playerInstance.events.off('timeUpdate', handleEvent);
         };
     };
 }, [isPlaying]);
 ```
 
-Whenever an event is fired a `dataEvent` object will be passed to the event handler.
+Whenever an event is fired a `dataEvent` argument is passed to the event handler.
 
 As there are two events being handled the objects for each will be different. By measuring their length they can be distinguished between. 
 
@@ -476,7 +476,7 @@ When audio has finished playing and has ended, playback can be reset to the star
 ```javascript
 const handleEvent = (dataEvent) => {
     if (Object.keys(dataEvent).length === 1) { // 'ended' data event has a length of 1, 'timeUpdate' has a length of 3
-        setIsPlaying(false)
+        setIsPlaying(false);
         playerInstance.changeCurrentTime(0);
         playerInstance.pause();
     };
@@ -559,7 +559,7 @@ In `Player.css`:
 
 Multiple time display formats are able to be cycled through by clicking the timer. 
 
-Create a `formatTimeDisplays` function to format the time displays and store them to state:
+Create a `formatTimeDisplays` function to format the time displays and store them in state:
 
 ```javascript
 const formatTimeDisplays = () => {
@@ -669,8 +669,14 @@ useEffect(() => {
 Call `formatTimeDisplays()` in the `handleEvent()` function so that `timeDisplays` is continuously updated:
 
 ```javascript
-const handleEvent = () => {
-    formatTimeDisplays()
+const handleEvent = (dataEvent) => {
+    if (Object.keys(dataEvent).length === 1) {
+        setIsPlaying(false);
+        playerInstance.changeCurrentTime(0);
+        playerInstance.pause();
+    };
+
+    formatTimeDisplays(); // Formats the time displays
 };
 ```
 ##### Styling
@@ -701,7 +707,7 @@ The progress bar is made up of a container with an internal 'filled' part that t
 
 The user can click on the progress bar to change the audio playback position. 
 
-Create a `handleProgress` function to update the filled part of the progress bar as the audio progresses:
+Create a `handleProgress` function to update the filled part of the progress bar as the audio plays:
 
 ```javascript
 const handleProgress = () => {
@@ -716,9 +722,15 @@ const handleProgress = () => {
 Call `handleProgress()` in `handleEvent()` to keep the progress bar continuously updated:
 
 ```javascript
-const handleEvent = () => {
-    handleProgress();
+const handleEvent = (dataEvent) => {
+    if (Object.keys(dataEvent).length === 1) {
+        setIsPlaying(false);
+        playerInstance.changeCurrentTime(0);
+        playerInstance.pause();
+    };
+
     formatTimeDisplays();
+    handleProgress(); // Update progress bar
 };
 ```
 
@@ -738,7 +750,7 @@ The click position can be calculated using the coordinates of progress bar relat
 const progressClick = (e) => {
     const { width, left } = progressRef.current.getBoundingClientRect(); // Progress bar coordinates
     const x = e.nativeEvent.clientX - left; // Position of click relative to progress bar
-    const percent = (x / width) * 100 // Percentage of progress bar to fill
+    const percent = (x / width) * 100; // Percentage of progress bar to fill
     const time = Number(((trackDuration / 100) * percent).toFixed(2)); // New time to start playback from 
     
     filledRef.current.style.width = `${percent}%`; // Update filled width
