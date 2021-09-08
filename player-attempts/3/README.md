@@ -14,9 +14,13 @@ One way this can be achieved is by displaying the player to the user, but only m
 
 ## Initial Setup
 
+The SpeechKit Player SDK is the foundation around which the audio player is built. 
+
+The various methods and events it provides can be utilised to develop an audio player with an interface and functionality to meet different demands. 
+
 Install the Player SDK:
 
-```drop
+```
 npm install @speechkit/speechkit-audio-player-v2
 ```
 
