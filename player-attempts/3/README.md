@@ -442,7 +442,9 @@ const handlePlayPause = () => {
 
 ##### Handling the `timeUpdate` and `ended` events
 
-When audio starts playing two event listeners are created. The `timeUpdate` listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously after each re-mounting. 
+When audio starts playing two event listeners are created. The `timeUpdate` event can be used to provide time tracking functionality as it fires at 250ms intervals. 
+
+N.B. The `timeUpdate` listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously after each re-mounting. 
 
 External to `handlePlayPause` create a `handleEvent` function:
 
