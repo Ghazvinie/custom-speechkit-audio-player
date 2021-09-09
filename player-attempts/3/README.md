@@ -106,7 +106,7 @@ There are six state values that are maintained:
 3.  `trackDuration` - The duration of audio
 4.  `isPlaying` - Whether audio is playing
 5.  `timeDisplays` - The audio clock/timers
-6.  `userLoggedIn` - Whether the user is logged in/has a subscription
+6.  `userLoggedIn` - Whether the user is logged in (this should be set to match user authorisation status)
 
 ```javascript
 const [playerInstance, setPlayerInstance] = useState(null);
