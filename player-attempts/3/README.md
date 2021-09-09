@@ -508,7 +508,6 @@ Add your chosen skip icons.
 
 Add a `handleSkip` `onClick` event handler:
 
-
 ```html
 <button className='rwd-fwd' name='rwd'>
     <RwdIcon onClick={(e) => handleSkip(e)} />
@@ -532,6 +531,30 @@ const handleSkip = (e) => {
         playerInstance.forward(skipValue);
     };
     formatTimeDisplays();
+};
+```
+
+N.B. The `parentNode` is being targeted because the `name` attribute is not accessible directly on the `<svg>` element which registers the click. 
+
+In some cases clicking directly on the icon can cause a `<path>` element to be targeted, one level below the `<svg>` element. For the function to operate regardless of where click is registered on the button an extra method of finding the `name` attribute should be used:
+
+```javascript
+const handleSkip = (e) => {
+    const { name } = e.target.parentNode; // <svg> registers click, parent node holds name attribute
+    const parentName = e.target.parentNode.parentNode.name; // <path> registers click, parent node of parent node holds name attribute
+    const skipValue = 5.00;
+
+    if (name === 'rwd' || parentName === 'rwd') { // Check if either matches
+        playerInstance.rewind(skipValue);
+    };
+    if (name === 'fwd' || parentName === 'fwd') { // Check if either matches
+        playerInstance.forward(skipValue);
+    };
+    formatTimeDisplays();
+};
+
+const handleLogin = () => {
+    setUserLoggedIn(prevState => !prevState)
 };
 ```
 

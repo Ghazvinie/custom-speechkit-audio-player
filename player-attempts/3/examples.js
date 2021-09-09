@@ -43,11 +43,20 @@ function Player() {
 
 export default Player;
 
-const progressClick = (e) => {
-    const { width, left } = progressRef.current.getBoundingClientRect();
-    const x = e.nativeEvent.clientX - left;
-    const percent = (x / width) * 100
-    const time = Number(((trackDuration / 100) * percent).toFixed(2));
-    filledRef.current.style.width = `${percent}%`;
-    playerInstance.changeCurrentTime(time);
-  };
+const handleSkip = (e) => {
+    const { name } = e.target.parentNode;
+    const parentName = e.target.parentNode.parentNode.name;
+    const skipValue = 5.00;
+
+    if (name === 'rwd' || parentName === 'rwd') {
+        playerInstance.rewind(skipValue);
+    };
+    if (name === 'fwd' || parentName === 'fwd') {
+        playerInstance.forward(skipValue);
+    };
+    formatTimeDisplays();
+};
+
+const handleLogin = () => {
+    setUserLoggedIn(prevState => !prevState)
+};

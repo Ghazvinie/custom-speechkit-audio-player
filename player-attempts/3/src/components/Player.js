@@ -210,9 +210,9 @@ function Player() {
 
         <div className='controls'>
 
-          <button className='rwd-fwd' name='rwd'><IoIosArrowBack className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
+          <button className='rwd-fwd' name='rwd'><IoIosArrowBack name='fwd' className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
 
-          <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying}/></button>
+          <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying} /></button>
 
           <button className='rwd-fwd' name='fwd' onClick={(e) => handleSkip(e)}><IoIosArrowForward className='rwd-fwd-svg' name='fwd' onClick={(e) => handleSkip(e)} /></button>
 
