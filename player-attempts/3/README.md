@@ -534,9 +534,9 @@ const handleSkip = (e) => {
 };
 ```
 
-**N.B.** The `parentNode` is being targeted because the `name` attribute is not accessible directly on the `<svg>` element which registers the click. 
+**N.B.** The `parentNode` is being targeted because the `name` attribute is not directly accessible on the `<svg>` element which registers the click. 
 
-In some cases clicking directly on the icon can cause a `<path>` element to be targeted, one level below the `<svg>` element. For the function to operate regardless of where click is registered on the button an extra method of finding the `name` attribute should be used:
+In some cases clicking directly on the icon can cause the `<path>` element to be targeted, one level below the `<svg>` element. For the function to operate regardless of where the click is registered on the button an extra method of finding the `name` attribute should be used:
 
 ```javascript
 const handleSkip = (e) => {
