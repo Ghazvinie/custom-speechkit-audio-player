@@ -23,7 +23,7 @@ function PlayPause(props) {
         <>
             {props.isPlaying ? pauseSVG : playSVG}
         </>
-    )
+    );
 };
 
 export default PlayPause;
