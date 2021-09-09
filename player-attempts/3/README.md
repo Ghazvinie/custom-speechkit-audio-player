@@ -453,7 +453,7 @@ External to `handlePlayPause` create a `handleEvent` function:
 const handleEvent = () => {};
 ```
 
-N.B. The `timeUpdate` listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously after each re-mounting. 
+**N.B.** The `timeUpdate` listener must be turned off before the component unmounts, otherwise multiple handlers will run simultaneously after each re-mounting. 
 
 Create a `useEffect` hook to turn off the `timeUpdate` event listener before the component unmounts:
 
@@ -534,7 +534,7 @@ const handleSkip = (e) => {
 };
 ```
 
-N.B. The `parentNode` is being targeted because the `name` attribute is not accessible directly on the `<svg>` element which registers the click. 
+**N.B.** The `parentNode` is being targeted because the `name` attribute is not accessible directly on the `<svg>` element which registers the click. 
 
 In some cases clicking directly on the icon can cause a `<path>` element to be targeted, one level below the `<svg>` element. For the function to operate regardless of where click is registered on the button an extra method of finding the `name` attribute should be used:
 
