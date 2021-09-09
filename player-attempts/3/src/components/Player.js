@@ -184,11 +184,13 @@ function Player() {
   // Handles rwd and ffwd buttons
   const handleSkip = (e) => {
     const { name } = e.target.parentNode;
+    const parentName = e.target.parentNode.parentNode.name;
     const skipValue = 5.00;
-    if (name === 'rwd') {
+
+    if (name === 'rwd' || parentName === 'rwd') {
       playerInstance.rewind(skipValue);
     };
-    if (name === 'fwd') {
+    if (name === 'fwd' || parentName === 'fwd') {
       playerInstance.forward(skipValue);
     };
     formatTimeDisplays();
@@ -210,9 +212,9 @@ function Player() {
 
           <button className='rwd-fwd' name='rwd'><IoIosArrowBack className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
 
-          <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying} /></button>
+          <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying}/></button>
 
-          <button className='rwd-fwd' name='fwd'><IoIosArrowForward className='rwd-fwd-svg' onClick={(e) => handleSkip(e)} /></button>
+          <button className='rwd-fwd' name='fwd' onClick={(e) => handleSkip(e)}><IoIosArrowForward className='rwd-fwd-svg' name='fwd' onClick={(e) => handleSkip(e)} /></button>
 
           <div className='progress' ref={progressRef} onClick={(e) => progressClick(e)}>
             <div className='progress-filled' ref={filledRef} ></div>
