@@ -230,7 +230,7 @@ function Player() {
 
       <div className='dropdown-container' ref={dropdownRef}>
 
-        <h2>Like what you hear?</h2>
+        <h2>Want to listen?</h2>
 
         <h3>Subscribe to hear this article and more</h3>
 
