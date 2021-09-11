@@ -20,6 +20,7 @@ function Player() {
   const [isPlaying, setIsPlaying] = useState(false);
   const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
   const [userLoggedIn, setUserLoggedIn] = useState(true);
+  const [title, setTitle] = useState('')
 
   const progressRef = useRef(null);
   const filledRef = useRef(null);
@@ -36,6 +37,7 @@ function Player() {
         setPlayerInstance(instance);
         setTrackDuration(instance.duration());
         formatTimeDisplays();
+        setTitle('Three brings in EU roaming charges and ends global scheme');
       };
     };
     getPlayer();
@@ -196,6 +198,7 @@ function Player() {
     formatTimeDisplays();
   };
 
+  // Mocks user authorisation
   const handleLogin = () => {
     setUserLoggedIn(prevState => !prevState)
   };
@@ -206,7 +209,7 @@ function Player() {
 
       <div className='player-container' style={!playerReady ? { display: 'none' } : {}}>
 
-        <h4 className='label'>Title Placeholder</h4>
+        <h4 className='label'>{title}</h4>
 
         <div className='controls'>
 
