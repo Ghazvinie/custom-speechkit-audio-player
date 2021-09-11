@@ -243,7 +243,7 @@ function Player() {
         <button className='signup-btn'>
           <a href='YOUR_PATH'>Sign In</a>
         </button>
-        
+
       </div>
     </>
 
