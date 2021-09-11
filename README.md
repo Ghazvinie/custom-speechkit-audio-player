@@ -142,14 +142,14 @@ const dropdownRef = useRef(null);
 
 The player interface is essentially a collection of buttons acting as controls for specific player instance methods. 
 
-At a minimum an audio player will be expected to have a play/pause button and a progress bar. In this example rewind and forward skip buttons are also included as well as a clock/timer that the user can click to display different the audio time in different formats. 
+At a minimum an audio player will be expected to have a play/pause button and a progress bar. In this example rewind and forward skip buttons are also included as well as a clock/timer that the user can click to display different the audio time in different formats. Above the player controls an article title is displayed. 
 
 The HTML structure for this is as follows:
 
 ```html
 <div className='player-container'>
 
-  <h4 className='label'>Title Placeholder</h4>
+  <h4 className='label'>{title}</h4>
 
   <div className='controls'>
 
@@ -190,7 +190,7 @@ function Player() {
     <>
       <div className='player-container'>
 
-        <h4 className='label'>Title Placeholder</h4>
+        <h4 className='label'>{title}</h4>
 
         <div className='controls'>
 
@@ -376,7 +376,7 @@ When the component first renders the Player component will asynchronously begin 
 	* An instance of the player is created and stored in state
     * Track duration is stored in state
 	* The time displays are updated
-    * The article title is displayed
+    * The article title is set
 * This function is called once, when the component first renders
 
 ```javascript 
