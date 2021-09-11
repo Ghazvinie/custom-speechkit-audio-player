@@ -8,8 +8,6 @@ A key feature of creating a custom player is the ability to create extra feature
 
 One way this can be achieved is by displaying the player interface to the user, but only making it usable to those with a subscription. If they are not subscribed a drop down box entices them to do so.
 
-A live example can be be found [here](https://infallible-ramanujan-8c3b2e.netlify.app/).
-
 <p align="center">
   <img src="./assets/dropdown.gif">
 </p>
