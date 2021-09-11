@@ -104,11 +104,12 @@ Numerous state and reference values are required.
 There are six state values that are maintained:
 
 1. `playerInstance` - The instance of the player
-2.  `playerReady` - Whether the player is ready to play audio
-3.  `trackDuration` - The duration of audio
-4.  `isPlaying` - Whether audio is playing
-5.  `timeDisplays` - The audio clock/timers
-6.  `userLoggedIn` - Whether the user is logged in (this should be set to match user authorisation status)
+2. `playerReady` - Whether the player is ready to play audio
+3. `trackDuration` - The duration of audio
+4. `isPlaying` - Whether audio is playing
+5. `timeDisplays` - The audio clock/timers
+6. `title` - The title of the article
+7. `userLoggedIn` - Whether the user is logged in (this should be set to match user authorisation status)
 
 ```javascript
 const [playerInstance, setPlayerInstance] = useState(null);
@@ -116,6 +117,7 @@ const [playerReady, setPlayerReady] = useState(false);
 const [trackDuration, setTrackDuration] = useState(0);
 const [isPlaying, setIsPlaying] = useState(false);
 const [timeDisplays, setTimeDisplays] = useState({ displayType: 'duration' });
+const [title, setTitle] = useState('');
 const [userLoggedIn, setUserLoggedIn] = useState(true);
 ```
 
@@ -374,6 +376,7 @@ When the component first renders the Player component will asynchronously begin 
 	* An instance of the player is created and stored in state
     * Track duration is stored in state
 	* The time displays are updated
+    * The article title is displayed
 * This function is called once, when the component first renders
 
 ```javascript 
@@ -386,6 +389,7 @@ useEffect(() => {
       setPlayerInstance(instance); // Stores instance in state
       setTrackDuration(instance.duration()); // Stores track duration in state
       formatTimeDisplays(); // Updates time displays
+      setTitle('YOUR_ARTICLE_TITLE'); // Sets article title
     };
   };
   getPlayer(); // Called at first render
@@ -591,17 +595,17 @@ const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
 
 	// Format duration: 0:00
-    const minsDuration = Math.round(trackDuration / 60);
+    const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.round(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 	
 	// Format timer to count up from zero: 0:00+
-    const mins = Math.round(currentTime / 60);
+    const mins = Math.floor(currentTime / 60);
     const secs = Math.round(currentTime % 60);
     const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
 	
 	// Format timer to count down from track duration: -0:00
-    const subMins = Math.round((trackDuration - currentTime) / 60);
+    const subMins = Math.floor((trackDuration - currentTime) / 60);
     const subSecs = Math.round((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 	
