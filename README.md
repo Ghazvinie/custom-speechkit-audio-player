@@ -101,7 +101,7 @@ import '../Dropdown.css';
 Numerous state and reference values are required.
 
 ### useState()
-There are six state values that are maintained:
+There are seven state values that are maintained:
 
 1. `playerInstance` - The instance of the player
 2. `playerReady` - Whether the player is ready to play audio

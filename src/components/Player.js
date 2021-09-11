@@ -37,7 +37,7 @@ function Player() {
         setPlayerInstance(instance);
         setTrackDuration(instance.duration());
         formatTimeDisplays();
-        setTitle('Three brings in EU roaming charges and ends global scheme');
+        setTitle('Title Placeholder');
       };
     };
     getPlayer();
@@ -169,7 +169,6 @@ function Player() {
       dropdownRef.current.classList.remove('dropdown-active');
     };
 
-
     if (!isPlaying && userLoggedIn) {
       // Starts play 
       playerInstance.play();
@@ -200,7 +199,7 @@ function Player() {
 
   // Mocks user authorisation
   const handleLogin = () => {
-    setUserLoggedIn(prevState => !prevState)
+    setUserLoggedIn(prevState => !prevState);
   };
 
   return (
@@ -232,14 +231,19 @@ function Player() {
       <div className='dropdown-container' ref={dropdownRef}>
 
         <h2>Like what you hear?</h2>
+
         <h3>Subscribe to hear this article and more</h3>
+
         <button className='signup-btn'>
           <a href='YOUR_PATH'>Subscribe</a>
         </button>
+
         <p className='signin-or'>or</p>
+
         <button className='signup-btn'>
           <a href='YOUR_PATH'>Sign In</a>
         </button>
+        
       </div>
     </>
 
