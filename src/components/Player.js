@@ -12,7 +12,6 @@ const initParams = {
   externalId: keys.external_id
 };
 
-
 function Player() {
 
   const [playerInstance, setPlayerInstance] = useState(null);
@@ -51,17 +50,18 @@ function Player() {
     displayTimer();
   }, [timeDisplays]);
 
+  // Event handler, called at regular intervals to update progress and time displays
   const handleEvent = (dataEvent) => {
-    if (Object.keys(dataEvent).length === 1) {
+    if (Object.keys(dataEvent).length === 1) { // Resets to start at audio end
       setIsPlaying(false)
       playerInstance.changeCurrentTime(0);
       playerInstance.pause();
     };
-
     handleProgress();
     formatTimeDisplays();
   };
 
+  // Turns off timeUpdate event listener
   useEffect(() => {
     if (playerInstance) {
       return () => {
@@ -90,8 +90,7 @@ function Player() {
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
-    console.log(currentTime)
-    console.log(trackDuration)
+
     // Format duration - 0:00
     const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.round(trackDuration % 60);
@@ -187,13 +186,11 @@ function Player() {
     const { name } = e.target.parentNode;
     const parentName = e.target.parentNode.parentNode.name;
     const skipValue = 5.00;
-    console.log(playerInstance.currentTime())
+
     if (name === 'rwd' || parentName === 'rwd') {
-      console.log('called rwd')
       playerInstance.rewind(skipValue);
     };
     if (name === 'fwd' || parentName === 'fwd') {
-      console.log('called fwd')
       playerInstance.forward(skipValue);
     };
     formatTimeDisplays();
