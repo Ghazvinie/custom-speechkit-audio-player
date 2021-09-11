@@ -90,19 +90,20 @@ function Player() {
   // Formats all the time displays and stores to state
   const formatTimeDisplays = () => {
     const currentTime = playerInstance === null ? 0 : playerInstance.currentTime();
-
+    console.log(currentTime)
+    console.log(trackDuration)
     // Format duration - 0:00
-    const minsDuration = Math.round(trackDuration / 60);
+    const minsDuration = Math.floor(trackDuration / 60);
     const secsDuration = Math.round(trackDuration % 60);
     const durationFormat = `${minsDuration}:${secsDuration < 10 ? '0' : ''}${secsDuration}`;
 
     // Format timer to count up from zero - 0:00+
-    const mins = Math.round(currentTime / 60);
+    const mins = Math.floor(currentTime / 60);
     const secs = Math.round(currentTime % 60);
     const upFormat = `${mins}:${secs < 10 ? 0 : ''}${secs}`;
 
     // Format timer to count down from track duration - 0:00-
-    const subMins = Math.round((trackDuration - currentTime) / 60);
+    const subMins = Math.floor((trackDuration - currentTime) / 60);
     const subSecs = Math.round((trackDuration - currentTime) % 60);
     const subFormat = `-${subMins}:${subSecs < 10 ? 0 : ''}${subSecs}`;
 
@@ -186,11 +187,13 @@ function Player() {
     const { name } = e.target.parentNode;
     const parentName = e.target.parentNode.parentNode.name;
     const skipValue = 5.00;
-
+    console.log(playerInstance.currentTime())
     if (name === 'rwd' || parentName === 'rwd') {
+      console.log('called rwd')
       playerInstance.rewind(skipValue);
     };
     if (name === 'fwd' || parentName === 'fwd') {
+      console.log('called fwd')
       playerInstance.forward(skipValue);
     };
     formatTimeDisplays();
@@ -214,7 +217,7 @@ function Player() {
 
           <button className='play-pause' onClick={() => handlePlayPause()}><PlayPause isPlaying={isPlaying} /></button>
 
-          <button className='rwd-fwd' name='fwd' onClick={(e) => handleSkip(e)}><IoIosArrowForward className='rwd-fwd-svg' name='fwd' onClick={(e) => handleSkip(e)} /></button>
+          <button className='rwd-fwd' name='fwd' ><IoIosArrowForward className='rwd-fwd-svg' name='fwd' onClick={(e) => handleSkip(e)} /></button>
 
           <div className='progress' ref={progressRef} onClick={(e) => progressClick(e)}>
             <div className='progress-filled' ref={filledRef} ></div>
