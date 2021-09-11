@@ -260,7 +260,9 @@ button {
 
 ## Login / Subscribe Dropdown Box
 
-![drop down example](./assets/dropdownimg.png)
+<p align="center">
+  <img src="./assets/dropdownimg.png">
+</p>
 
 The player should only function if the user has a valid subscription and is logged in. If this is not the case a dropdown box is displayed with methods for the user to login or subscribe. 
 
