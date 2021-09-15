@@ -14,6 +14,8 @@ One way this can be achieved is by displaying the player interface to the user, 
 
 ## Initial Setup
 
+Setup the React application using your preferred method. The easiest way is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
+
 The SpeechKit Player SDK is the foundation around which the audio player is built. 
 
 The various methods and events it provides can be utilised to develop an audio player with an interface and functionality to meet different demands. 
@@ -23,8 +25,6 @@ Install the Player SDK:
 ```
 npm install @speechkit/speechkit-audio-player-v2
 ```
-
-Setup the React application using your preferred method. The easiest way is to use [Create React App](https://create-react-app.dev/docs/getting-started/).
 
 ## Player Setup
 
