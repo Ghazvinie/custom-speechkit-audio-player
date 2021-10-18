@@ -37,7 +37,7 @@ function Player() {
         setPlayerInstance(instance);
         setTrackDuration(instance.duration());
         formatTimeDisplays();
-        setTitle('Title Placeholder');
+        setTitle('Three brings in EU roaming charges and ends global scheme');
       };
     };
     getPlayer();
